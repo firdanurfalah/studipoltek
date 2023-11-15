@@ -87,14 +87,16 @@
             </div>
 
             <div class="row col-mb-50">
+                @foreach($category as $key => $v)
                 <div class="col-sm-6 col-lg-3">
                     <div class="feature-box fbox-center fbox-light fbox-effect border-bottom-0">
                         <img height="185px" class="br-20" src="{{asset('front/images/parallax/1.jpg')}}" alt="">
                         <div class="fbox-content">
-                            <h3>e-Commerce Solutions<span class="subtitle">Start your Own Shop today</span></h3>
+                            <h3>{{$v->nama}}<span class="subtitle">{{$v->deskripsi}}</span></h3>
                         </div>
                     </div>
                 </div>
+                @endforeach
                 <div class="col-sm-6 col-lg-3">
                     <div class="feature-box fbox-center fbox-light fbox-effect border-bottom-0">
                         <img height="185px" class="br-20" src="{{asset('front/images/parallax/2.jpg')}}" alt="">

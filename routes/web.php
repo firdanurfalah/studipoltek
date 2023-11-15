@@ -46,9 +46,10 @@ Route::get('/dashboard', function () {
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function () {
-    return view('front.beranda');
-});
+Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
+// Route::get('/', function () {
+//     return view('front.beranda');
+// });
 Route::get('/about', function () {
     return view('front.pages.about');
 });
