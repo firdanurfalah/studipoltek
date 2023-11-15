@@ -45,7 +45,7 @@ Route::get('/dashboard', function () {
 // Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'create'])->name('artikel');
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
     return view('front.beranda');
 });
