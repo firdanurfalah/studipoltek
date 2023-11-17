@@ -42,4 +42,4 @@ Route::get('/dashboard', function () {
 // Route::get('/admin/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin');
 // Route::get('/categori', [App\Http\Controllers\CategoriController::class, 'index'])->name('categori');
 // Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'create'])->name('artikel');
-Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
+// Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');

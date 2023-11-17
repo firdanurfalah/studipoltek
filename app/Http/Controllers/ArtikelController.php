@@ -25,7 +25,7 @@ class ArtikelController extends Controller
         $validator = Validator::make($request->all(), [
 
           
-            'gambar'=> 'required',
+            'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
             'judul'  => 'required',
             'deskripsi'  => 'required',
           
@@ -40,9 +40,12 @@ class ArtikelController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar')->store('artikel/' . time());
+
         ArtikelModel::create([
             'id' => $request->idartikel,
-            'gambar' => $request->gambar,
+            'gambar' => $file,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             
@@ -55,6 +58,7 @@ class ArtikelController extends Controller
         ]);
             return redirect('/artikel')->with('ss', 'Berhasil tambah ');
         }
+    }
 
         public function show(string $id)
         {
@@ -69,9 +73,11 @@ class ArtikelController extends Controller
 
         public function update(Request $request, string $id)
         {
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar')->store('artikel/' . time());
             $validator = Validator::make($request->all(), [
              
-                'gambar'=> 'required',
+                'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'judul'=> 'required',
                 'deskripsi'=> 'required',
               
@@ -87,13 +93,14 @@ class ArtikelController extends Controller
             ArtikelModel::where('id', $id)->update([
                 'id' => $request->idartikel,
            
-                'gambar' => $request->gambar,
+                'gambar' => $file,
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
               
        
             ]);
             return redirect('/artikel')->with('success', 'Berhasil edit ');
+        }
         }
 
         public function destroy(string $id)

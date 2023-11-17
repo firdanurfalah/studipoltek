@@ -49,11 +49,11 @@
                                     <td>
                                         <a href="/adminxxx/{{$value->id}}" class="btn btn-primary btn-sm d-block d-none">Edit</a>
                                         <br>
-                                        {{-- <form action="{{ route('sosiallink.destroy', $value->id) }}" method="post">
+                                        <form action="{{ route('adminxxx.destroy', $value->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <a type="submit" class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

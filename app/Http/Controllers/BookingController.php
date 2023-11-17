@@ -23,6 +23,10 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+
+        if ($request->hasFile('upload')) { 
+            $file = $request->file('upload')->store('booking/' . time());
+
         $validator = Validator::make($request->all(), [
 
             'nama'  => 'required',
@@ -30,7 +34,7 @@ class BookingController extends Controller
             'nohp'=> 'required',
             'tanggal'=> 'required',
             'jam'=> 'required',
-            'upload'=> 'required',
+            'upload'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
             'status'=> 'required',
            
        
@@ -50,7 +54,7 @@ class BookingController extends Controller
             'nohp' => $request->nohp,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
-            'upload' => $request->upload,
+            'upload' => $file,
             'status' => $request->status,
 
         
@@ -61,6 +65,7 @@ class BookingController extends Controller
         ]);
             return redirect('/booking')->with('ss', 'Berhasil tambah ');
         }
+    }
 
         public function show(string $id)
         {
@@ -75,13 +80,15 @@ class BookingController extends Controller
 
         public function update(Request $request, string $id)
         {
+            if ($request->hasFile('upload')) { 
+                $file = $request->file('upload')->store('booking/' . time());
             $validator = Validator::make($request->all(), [
                 'nama'  => 'required',
                 'email'=> 'required',
                 'nohp'=> 'required',
                 'tanggal'=> 'required',
                 'jam'=> 'required',
-                'upload'=> 'required',
+                'upload'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'status'=> 'required',
          
                
@@ -98,13 +105,14 @@ class BookingController extends Controller
                 'nohp' => $request->nohp,
                 'tanggal' => $request->tanggal,
                 'jam' => $request->jam,
-                'upload' => $request->upload,
+                'upload' => $file,
                 'status' => $request->status,
         
        
             ]);
             return redirect('/booking')->with('success', 'Berhasil edit ');
         }
+    }
 
         public function destroy(string $id)
         {

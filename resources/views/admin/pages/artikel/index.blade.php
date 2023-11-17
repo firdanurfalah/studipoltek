@@ -51,13 +51,13 @@
 
 
                                     <td>
-                                        {{-- <a href="/artikel/{{$value->id) }}" class="btn btn-primary btn-sm d-block d-none">Edit</a>
-                                        <br> --}}
-                                        {{-- <form action="{{ route('sosiallink.destroy', $value->id) }}" method="post">
+                                        <a href="/artikel/{{$value->id}}" class="btn btn-primary btn-sm d-block d-none">Edit</a>
+                                        <br> 
+                                       <form action="{{ route('artikel.destroy', $value->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <a type="submit" class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

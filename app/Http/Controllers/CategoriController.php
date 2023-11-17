@@ -20,10 +20,13 @@ class CategoriController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->hasFile('gambar')) { 
+            $file = $request->file('gambar')->store('categori/' . time());
+
         $validator = Validator::make($request->all(), [
 
             'nama'  => 'required',
-            'gambar'=> 'required',
+            'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
             'harga'=> 'required',
             'deskripsi'=> 'required',
            
@@ -40,7 +43,7 @@ class CategoriController extends Controller
         CategoriModel::create([
             'id' => $request->idcategori,
             'nama' => $request->nama,
-            'gambar' => $request->gambar,
+            'gambar' =>$file,
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
 
@@ -52,6 +55,7 @@ class CategoriController extends Controller
         ]);
             return redirect('/categori')->with('ss', 'Berhasil tambah ');
         }
+    }
 
         public function show(string $id)
         {
@@ -68,7 +72,7 @@ class CategoriController extends Controller
         {
             $validator = Validator::make($request->all(), [
                 'nama'  => 'required',
-                'gambar'=> 'required',
+                'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'harga'=> 'required',
                 'deskripsi'=> 'required',
               
@@ -80,10 +84,13 @@ class CategoriController extends Controller
             if ($validator->fails()) {
                 return Redirect::back()->withErrors($validator)->withInput();
             }
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar')->store('categori/' . time());
+
             CategoriModel::where('id', $id)->update([
                 'id' => $request->idcategori,
                 'nama' => $request->nama,
-                'gambar' => $request->gambar,
+                'gambar' => $file,
                 'harga' => $request->harga,
                 'deskripsi' => $request->deskripsi,
         
@@ -91,7 +98,7 @@ class CategoriController extends Controller
             ]);
             return redirect('/categori')->with('success', 'Berhasil edit ');
         }
-
+    }
         public function destroy(string $id)
         {
             CategoriModel::where('id', $id)->delete();

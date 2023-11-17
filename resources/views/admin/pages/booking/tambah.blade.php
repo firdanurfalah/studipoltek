@@ -5,7 +5,7 @@
 <!--  BEGIN CONTENT AREA  -->
 <div id="content" class="main-content">
     <div class="layout-px-spacing">
-        <form action="/booking" method="POST" enctype="multipart/form-data" style="width: 1340px; height: 2000px;">
+        <form action="/booking/create" method="POST" enctype="multipart/form-data" style="width: 1340px; height: 2000px;">
 
             @csrf
            
