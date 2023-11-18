@@ -9,8 +9,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
+use Illuminate\Support\Facades\Auth;
 
-
+Auth::routes();
 
 
 Route::resource('adminxxx', AdminController::class);
@@ -29,9 +30,9 @@ Route::resource('booking', BookingController::class);
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -43,3 +44,25 @@ Route::get('/dashboard', function () {
 // Route::get('/categori', [App\Http\Controllers\CategoriController::class, 'index'])->name('categori');
 // Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'create'])->name('artikel');
 // Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
+// Route::get('/', function () {
+//     return view('front.beranda');
+// });
+Route::get('/about', function () {
+    return view('front.pages.about');
+});
+Route::get('/kategori', function () {
+    return view('front.pages.categories');
+});
+Route::get('/promo', function () {
+    return view('front.pages.promo');
+});
+Route::get('/kontak', function () {
+    return view('front.pages.contacs');
+});
+Route::get('/promo/null/detail', function () {
+    return view('front.detail');
+});
