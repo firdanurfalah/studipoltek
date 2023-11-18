@@ -357,7 +357,7 @@
     <!-- Footer Scripts
 	============================================= -->
     <script src="{{asset('front/js/functions.js')}}"></script>
-
+    @yield('js')
 </body>
 
 </html>

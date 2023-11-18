@@ -1,8 +1,6 @@
 @extends('front.template.themes')
 @section('content')
 <!-- Content
-============================================= -->
-<!-- Content
 		============================================= -->
 <section id="content">
     <div class="content-wrap">
@@ -11,105 +9,55 @@
             <div class="single-product">
                 <div class="product">
                     <div class="row gutter-40">
-
                         <div class="col-md-5">
-
                             <!-- Product Single - Gallery
 									============================================= -->
                             <div class="product-image">
                                 <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                                     <div class="flexslider">
                                         <div class="slider-wrap" data-lightbox="gallery">
-                                            <div class="slide" data-thumb="/images/shop/thumbs/dress/3.jpg"><a
-                                                    href="/images/shop/dress/3.jpg"
+                                            <div class="slide" data-thumb="/gambar?rf={{$data->gambar}}">
+                                                <a href="/gambar?rf={{$data->gambar}}"
                                                     title="Pink Printed Dress - Front View"
-                                                    data-lightbox="gallery-item"><img src="/images/shop/dress/3.jpg"
-                                                        alt="Pink Printed Dress"></a></div>
-                                            <div class="slide" data-thumb="/images/shop/thumbs/dress/3-1.jpg"><a
-                                                    href="/images/shop/dress/3-1.jpg"
-                                                    title="Pink Printed Dress - Side View"
-                                                    data-lightbox="gallery-item"><img src="/images/shop/dress/3-1.jpg"
-                                                        alt="Pink Printed Dress"></a></div>
-                                            <div class="slide" data-thumb="/images/shop/thumbs/dress/3-2.jpg"><a
-                                                    href="/images/shop/dress/3-2.jpg"
-                                                    title="Pink Printed Dress - Back View"
-                                                    data-lightbox="gallery-item"><img src="/images/shop/dress/3-2.jpg"
-                                                        alt="Pink Printed Dress"></a></div>
+                                                    data-lightbox="gallery-item"><img src="/gambar?rf={{$data->gambar}}"
+                                                        alt="Pink Printed Dress">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="sale-flash badge badge-danger p-2">Sale!</div>
                             </div><!-- Product Single - Gallery End -->
-
                         </div>
-
                         <div class="col-md-5 product-desc">
-
                             <div class="d-flex align-items-center justify-content-between">
-
                                 <!-- Product Single - Price
 										============================================= -->
-                                <div class="product-price"><del>$39.99</del> <ins>$24.99</ins></div>
+                                <div class="product-price"><del>RP. {{number_format($data->harga+150000)}}</del>
+                                    <ins>RP. {{number_format($data->harga)}}</ins>
+                                </div>
                                 <!-- Product Single - Price End -->
-
-                                <!-- Product Single - Rating
-										============================================= -->
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-half-full"></i>
-                                    <i class="icon-star-empty"></i>
-                                </div><!-- Product Single - Rating End -->
-
                             </div>
-
                             <div class="line"></div>
-
                             <!-- Product Single - Quantity & Cart Button
 									============================================= -->
-                            <form class="cart mb-0 d-flex justify-content-between align-items-center" method="post"
+                            <form action="/form-booking"
+                                class="cart mb-0 d-flex justify-content-between align-items-center" method="get"
                                 enctype='multipart/form-data'>
+                                <input type="text" name="id" id="id" value="{{$data->id}}" hidden>
                                 <div class="quantity clearfix">
-                                    <input type="button" value="-" class="minus">
+                                    {{-- <input type="button" value="-" class="minus">
                                     <input type="number" step="1" min="1" name="quantity" value="1" title="Qty"
                                         class="qty" />
-                                    <input type="button" value="+" class="plus">
+                                    <input type="button" value="+" class="plus"> --}}
                                 </div>
-                                <button type="submit" class="add-to-cart button m-0">Add to cart</button>
+                                <button type="submit" class="add-to-cart button m-0">Booking Now</button>
                             </form><!-- Product Single - Quantity & Cart Button End -->
-
                             <div class="line"></div>
+                            <p>{{$data->deskripsi}}</p>
 
-                            <!-- Product Single - Short Description
-									============================================= -->
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero velit id eaque ex quae
-                                laboriosam nulla optio doloribus! Perspiciatis, libero, neque, perferendis at nisi optio
-                                dolor!</p>
-                            <p>Perspiciatis ad eveniet ea quasi debitis quos laborum eum reprehenderit eaque explicabo
-                                assumenda rem modi.</p>
-                            <ul class="iconlist">
-                                <li><i class="icon-caret-right"></i> Dynamic Color Options</li>
-                                <li><i class="icon-caret-right"></i> Lots of Size Options</li>
-                                <li><i class="icon-caret-right"></i> 30-Day Return Policy</li>
-                            </ul><!-- Product Single - Short Description End -->
-
-                            <!-- Product Single - Meta
-									============================================= -->
-                            <div class="card product-meta">
-                                <div class="card-body">
-                                    <span itemprop="productID" class="sku_wrapper">SKU: <span
-                                            class="sku">8465415</span></span>
-                                    <span class="posted_in">Category: <a href="#" rel="tag">Dress</a>.</span>
-                                    <span class="tagged_as">Tags: <a href="#" rel="tag">Pink</a>, <a href="#"
-                                            rel="tag">Short</a>, <a href="#" rel="tag">Dress</a>, <a href="#"
-                                            rel="tag">Printed</a>.</span>
-                                </div>
-                            </div><!-- Product Single - Meta End -->
-
-                            <!-- Product Single - Share
-									============================================= -->
-                            <div class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
+                            <!-- Product Single - Share ============================================= -->
+                            {{-- <div class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
                                 <span>Share:</span>
                                 <div>
                                     <a href="#" class="social-icon si-borderless si-facebook">
@@ -137,12 +85,10 @@
                                         <i class="icon-email3"></i>
                                     </a>
                                 </div>
-                            </div><!-- Product Single - Share End -->
-
+                            </div> --}}
+                            <!-- Product Single - Share End -->
                         </div>
-
-                        <div class="col-md-2">
-
+                        {{-- <div class="col-md-2">
                             <a href="#" title="Brand Logo" class="d-none d-md-block"><img src="/images/shop/brand.jpg"
                                     alt="Brand Logo"></a>
 
@@ -188,14 +134,10 @@
                                 </div>
                             </div>
 
-                        </div>
-
+                        </div> --}}
                         <div class="w-100"></div>
-
-                        <div class="col-12 mt-5">
-
+                        {{-- <div class="col-12 mt-5">
                             <div class="tabs clearfix mb-0" id="tab-1">
-
                                 <ul class="tab-nav clearfix">
                                     <li><a href="#tabs-1"><i class="icon-align-justify2"></i><span
                                                 class="d-none d-md-inline-block"> Description</span></a></li>
@@ -432,8 +374,7 @@
 
                             </div>
 
-                        </div>
-
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -446,164 +387,35 @@
 
                 <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false"
                     data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3" data-items-xl="4">
-
+                    @foreach($all as $key => $value)
                     <div class="oc-item">
                         <div class="product">
                             <div class="product-image">
-                                <a href="#"><img src="/images/shop/dress/1.jpg" alt="Checked Short Dress"></a>
-                                <a href="#"><img src="/images/shop/dress/1-1.jpg" alt="Checked Short Dress"></a>
-                                <div class="badge badge-success p-2">50% Off*</div>
-                                <div class="bg-overlay">
-                                    <div class="bg-overlay-content align-items-end justify-content-between"
-                                        data-hover-animate="fadeIn" data-hover-speed="400">
-                                        <a href="#" class="btn btn-dark mr-2"><i class="icon-shopping-cart"></i></a>
-                                        <a href="include/ajax/shop-item.html" class="btn btn-dark"
-                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-                                    </div>
-                                    <div class="bg-overlay-bg bg-transparent"></div>
-                                </div>
-                            </div>
-                            <div class="product-desc center">
-                                <div class="product-title">
-                                    <h3><a href="#">Checked Short Dress</a></h3>
-                                </div>
-                                <div class="product-price"><del>$24.99</del> <ins>$12.49</ins></div>
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-half-full"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oc-item">
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#"><img src="/images/shop/pants/1-1.jpg" alt="Slim Fit Chinos"></a>
-                                <a href="#"><img src="/images/shop/pants/1.jpg" alt="Slim Fit Chinos"></a>
-                                <div class="bg-overlay">
-                                    <div class="bg-overlay-content align-items-end justify-content-between"
-                                        data-hover-animate="fadeIn" data-hover-speed="400">
-                                        <a href="#" class="btn btn-dark mr-2"><i class="icon-shopping-cart"></i></a>
-                                        <a href="include/ajax/shop-item.html" class="btn btn-dark"
-                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-                                    </div>
-                                    <div class="bg-overlay-bg bg-transparent"></div>
-                                </div>
-                            </div>
-                            <div class="product-desc center">
-                                <div class="product-title">
-                                    <h3><a href="#">Slim Fit Chinos</a></h3>
-                                </div>
-                                <div class="product-price">$39.99</div>
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-half-full"></i>
-                                    <i class="icon-star-empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oc-item">
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#"><img src="/images/shop/shoes/1-1.jpg" alt="Dark Brown Boots"></a>
-                                <a href="#"><img src="/images/shop/shoes/1.jpg" alt="Dark Brown Boots"></a>
-                                <div class="bg-overlay">
-                                    <div class="bg-overlay-content align-items-end justify-content-between"
-                                        data-hover-animate="fadeIn" data-hover-speed="400">
-                                        <a href="#" class="btn btn-dark mr-2"><i class="icon-shopping-cart"></i></a>
-                                        <a href="include/ajax/shop-item.html" class="btn btn-dark"
-                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-                                    </div>
-                                    <div class="bg-overlay-bg bg-transparent"></div>
-                                </div>
-                            </div>
-                            <div class="product-desc center">
-                                <div class="product-title">
-                                    <h3><a href="#">Dark Brown Boots</a></h3>
-                                </div>
-                                <div class="product-price">$49</div>
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-empty"></i>
-                                    <i class="icon-star-empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oc-item">
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#"><img src="/images/shop/dress/2.jpg" alt="Light Blue Denim Dress"></a>
-                                <a href="#"><img src="/images/shop/dress/2-2.jpg" alt="Light Blue Denim Dress"></a>
-                                <div class="bg-overlay">
-                                    <div class="bg-overlay-content align-items-end justify-content-between"
-                                        data-hover-animate="fadeIn" data-hover-speed="400">
-                                        <a href="#" class="btn btn-dark mr-2"><i class="icon-shopping-cart"></i></a>
-                                        <a href="include/ajax/shop-item.html" class="btn btn-dark"
-                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-                                    </div>
-                                    <div class="bg-overlay-bg bg-transparent"></div>
-                                </div>
-                            </div>
-                            <div class="product-desc center">
-                                <div class="product-title">
-                                    <h3><a href="#">Light Blue Denim Dress</a></h3>
-                                </div>
-                                <div class="product-price">$19.95</div>
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oc-item">
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#"><img src="/images/shop/sunglasses/1.jpg" alt="Unisex Sunglasses"></a>
-                                <a href="#"><img src="/images/shop/sunglasses/1-1.jpg" alt="Unisex Sunglasses"></a>
+                                <a href="#"><img src="/gambar?rf={{$value->gambar}}" alt="Checked Short Dress"></a>
+                                <a href="#"><img src="/gambar?rf={{$value->gambar}}" alt="Checked Short Dress"></a>
                                 <div class="badge badge-success p-2">Sale!</div>
                                 <div class="bg-overlay">
                                     <div class="bg-overlay-content align-items-end justify-content-between"
                                         data-hover-animate="fadeIn" data-hover-speed="400">
-                                        <a href="#" class="btn btn-dark mr-2"><i class="icon-shopping-cart"></i></a>
-                                        <a href="include/ajax/shop-item.html" class="btn btn-dark"
-                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a>
+                                        {{-- <a href="#" class="btn btn-dark mr-2"><i
+                                                class="icon-shopping-cart"></i></a> --}}
+                                        {{-- <a href="/gambar?rf={{$value->gambar}}" class="btn btn-dark"
+                                            data-lightbox="ajax"><i class="icon-line-expand"></i></a> --}}
                                     </div>
                                     <div class="bg-overlay-bg bg-transparent"></div>
                                 </div>
                             </div>
                             <div class="product-desc center">
                                 <div class="product-title">
-                                    <h3><a href="#">Unisex Sunglasses</a></h3>
+                                    <h3><a href="/categori/{{$value->id}}/detail">{{$value->nama}}</a></h3>
                                 </div>
-                                <div class="product-price"><del>$19.99</del> <ins>$11.99</ins></div>
-                                <div class="product-rating">
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star3"></i>
-                                    <i class="icon-star-empty"></i>
-                                    <i class="icon-star-empty"></i>
+                                <div class="product-price"><del>RP. {{number_format($data->harga+150000)}}</del>
+                                    <ins>RP. {{number_format($data->harga)}}</ins>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    @endforeach
                 </div>
 
             </div>

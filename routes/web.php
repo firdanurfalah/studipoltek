@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoriController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 Auth::routes();
 
@@ -48,6 +49,9 @@ Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create']
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
+Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
+Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
+Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
 // Route::get('/', function () {
 //     return view('front.beranda');
 // });
@@ -63,10 +67,7 @@ Route::get('/promo', function () {
 Route::get('/kontak', function () {
     return view('front.pages.contacs');
 });
-Route::get('/promo/null/detail', function () {
-    return view('front.detail');
-});
 
-route::get('gambar', function (Request $r){
+route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
