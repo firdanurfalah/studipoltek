@@ -40,7 +40,8 @@
                                 <tr>
                                  
                                     <td>{{$value->nama}}</td>
-                                    <td>{{$value->gambar}}</td>
+                                   <td> <img  src="/gambar?rf={{$value->gambar}}"> </td>
+
                                     <td>{{$value->harga}}</td>
                                     <td>{{$value->deskripsi}}</td>
                                   

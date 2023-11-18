@@ -66,3 +66,7 @@ Route::get('/kontak', function () {
 Route::get('/promo/null/detail', function () {
     return view('front.detail');
 });
+
+route::get('gambar', function (Request $r){
+    return Storage::download($r->rf);
+});
