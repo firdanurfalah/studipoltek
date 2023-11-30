@@ -11,6 +11,11 @@
 
 
     <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container sidebar-closed sbar-open" id="container">
+
+        <div class="overlay"></div>
+        <div class="cs-overlay"></div>
+        <div class="search-overlay"></div>
  
 
         @include('admin.layout.sidebar')
@@ -18,7 +23,7 @@
 
         @yield('content')
 
-
+    </div>
        
     <!-- END MAIN CONTAINER -->
 

@@ -1,11 +1,9 @@
 <!--  BEGIN SIDEBAR  -->
+<div class="sidebar-wrapper sidebar-theme">
 
-    <!-- Isi sidebar Anda di sini -->
+    <div id="dismiss" class="d-lg-none"><i class="flaticon-cancel-12"></i></div>
 
-    <div class="sidebar-wrapper "> <!-- Atur lebar sidebar sesuai kebutuhan -->
-        <nav id="sidebar" style="background-color: #ffffff;">
-            <!-- Isi sidebar Anda di sini -->
-            
+    <nav id="sidebar">
     
             <ul class="list-unstyled menu-categories" id="accordionExample">
     

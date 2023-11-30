@@ -13,7 +13,7 @@ class BookingController extends Controller
     public function index()
     {
         $data['booking']= BookingModel::get();
-
+       
         return view('admin.pages.booking.index', $data);
     }
     public function create()
@@ -80,8 +80,7 @@ class BookingController extends Controller
 
         public function update(Request $request, string $id)
         {
-            if ($request->hasFile('upload')) { 
-                $file = $request->file('upload')->store('booking/' . time());
+
             $validator = Validator::make($request->all(), [
                 'nama'  => 'required',
                 'email'=> 'required',
@@ -98,6 +97,9 @@ class BookingController extends Controller
             if ($validator->fails()) {
                 return Redirect::back()->withErrors($validator)->withInput();
             }
+
+            if ($request->hasFile('upload')) {
+                $file = $request->file('upload')->store('booking/' . time());
             BookingModel::where('id', $id)->update([
                 'id' => $request->idbooking,
                 'nama' => $request->nama,
@@ -114,9 +116,12 @@ class BookingController extends Controller
         }
     }
 
+
+
         public function destroy(string $id)
         {
             BookingModel::where('id', $id)->delete();
             return redirect('/booking')->with('success', 'Berhasil hapus data');
         }
-}
+
+    }

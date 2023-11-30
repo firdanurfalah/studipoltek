@@ -24,7 +24,7 @@
                         <table id="zero-config" class="table dt-table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                  
                                     <th>nama</th>
                                     <th>email</th>
                                     <th>nohp</th>
@@ -48,7 +48,7 @@
                                     <td>{{$value->nohp}}</td>
                                     <td>{{$value->tanggal}}</td>
                                     <td>{{$value->jam}}</td>
-                                    <td>{{$value->upload}}</td>
+                                    <td> <img  src="/gambar?rf={{$value->upload}}"> </td>
                                     <td>{{$value->status}}</td>
                                   
 

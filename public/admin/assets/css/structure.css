@@ -488,8 +488,8 @@ code {
         font-weight: 600;
         font-size: 14px;
         margin-right: 8px; }
-    /* .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu .dropdown-item:hover .data-info h6 {
-      color: #4361ee; } */
+    .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu .dropdown-item:hover .data-info h6 {
+      color: #4361ee; }
     .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu .data-info p {
       margin-bottom: 0;
       font-size: 13px;
@@ -717,20 +717,20 @@ code {
   background: #fff; }
 
 .sidebar-closed > .sidebar-wrapper {
-  width: px; }
-  /* .sidebar-closed > .sidebar-wrapper:hover {
-    width: 255px; } */
+  width: 54px; }
+  .sidebar-closed > .sidebar-wrapper:hover {
+    width: 255px; }
 
 .sidebar-closed > #content {
   margin-left: 54px; }
 
 #sidebar .theme-brand {
-  background-color: #000000;
+  background-color: #4361ee;
   padding: 0.9px 12px 0.9px 24px;
   border-bottom: 1px solid #ebedf2;
   border-radius: 6px 6px 0 0;
   justify-content: space-between;
-  background-image: linear-gradient(to right, #502ACD 0%, #502ACD 86%); }
+  background-image: linear-gradient(to right, #304aca 0%, #4361ee 86%); }
 
 .sidebar-closed #sidebar .theme-brand {
   padding: 9.14px 5px; }
@@ -1051,11 +1051,10 @@ code {
         MEDIA QUERIES
     ======================
 */
-@media (max-width: 1000px) {
+@media (max-width: 991px) {
   .header-container {
     padding-right: 15px;
-    padding-left: 15px; 
-    width: 100%;}
+    padding-left: 15px; }
   /*
       =============
           NavBar
@@ -1122,83 +1121,3 @@ code {
     left: -76px !important; }
   .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu {
     right: -64px; } }
-
-       /* Tambahkan CSS berikut untuk mengatur input pencarian di tengah dan memberi border */
-       .search-container {
-        display: flex;
-        align-items: center;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin: 0 auto;
-        max-width: 400px; /* Sesuaikan lebar sesuai kebutuhan Anda */
-    }
-
-    .search-input {
-        border: none;
-        width: 100%;
-    }
-
-    /* Tambahkan jarak antara item-menu */
-.menu {
-  margin-bottom: 20px; /* Sesuaikan margin sesuai kebutuhan */
-  /* Ubah warna latar belakang menjadi biru saat dihover */
-
-}
-
-/* Ubah warna tombol menjadi biru saat dihover */
-.menu a {
-  text-decoration: none; /* Hapus garis bawah */
- /* Atur warna teks default */
-  font-size: 30px; 
-}
-
-.menu a:hover {
-  background-color: #502ACD; /* Ubah warna latar belakang menjadi biru saat dihover */
-  color: #440bee; /* Ubah warna teks saat dihover untuk memastikan kejelasan */
-
-}
-
-.menu a.active {
-  background-color: #502ACD; /* Atur warna latar belakang saat item-menu aktif */
-  color: #130bf3; /* Atur warna teks saat item-menu aktif */
-}
-
-.nav-link.dropdown-toggle {
-  content: "\f107"; /* Unicode untuk ikon caretdown pada Font Awesome */
-  font-family: 'Font Awesome 5 Free';
-  margin-left: 5px; /* Jarak antara teks dan ikon caret */
-}
-
-/* Menu yang sedang aktif */
-/* Menu yang sedang aktif */
-.menu.active {
-  background-color: blue; /* Ganti warna latar belakang dengan warna yang Anda inginkan */
- /* Ganti warna teks dengan warna yang Anda inginkan */
-}
-
-
-
-/* Tambahkan CSS ini ke dalam tag <style> Anda atau dalam file CSS terpisah */
-
-.nav-item.active .nav-link {
-  background-color: blue; /* Ganti warna latar belakang sesuai kebutuhan */
-  color: white; /* Warna teks diubah menjadi putih */
-  font-weight: bold; /* Ganti gaya teks sesuai kebutuhan */
-  /* Tambahan gaya lainnya jika diperlukan */
-}
-
-.nav-link svg path {
-  fill: white;
-}
-
-
-#footer {
-  background-color: blue; /* Ganti dengan warna biru yang Anda inginkan */
-  color: white; /* Ganti warna teks menjadi putih */
-}
-
-
-
-
-
-

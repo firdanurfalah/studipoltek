@@ -8,6 +8,12 @@
         <form action="/categori" method="POST" enctype="multipart/form-data" style="width: 1340px; height: 2000px;">
 
             @csrf
+            <div class="page-header">
+                <div class="page-title">
+                    <a href="{{route('categori.index')}}" class="btn btn-primary btn-sm">Kembali</a>
+                    <button class="btn btn-success btn-sm" type="submit">Simpan</button>
+                </div>
+            </div>
            
             <div class="row">
                
@@ -73,10 +79,7 @@
 
                         </div>
                         
-                        <div class="col-lg-12 mt-3 text-right"> <!-- Menggeser tombol ke kanan -->
-                            <!-- Tombol Create ditempatkan di sini -->
-                            <button class="btn btn-primary btn-sm" type="submit">SIMPAN & LANJUTKAN</button>
-                        </div>
+                        
                     </div>
                     
                 </div>
