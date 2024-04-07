@@ -165,32 +165,34 @@
                 <div class="col-lg-12">
 
                     <div class="row col-mb-50">
+                        @foreach($article as $key => $value)
                         <article class="col-12">
                             <div class="row">
                                 <div class="col-md-6 entry-image mb-0">
                                     <a href="#">
-                                        <img src="/front/demos/blog/images/lists/1.jpg" alt="Image">
+                                        <img src="/gambar?rf={{$value->gambar}}" alt="Image">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="entry-title mt-lg-0 mt-3">
-                                        <div class="entry-categories"><a href="demo-blog-categories.html">Coronavirus
-                                                Update - World</a></div>
-                                        <h3><a href="demo-blog-single.html" class="color-underline stretched-link">Apple
-                                                and Google Team Up to ‘Contact Trace’ the Coronavirus</a></h3>
+                                        {{-- <div class="entry-categories"><a href="#">{{$value->judul}}</a></div> --}}
+                                        <h3><a href="#" class="color-underline stretched-link">
+                                                {{$value->judul}}</a></h3>
                                     </div>
                                     <div class="entry-meta">
                                         <ul>
-                                            <li><a href="#">Mar 11, 2016</a></li>
+                                            <li><a
+                                                    href="#">{{\Carbon\Carbon::parse($value->created_at)->format('d-m-Y')}}</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="entry-content">
-                                        <p>The technology giants said they would embed a feature in iPhones and Android
-                                            devices to enable users to track infected people they’d come close to.</p>
+                                        {{$value->deskripsi}}
                                     </div>
                                 </div>
                             </div>
                         </article>
+                        @endforeach
                     </div>
                 </div>
             </div>
