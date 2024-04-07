@@ -48,10 +48,8 @@
                         <!-- Logo
 						============================================= -->
                         <div id="logo">
-                            <a href="index.html" class="standard-logo"
-                                data-dark-logo="/frontimages/logo-dark.png">Logo</a>
-                            <a href="index.html" class="retina-logo"
-                                data-dark-logo="/frontimages/logo-dark@2x.png">Logos</a>
+                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png">Logo</a>
+                            <a href="/" class="retina-logo" data-dark-logo="/frontimages/logo-dark@2x.png">Logos</a>
                             {{-- <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img
                                     src="images/logo.png" alt="Canvas Logo"></a>
                             <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img
