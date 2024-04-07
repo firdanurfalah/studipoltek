@@ -13,6 +13,14 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/table/datatable/dt-global_style.css')}}">
 
 {{-- <script src="script.js" defer></script> --}}
+<script src="{{asset('admin/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
+<script src="{{asset('admin/bootstrap/js/popper.min.js')}}"></script>
+<script src="{{asset('admin/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('admin/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/app.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
 <!-- END GLOBAL MANDATORY STYLES -->
