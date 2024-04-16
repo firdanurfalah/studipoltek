@@ -51,7 +51,15 @@
                                     <td><a href="/gambar?rf={{$value->upload}}" style="cursor: pointer"><img
                                                 src="/gambar?rf={{$value->upload}}" width="100px" height="40px"></a>
                                     </td>
-                                    <td>{{$value->status}}</td>
+                                    <td>
+                                        @if($value->status == 0)
+                                        <span onclick="approve({{$value->id}},{{$value->status}})"
+                                            class="badge badge-info" style="cursor: pointer">Pending</span>
+                                        @else
+                                        <span onclick="approve({{$value->id}},{{$value->status}})"
+                                            class="badge badge-success" style="cursor: pointer">Success</span>
+                                        @endif
+                                    </td>
 
 
                                     <td>
@@ -77,7 +85,26 @@
 
         </div>
 
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Approve</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formapprove" action="" method="POST" class="text-center">
+                            <p id="titleapprove"></p>
+                            @csrf
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-sm mr-2">Ya</button>
+                                <span onclick="approveclose()" class="btn btn-danger btn-sm">Tidak</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!-- CONTENT AREA -->
@@ -85,4 +112,18 @@
     </div>
 </div>
 <!--  END CONTENT AREA  -->
+<script>
+    function approve(id,status) {
+        let t = 'Apakah anda yakin untuk approve booking ?';
+        if (status == 1) {
+            t = 'Apakah anda yakin untuk cancel booking ?';
+        }
+        $('#titleapprove').html(t);
+        $('#exampleModal').modal('show');
+        $('#formapprove').attr('action','/approve-booking/'+id);
+    }
+    function approveclose() {
+        $('#exampleModal').modal('hide');
+    }
+</script>
 @endsection

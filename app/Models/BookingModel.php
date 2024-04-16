@@ -18,6 +18,6 @@ class BookingModel extends Model
         'jam',
         'upload',
         'status',
-
+        'jumlah_orang',
     ];
 }
