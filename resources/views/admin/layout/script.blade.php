@@ -1,14 +1,6 @@
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{{asset('admin/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
-    <script src="{{asset('admin/bootstrap/js/popper.min.js')}}"></script>
-    <script src="{{asset('admin/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/app.js')}}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-
-    <script>
-        function globalgetactivemenu() {
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script>
+    function globalgetactivemenu() {
             //deactivate menu
         }
         $(document).ready(function() {
@@ -95,14 +87,14 @@
                 $(this).parents('tr').remove();
             });
         });
-    </script>
-    <script src="{{asset('admin/assets/js/custom.js')}}"></script>
-    <script src="{{asset('admin/plugins/select2/select2.min.js')}}"></script>
-    <script src="https://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
-    <script src="{{asset('admin/plugins/table/datatable/datatables.js')}}"></script>
-    
-    <script>
-        const thumbnailInput = document.getElementById('thumbnail');
+</script>
+<script src="{{asset('admin/assets/js/custom.js')}}"></script>
+<script src="{{asset('admin/plugins/select2/select2.min.js')}}"></script>
+<script src="https://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
+<script src="{{asset('admin/plugins/table/datatable/datatables.js')}}"></script>
+
+<script>
+    const thumbnailInput = document.getElementById('thumbnail');
         const previewImage = document.getElementById('previewImage');
     
         thumbnailInput.addEventListener('change', function () {
@@ -116,16 +108,16 @@
                 reader.readAsDataURL(thumbnailInput.files[0]);
             }
         });
-    </script>
+</script>
 
-    
-    
 
-    
-    
-    
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+
+
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
