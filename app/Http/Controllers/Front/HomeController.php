@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class HomeController extends Controller
     {
         $data = [];
         $data['category'] = CategoriModel::get();
+        $data['article'] = ArtikelModel::get();
         // return $data;
         return view('front.beranda', $data);
     }

@@ -8,9 +8,9 @@
 
         <div class="page-header">
             <div class="page-title">
-              
+
                 <a href="/booking/create" class="btn btn-primary btn-sm">Tambah</a>
-              
+
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                         <table id="zero-config" class="table dt-table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                  
+
                                     <th>nama</th>
                                     <th>email</th>
                                     <th>nohp</th>
@@ -32,9 +32,9 @@
                                     <th>jam</th>
                                     <th>upload</th>
                                     <th>status</th>
-                                   
-                                   
-                                   
+
+
+
 
                                     <th class="no-content text-center">Aksi</th>
                                 </tr>
@@ -42,23 +42,27 @@
                             <tbody>
                                 @foreach($booking as $key => $value)
                                 <tr>
-                                 
+
                                     <td>{{$value->nama}}</td>
                                     <td>{{$value->email}}</td>
                                     <td>{{$value->nohp}}</td>
                                     <td>{{$value->tanggal}}</td>
                                     <td>{{$value->jam}}</td>
-                                    <td> <img  src="/gambar?rf={{$value->upload}}"> </td>
+                                    <td><a href="/gambar?rf={{$value->upload}}" style="cursor: pointer"><img
+                                                src="/gambar?rf={{$value->upload}}" width="100px" height="40px"></a>
+                                    </td>
                                     <td>{{$value->status}}</td>
-                                  
+
 
                                     <td>
-                                        <a href="/booking/{{ $value->id }}" class="btn btn-primary btn-sm d-block d-none">Edit</a>
-                                        <br> 
-                                         <form action="{{ route('booking.destroy', $value->id) }}" method="post">
+                                        <a href="/booking/{{ $value->id }}"
+                                            class="btn btn-primary btn-sm d-block d-none">Edit</a>
+                                        <br>
+                                        <form action="{{ route('booking.destroy', $value->id) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <a type="submit" class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
+                                            <a type="submit"
+                                                class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
                                         </form>
                                     </td>
                                 </tr>

@@ -66,7 +66,8 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="" class="text-capitalize">Bukti DP</label>
-                    <input type="file" name="gambar" id="gambar" class="form-control">
+                    <input type="file" name="gambar" id="gambar" class="form-control"
+                        accept="image/png, image/gif, image/jpeg">
                     <div class="w-50">
                         <img src="" alt="" class="imagepreview">
                     </div>
