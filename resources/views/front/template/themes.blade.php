@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap"
         rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
     <link rel="stylesheet" href="{{asset('front/css/bootstrap.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{asset('front/css/style.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{asset('front/css/swiper.css')}}" type="text/css" />
@@ -48,8 +49,10 @@
                         <!-- Logo
 						============================================= -->
                         <div id="logo">
-                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png">Logo</a>
-                            <a href="/" class="retina-logo" data-dark-logo="/frontimages/logo-dark@2x.png">Logos</a>
+                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png"
+                                style="font-family: 'Krona One';">SNAPGUIDE</a>
+                            <a href="/" class="retina-logo" data-dark-logo="/frontimages/logo-dark@2x.png"
+                                style="font-family: 'Krona One';">SNAPGUIDE</a>
                             {{-- <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img
                                     src="images/logo.png" alt="Canvas Logo"></a>
                             <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img
@@ -153,6 +156,12 @@
                                 <li class="menu-item">
                                     <a class="menu-link" href="kontak">
                                         <div>Contacts</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
+                                        href="/login">
+                                        Login
                                     </a>
                                 </li>
                             </ul>
