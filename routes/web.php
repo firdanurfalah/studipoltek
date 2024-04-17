@@ -52,6 +52,7 @@ Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
 Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
+Route::post('/approve-booking/{id}', [App\Http\Controllers\Front\HomeController::class, 'approvebooking']);
 // Route::get('/', function () {
 //     return view('front.beranda');
 // });
