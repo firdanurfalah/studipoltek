@@ -1,7 +1,16 @@
 @extends('front.template.themes')
 @section('content')
+<style>
+    .top-cart-number::before {
+        background-color: #ff0000;
+    }
 
-<section id="slider" class="slider-element slider-parallax swiper_wrapper vh-75">
+    .title {
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+{{-- <section id="slider" class="slider-element slider-parallax swiper_wrapper vh-75">
     <div class="slider-inner">
 
         <div class="swiper-container swiper-parent">
@@ -58,45 +67,73 @@
         </div>
 
     </div>
-</section>
+</section> --}}
 
 <!-- Content
 ============================================= -->
 <section id="content">
     <div class="content-wrap">
 
-        {{-- <div class="promo promo-light promo-full bottommargin-lg header-stick border-top-0 p-5">
-            <div class="container clearfix">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg">
-                        <h3>Try Premium Free for <span>30 Days</span> and you'll never regret it!</h3>
-                        <span>Starts at just <em>$0/month</em> afterwards. No Ads, No Gimmicks and No SPAM. Just
-                            Real Content.</span>
-                    </div>
-                    <div class="col-12 col-lg-auto mt-4 mt-lg-0">
-                        <a href="#" class="button button-large button-circle m-0">Start Trial</a>
+        <div class="container clearfix">
+            <div class="row">
+                <div class="col-lg-6">
+                    <span class="text-secondary">Ms. Studio</span>
+                    <p>
+                    <h2 class="m-0">Masih Bingung Cari</h2>
+                    <h2 style="font-weight: bold">Studio Foto ?</h2>
+                    </p>
+                    <p class="text-secondary m-0" style="font-size: 16px">Yuk, booking sekarang! </p>
+                    <p class="text-secondary" style="font-size: 16px">
+                        Dapatkan promo
+                        menarik dari Ms. Studio
+                    </p>
+                    <div class="d-flex">
+                        <a class="button button-small button-dark button-circle pt-2 pb-2" href="#">
+                            Booking Now
+                        </a>
+                        <a class="button button-small button-dark button-circle pt-2 pb-2" href="#">
+                            Style Reference
+                        </a>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <img src="/images/1.png" alt="" width="100%">
+                </div>
             </div>
-        </div> --}}
+        </div>
 
-        <div class="container clearfix">
+        <div class="container clearfix mt-4">
             <div class="heading-block center">
-                <h3>KATEGORI</h3>
-                <span>Sesuaikan pilihan anda dengan <strong>KATEGORI</strong> kami</span>
+                <h3>Best Recomendation</h3>
             </div>
 
             <div class="row col-mb-50">
                 @foreach($category as $key => $v)
                 <div class="col-sm-6 col-lg-3">
-                    <a href="/categori/{{$v->id}}/detail">
-                        <div class="feature-box fbox-center fbox-light fbox-effect border-bottom-0">
-                            <img height="185px" class="br-20" src="/gambar?rf={{$v->gambar}}" alt="">
-                            <div class="fbox-content">
-                                <h3>{{$v->nama}}<span class="subtitle">{{$v->deskripsi}}</span></h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="top-cart-number"
+                                style="top: -10px; right: -20px; width: 2rem; height: 2rem; line-height: 2rem;">
+                                HOT
+                            </span>
+                            <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="">
+                            <div class="title">{{$v->nama}}</div>
+                            <div class="price"><del>Rp. 50.000</del> <b>Rp. 40.000</b></div>
+                            <div class="total-booking text-secondary">98 Booking</div>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <a class="button button-small button-dark button-circle pt-2 pb-2 text-center" href="#">
+                                    Booking
+                                </a>
+                                <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.58333 1C3.05208 1 1 3.05208 1 5.58333C1 10.1667 6.41667 14.3333 9.33333 15.3025C12.25 14.3333 17.6667 10.1667 17.6667 5.58333C17.6667 3.05208 15.6146 1 13.0833 1C11.5333 1 10.1625 1.76958 9.33333 2.9475C8.9107 2.3455 8.34923 1.8542 7.69647 1.5152C7.04371 1.1762 6.31887 0.999481 5.58333 1Z"
+                                        stroke="#BABABA" stroke-width="1.66667" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 @endforeach
             </div>

@@ -88,11 +88,6 @@
             });
         });
 </script>
-<script src="{{asset('admin/assets/js/custom.js')}}"></script>
-<script src="{{asset('admin/plugins/select2/select2.min.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
-<script src="{{asset('admin/plugins/table/datatable/datatables.js')}}"></script>
-
 <script>
     const thumbnailInput = document.getElementById('thumbnail');
         const previewImage = document.getElementById('previewImage');
