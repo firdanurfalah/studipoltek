@@ -117,7 +117,7 @@
                     <div class="card">
                         <div class="card-body">
                             <span class="top-cart-number"
-                                style="top: -10px; right: -20px; width: 2rem; height: 2rem; line-height: 2rem;">
+                                style="top: -10px; right: -10px; width: 2rem; height: 2rem; line-height: 2rem;">
                                 HOT
                             </span>
                             <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="">
@@ -148,7 +148,7 @@
 
         <div class="card" style="background-color: #d2d2fc">
             <div class="sale-flash badge badge-success p-2 text-uppercase"
-                style="top: 5px; transform: rotate(-25deg); font-size: 30px; background-color: #F7B600">
+                style="top: 5px; left: -8px; transform: rotate(-25deg); font-size: 30px; background-color: #F7B600">
                 Sale!</div>
             <div class="heading-block center">
                 <h2 class="">Ramadhan Sale</h2>
@@ -318,7 +318,7 @@
                     <div class="card">
                         <div class="card-body">
                             <span class="top-cart-number"
-                                style="top: -10px; right: -20px; width: 2rem; height: 2rem; line-height: 2rem;">
+                                style="top: -10px; right: -10px; width: 2rem; height: 2rem; line-height: 2rem;">
                                 HOT
                             </span>
                             <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="">
