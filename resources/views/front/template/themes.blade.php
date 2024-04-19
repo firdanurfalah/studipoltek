@@ -140,12 +140,12 @@
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="about">
-                                        <div>About</div>
+                                        <div>Katalog Studio</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="kategori">
-                                        <div>Categories</div>
+                                        <div>Referensi</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
@@ -155,7 +155,7 @@
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="kontak">
-                                        <div>Contacts</div>
+                                        <div>Pengambilan Foto</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
