@@ -24,7 +24,7 @@
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/home" class="nav-link active">
+                    <a href="/home" class="nav-link {{Request::is('home') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/adminxxx" class="nav-link">
+                    <a href="/adminxxx" class="nav-link {{Request::is('adminxxx') ? 'active' : ''}}">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Admin
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/categori" class="nav-link">
+                    <a href="/categori" class="nav-link {{Request::is('categori') ? 'active' : ''}}">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Kategori
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/artikel" class="nav-link">
+                    <a href="/artikel" class="nav-link {{Request::is('artikel') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Artikel
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/booking" class="nav-link">
+                    <a href="/booking" class="nav-link {{Request::is('booking') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Booking
