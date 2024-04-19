@@ -13,6 +13,13 @@
     .container {
         font-family: 'Poppins'
     }
+
+    .imagetext {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
 {{-- <section id="slider" class="slider-element slider-parallax swiper_wrapper vh-75">
     <div class="slider-inner">
@@ -111,8 +118,8 @@
                 <h3>Best Recomendation</h3>
             </div>
 
-            <div class="row col-mb-50">
-                @foreach($category as $key => $v)
+            <div class="row col-mb-50 justify-content-center">
+                @foreach($product as $key => $v)
                 <div class="col-sm-6 col-lg-3">
                     <div class="card">
                         <div class="card-body">
@@ -120,9 +127,10 @@
                                 style="top: -10px; right: -10px; width: 2rem; height: 2rem; line-height: 2rem;">
                                 HOT
                             </span>
-                            <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="">
+                            <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="" width="100%">
                             <div class="title">{{$v->nama}}</div>
-                            <div class="price"><del>Rp. 50.000</del> <b>Rp. 40.000</b></div>
+                            <div class="price"><del>Rp. {{number_format($v->harga_diskon)}}</del> <b>Rp.
+                                    {{number_format($v->harga)}}</b></div>
                             <div class="total-booking text-secondary">98 Booking</div>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <a class="button button-small button-dark button-circle pt-2 pb-2 text-center" href="#">
@@ -141,7 +149,6 @@
                 </div>
                 @endforeach
             </div>
-
             <div class="line"></div>
 
         </div>
@@ -158,18 +165,24 @@
                 ============================================= -->
             <div class="container">
                 <div class="row">
+                    @foreach($promo as $key => $va)
                     <div class="col-lg-4 mb-4">
-                        <div class="card text-white" style="background-color: #9E81BB">
+                        <div class="card text-white"
+                            style="background-color: {{$key%2 == 1 ? '#9E81BB' : '#EE6B8B' }} ">
                             <div class="card-body">
-                                <img src="/front/images/portfolio/4/1.jpg" alt="Open Imagination">
+                                <div>
+                                    <img src="/gambar?rf={{$va->gambar}}" alt="Open Imagination" width="100%">
+                                    <div class="imagetext"></div>
+                                </div>
                                 <div class="text-right">s&k berlaku</div>
-                                <p class="m-0">Paket Couple hanya 40 ribu saja. Segera booking sebelum promo
-                                    berakhir
+                                <p class="m-0">{{strlen($va->deskripsi) > 60 ? substr($va->deskripsi,0,60).'...' :
+                                    $va->deskripsi}}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    @endforeach
+                    {{-- <div class="col-lg-4">
                         <div class="card" style="background-color: #EE6B8B">
                             <div class="card-body">
                                 <img src="/front/images/portfolio/4/1.jpg" alt="Open Imagination">
@@ -190,7 +203,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- <div id="portfolio" class="portfolio row grid-container portfolio-reveal no-gutters"
                     data-layout="fitRows">
@@ -312,8 +325,8 @@
                 <h3>New Arrival</h3>
             </div>
 
-            <div class="row col-mb-50">
-                @foreach($category as $key => $v)
+            <div class="row col-mb-50 justify-content-center">
+                @foreach($arrival as $key => $v)
                 <div class="col-sm-6 col-lg-3">
                     <div class="card">
                         <div class="card-body">
@@ -321,9 +334,10 @@
                                 style="top: -10px; right: -10px; width: 2rem; height: 2rem; line-height: 2rem;">
                                 HOT
                             </span>
-                            <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="">
+                            <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="" width="100%">
                             <div class="title">{{$v->nama}}</div>
-                            <div class="price"><del>Rp. 50.000</del> <b>Rp. 40.000</b></div>
+                            <div class="price"><del>Rp. {{number_format($v->harga_diskon)}}</del> <b>Rp.
+                                    {{number_format($v->harga)}}</b></div>
                             <div class="total-booking text-secondary">98 Booking</div>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <a class="button button-small button-dark button-circle pt-2 pb-2 text-center" href="#">

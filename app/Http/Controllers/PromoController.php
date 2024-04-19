@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoriModel;
-use App\Models\ProductModel;
+use App\Models\PromoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class PromoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['data'] = ProductModel::select(
-            'product_models.*',
-            'categori.nama as categori_nama'
-        )
-            ->join('categori', 'categori.id', 'product_models.kategori_id')
-            ->get();
-        return view('admin.pages.product.index', $data);
+        $data['data'] = PromoModel::get();
+        return view('admin.pages.promo.index', $data);
     }
 
     /**
@@ -29,8 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $data['kategori'] = CategoriModel::get();
-        return view('admin.pages.product.tambah', $data);
+        return view('admin.pages.promo.tambah');
     }
 
     /**
@@ -40,11 +33,13 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama'  => 'required',
-            'harga' => 'required',
-            'harga_diskon' => 'required',
+            'kode' => 'required',
+            'nominal_type' => 'required',
+            'nominal' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'deskripsi' => 'required',
             'gambar' => 'required_if:id,null|image|mimes:jpeg,png,jpg',
-            'kategori' => 'required',
-            'rekomendasi' => 'required',
         ]);
 
         // response error validation
@@ -54,20 +49,22 @@ class ProductController extends Controller
 
         $insert = [
             'nama' => $request->nama,
-            'harga' => $request->harga,
-            'harga_diskon' => $request->harga_diskon,
-            'is_recommend' => $request->rekomendasi,
-            'kategori_id' => $request->kategori,
+            'kode' => $request->kode,
+            'nominal_type' => $request->nominal_type,
+            'nominal' => $request->nominal,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+            'deskripsi' => $request->deskripsi,
         ];
         if ($request->hasFile('gambar')) {
-            $insert['gambar'] = $request->file('gambar')->store('product/' . time());
+            $insert['gambar'] = $request->file('gambar')->store('promo/' . time());
         }
 
-        $u = ProductModel::UpdateOrCreate([
+        $u = PromoModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
         if ($u) {
-            return redirect('/product')->with('info', 'Berhasil ');
+            return redirect('/admin-promo')->with('info', 'Berhasil ');
         }
         return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
     }
@@ -77,9 +74,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $data['x'] = ProductModel::where('id', $id)->first();
-        $data['kategori'] = CategoriModel::get();
-        return view('admin.pages.product.edit', $data);
+        $data['x'] = PromoModel::where('id', $id)->first();
+        return view('admin.pages.promo.edit', $data);
     }
 
     /**
@@ -103,7 +99,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        ProductModel::where('id', $id)->delete();
-        return redirect('/product')->with('info', 'Berhasil hapus data');
+        PromoModel::where('id', $id)->delete();
+        return redirect('/admin-promo')->with('info', 'Berhasil hapus data');
     }
 }

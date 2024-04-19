@@ -56,6 +56,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/product" class="nav-link {{Request::is('product') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Produk
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/booking" class="nav-link {{Request::is('booking') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>

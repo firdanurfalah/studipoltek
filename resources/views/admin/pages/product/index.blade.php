@@ -5,7 +5,7 @@
 <!--  BEGIN CONTENT AREA  -->
 <div class="card">
     <div class="card-header">
-        <a href="/categori/create" class="btn btn-primary btn-sm">Tambah</a>
+        <a href="/product/create" class="btn btn-primary btn-sm">Tambah</a>
     </div>
 
     <!-- CONTENT AREA -->
@@ -19,18 +19,26 @@
                                 <tr>
                                     <th class="text-capitalize" width="10%">no</th>
                                     <th class="text-capitalize">nama</th>
-                                    <th class="text-capitalize">deskripsi</th>
+                                    <th class="text-capitalize">harga</th>
+                                    <th class="text-capitalize">harga diskon</th>
+                                    <th class="text-capitalize">kategori</th>
+                                    <th class="text-capitalize">rekomendasi</th>
+                                    <th class="text-capitalize">gambar</th>
                                     <th class="no-content text-center text-capitalize" width="20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($categori as $key => $value)
+                                @foreach($data as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->nama}}</td>
-                                    <td>{{$value->deskripsi}}</td>
+                                    <td>{{$value->harga}}</td>
+                                    <td>{{$value->harga_diskon}}</td>
+                                    <td>{{$value->categori_nama}}</td>
+                                    <td>{{$value->is_recommend == 1 ? 'Ya' : 'Tidak'}}</td>
+                                    <td><img src="/gambar?rf={{$value->gambar}}" alt="" width="100px"></td>
                                     <td>
-                                        <a href="/categori/{{$value->id}}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="/product/{{$value->id}}" class="btn btn-primary btn-sm">Edit</a>
                                         <span class="btn btn-danger btn-sm" onclick="hapus({{$value->id}})">Hapus</span>
                                     </td>
                                 </tr>
@@ -52,7 +60,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Detail Image</h5>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="" alt="" id="imagecategori" width="100%">
+                    <img src="" alt="" id="imageproduct" width="100%">
                 </div>
             </div>
         </div>
@@ -79,11 +87,7 @@
 <script>
     function hapus(id) {
         $('#modalhapus').modal('show');
-        $('#form-delete').attr('action','/categori/'+id);
+        $('#form-delete').attr('action','/product/'+id);
     }
-    // function showImage(foto) {
-    //     $('#imagecategori').attr('src','/gambar?rf=/'+foto);
-    //     $('#exampleModal').modal('show');
-    // }
 </script>
 @endsection

@@ -9,6 +9,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PromoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,6 +21,8 @@ Route::resource('adminxxx', AdminController::class);
 Route::resource('categori', CategoriController::class);
 Route::resource('artikel', ArtikelController::class);
 Route::resource('booking', BookingController::class);
+Route::resource('product', ProductController::class);
+Route::resource('admin-promo', PromoController::class);
 
 /*
 |--------------------------------------------------------------------------

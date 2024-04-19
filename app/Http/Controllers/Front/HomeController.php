@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
+use App\Models\ProductModel;
+use App\Models\PromoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +19,9 @@ class HomeController extends Controller
         $data = [];
         $data['category'] = CategoriModel::get();
         $data['article'] = ArtikelModel::get();
+        $data['product'] = ProductModel::limit(3)->get();
+        $data['arrival'] = ProductModel::limit(3)->get();
+        $data['promo'] = PromoModel::limit(3)->get();
         // return $data;
         return view('front.beranda', $data);
     }
