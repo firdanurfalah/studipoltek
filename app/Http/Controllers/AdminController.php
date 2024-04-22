@@ -14,32 +14,35 @@ class AdminController extends Controller
 
     public function index()
     {
+
+        // ambil data di table user
         $data['admin'] = User::get();
 
+        // menampilkan view index
         return view('admin.pages.admin.index', $data);
     }
 
     public function create()
     {
-
+        // menampilkan view tambah
         return view('admin.pages.admin.tambah');
     }
 
     public function store(Request $request)
     {
-        // return $request->all();
+        // validasi inputan
         $validator = Validator::make($request->all(), [
-            // 'id' => $request->idadmin,
             'nama' => 'required',
             'email' => 'required',
             'level' => 'required',
         ]);
 
-        // response error validation
+        // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput($request->all());
         }
 
+        // buat variable simpan
         $insert =
             [
                 'name' => $request->nama,
@@ -47,22 +50,29 @@ class AdminController extends Controller
                 'level' => $request->level,
             ];
 
+        // cek inputan password bila ada maka update password 
         if ($request->password) {
             $insert['password'] = Hash::make($request->password);
         }
 
+        // simpan atau update data
         User::updateOrCreate(
             [
                 'id' => $request->id,
             ],
             $insert
         );
+
+        // respon data
         return redirect('/adminxxx')->with('ss', 'Berhasil');
     }
 
     public function show(string $id)
     {
+        // ambil data di table user berdasarkan id
         $data['x'] = User::where('id', $id)->first();
+
+        // menampilkan view edit dengan data
         return view('admin.pages.admin.edit', $data);
     }
 
@@ -78,7 +88,9 @@ class AdminController extends Controller
 
     public function destroy(string $id)
     {
+        // hapus data di table user berdasarakan id
         User::where('id', $id)->delete();
+        // return data
         return redirect('/admin')->with('success', 'Berhasil hapus data');
     }
 }

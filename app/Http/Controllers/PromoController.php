@@ -14,7 +14,9 @@ class PromoController extends Controller
      */
     public function index()
     {
+        // ambil data di table promo
         $data['data'] = PromoModel::get();
+        // menampilkan view index
         return view('admin.pages.promo.index', $data);
     }
 
@@ -23,6 +25,7 @@ class PromoController extends Controller
      */
     public function create()
     {
+        // menampilkan view tambah
         return view('admin.pages.promo.tambah');
     }
 
@@ -31,6 +34,7 @@ class PromoController extends Controller
      */
     public function store(Request $request)
     {
+        // validasi data inputan
         $validator = Validator::make($request->all(), [
             'nama'  => 'required',
             'kode' => 'required',
@@ -42,11 +46,12 @@ class PromoController extends Controller
             'gambar' => 'required_if:id,null|image|mimes:jpeg,png,jpg',
         ]);
 
-        // response error validation
+        // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
         }
 
+        // variable inputan
         $insert = [
             'nama' => $request->nama,
             'kode' => $request->kode,
@@ -56,16 +61,20 @@ class PromoController extends Controller
             'tanggal_selesai' => $request->tanggal_selesai,
             'deskripsi' => $request->deskripsi,
         ];
+        // jika tedapat inputan gambar
         if ($request->hasFile('gambar')) {
             $insert['gambar'] = $request->file('gambar')->store('promo/' . time());
         }
 
+        // simpan dan tambah data
         $u = PromoModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
         if ($u) {
+            // respon data
             return redirect('/admin-promo')->with('info', 'Berhasil ');
         }
+        // respon data
         return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
     }
 
@@ -74,7 +83,9 @@ class PromoController extends Controller
      */
     public function show(string $id)
     {
+        // ambil data berdasarkan id
         $data['x'] = PromoModel::where('id', $id)->first();
+        // menampilkan view edit
         return view('admin.pages.promo.edit', $data);
     }
 
@@ -99,7 +110,9 @@ class PromoController extends Controller
      */
     public function destroy(string $id)
     {
+        // hapus data di table promo berdasarkan id
         PromoModel::where('id', $id)->delete();
+        // return data
         return redirect('/admin-promo')->with('info', 'Berhasil hapus data');
     }
 }
