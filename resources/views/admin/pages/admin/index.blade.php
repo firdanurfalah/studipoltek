@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->email}}</td>
-                                    <td>{{$value->level == 1 ? 'User' : 'Admin'}}</td>
+                                    <td class="text-capitalize">{{$value->level}}</td>
                                     <td>
                                         <a href="/adminxxx/{{$value->id}}"
                                             class="btn btn-primary btn-sm d-block d-none">Edit</a>

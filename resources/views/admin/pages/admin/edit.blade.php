@@ -11,9 +11,9 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="name" class="text-capitalize">Nama</label>
-                        <input type="text" name="name" id="name" value="{{$x->name}}" class="form-control">
-                        @error('name')
+                        <label for="nama" class="text-capitalize">Nama</label>
+                        <input type="text" name="nama" id="nama" value="{{$x->name}}" class="form-control">
+                        @error('nama')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -46,8 +46,9 @@
                     <div class="form-group">
                         <label for="level" class="text-capitalize">level</label>
                         <select name="level" id="level" class="form-control">
-                            <option value="0" {{$x->level == 0 ? 'selected':''}}>Admin</option>
-                            <option value="1" {{$x->level == 1 ? 'selected':''}}>User</option>
+                            <option value="admin" {{$x->level == 'admin' ? 'selected':''}}>Admin</option>
+                            <option value="user" {{$x->level == 'user' ? 'selected':''}}>User</option>
+                            <option value="owner" {{$x->level == 'owner' ? 'selected':''}}>Owner</option>
                         </select>
                         @error('level')
                         <span class="invalid-feedback" role="alert">

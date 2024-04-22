@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->level == 0) {
+        if (auth()->user()->level == 'admin' || auth()->user()->level == 'owner') {
             return $next($request);
         }
         return Redirect::back()->with('info', 'akses dibatasi');
