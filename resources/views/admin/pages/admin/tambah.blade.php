@@ -32,6 +32,31 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="password" class="text-capitalize">password (kosongi bila tidak dirubah)</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="level" class="text-capitalize">level</label>
+                        <select name="level" id="level" class="form-control">
+                            <option value="0">Admin</option>
+                            <option value="1">User</option>
+                        </select>
+                        @error('level')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-6" hidden>
+                    <div class="form-group">
                         <label for="nohp" class="text-capitalize">nohp</label>
                         <input type="text" name="nohp" id="nohp" class="form-control">
                         @error('nohp')

@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Storage;
 Auth::routes();
 
 
-Route::resource('adminxxx', AdminController::class);
-Route::resource('categori', CategoriController::class);
-Route::resource('artikel', ArtikelController::class);
-Route::resource('booking', BookingController::class);
-Route::resource('product', ProductController::class);
-Route::resource('admin-promo', PromoController::class);
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('adminxxx', AdminController::class);
+    Route::resource('categori', CategoriController::class);
+    Route::resource('artikel', ArtikelController::class);
+    Route::resource('booking', BookingController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('admin-promo', PromoController::class);
+});
 
 /*
 |--------------------------------------------------------------------------

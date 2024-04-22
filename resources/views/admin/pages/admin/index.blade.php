@@ -23,28 +23,18 @@
                         <table id="example2" class="table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
-
-                                    <th>nama</th>
+                                    <th>Nama</th>
                                     <th>Email</th>
-                                    <th>nohp</th>
-
-
-
+                                    <th>Level</th>
                                     <th class="no-content text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($admin as $key => $value)
                                 <tr>
-
-                                    <td>{{$value->nama}}</td>
-                                    <td>{{$value->Email}}</td>
-                                    <td>{{$value->nohp}}</td>
-
-
-
-
-
+                                    <td>{{$value->name}}</td>
+                                    <td>{{$value->email}}</td>
+                                    <td>{{$value->level == 1 ? 'User' : 'Admin'}}</td>
                                     <td>
                                         <a href="/adminxxx/{{$value->id}}"
                                             class="btn btn-primary btn-sm d-block d-none">Edit</a>
