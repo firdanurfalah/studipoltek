@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap"
         rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
     <link rel="stylesheet" href="{{asset('front/css/bootstrap.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{asset('front/css/style.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{asset('front/css/swiper.css')}}" type="text/css" />
@@ -48,8 +49,10 @@
                         <!-- Logo
 						============================================= -->
                         <div id="logo">
-                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png">Logo</a>
-                            <a href="/" class="retina-logo" data-dark-logo="/frontimages/logo-dark@2x.png">Logos</a>
+                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png"
+                                style="font-family: 'Krona One';">SNAPGUIDE</a>
+                            <a href="/" class="retina-logo" data-dark-logo="/frontimages/logo-dark@2x.png"
+                                style="font-family: 'Krona One';">SNAPGUIDE</a>
                             {{-- <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img
                                     src="images/logo.png" alt="Canvas Logo"></a>
                             <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img
@@ -137,12 +140,12 @@
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="about">
-                                        <div>About</div>
+                                        <div>Katalog Studio</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="kategori">
-                                        <div>Categories</div>
+                                        <div>Referensi</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
@@ -152,7 +155,13 @@
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link" href="kontak">
-                                        <div>Contacts</div>
+                                        <div>Pengambilan Foto</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
+                                        href="/login">
+                                        Login
                                     </a>
                                 </li>
                             </ul>
@@ -175,100 +184,104 @@
                 <div class="footer-widgets-wrap">
 
                     <div class="row col-mb-50">
-                        <div class="col-lg-8">
-
+                        <div class="col-lg-12">
+                            <a href="/" class="standard-logo" data-dark-logo="/frontimages/logo-dark.png">
+                                <h3 class="text-uppercase" style="font-family: 'Krona One';">snapguide</h3>
+                            </a>
                             <div class="row col-mb-50">
-                                <div class="col-md-4">
-
+                                <div class="col-md-3">
                                     <div class="widget clearfix">
-
-                                        <img src="/front/images/footer-widget-logo.png" alt="Image" class="footer-logo">
-
-                                        <p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp;
-                                            <strong>Flexible</strong> Design Standards.
-                                        </p>
-
                                         <div
                                             style="background: url('/front/images/world-map.png') no-repeat center center; background-size: 100%;">
-                                            <address>
-                                                <strong>Headquarters:</strong><br>
-                                                795 Folsom Ave, Suite 600<br>
-                                                San Francisco, CA 94107<br>
+                                            <b class="m-0">FIND US</b>
+                                            <address>JI. Margasari - Jatibarang No.9, Turi, Jatibarang Kidul, Kec.
+                                                Jatibarang, Kabupaten Brebes, Jawa Tengah
                                             </address>
-                                            <abbr title="Phone Number"><strong>Phone:</strong></abbr> (1) 8547
-                                            632521<br>
-                                            <abbr title="Fax"><strong>Fax:</strong></abbr> (1) 11 4752 1433<br>
-                                            <abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    <div class="widget widget_links clearfix">
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    <div class="widget clearfix">
-                                        <h4>Tips & Trick</h4>
-
-                                        <div class="posts-sm row col-mb-30" id="post-list-footer">
-                                            <div class="entry col-12">
-                                                <div class="grid-inner row">
-                                                    <div class="col">
-                                                        <div class="entry-title">
-                                                            <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="entry-meta">
-                                                            <ul>
-                                                                <li>10th July 2021</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <b class="text-uppercase mb-2">customer support</b>
+                                            <div class="d-flex">
+                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M14.875 3.09155C14.111 2.31982 13.201 1.70794 12.198 1.2916C11.1951 0.875249 10.1192 0.66277 9.03331 0.666554C4.48331 0.666554 0.77498 4.37489 0.77498 8.92489C0.77498 10.3832 1.15831 11.7999 1.87498 13.0499L0.708313 17.3332L5.08331 16.1832C6.29165 16.8416 7.64998 17.1916 9.03331 17.1916C13.5833 17.1916 17.2916 13.4832 17.2916 8.93322C17.2916 6.72489 16.4333 4.64989 14.875 3.09155ZM9.03331 15.7916C7.79998 15.7916 6.59165 15.4582 5.53331 14.8332L5.28331 14.6832L2.68331 15.3666L3.37498 12.8332L3.20831 12.5749C2.5231 11.4807 2.15926 10.2159 2.15831 8.92489C2.15831 5.14155 5.24165 2.05822 9.02498 2.05822C10.8583 2.05822 12.5833 2.77489 13.875 4.07489C14.5145 4.71152 15.0214 5.46877 15.3661 6.30274C15.7109 7.13671 15.8867 8.03081 15.8833 8.93322C15.9 12.7166 12.8166 15.7916 9.03331 15.7916ZM12.8 10.6582C12.5916 10.5582 11.575 10.0582 11.3916 9.98322C11.2 9.91655 11.0666 9.88322 10.925 10.0832C10.7833 10.2916 10.3916 10.7582 10.275 10.8916C10.1583 11.0332 10.0333 11.0499 9.82498 10.9416C9.61665 10.8416 8.94998 10.6166 8.16665 9.91655C7.54998 9.36655 7.14165 8.69155 7.01665 8.48322C6.89998 8.27489 6.99998 8.16655 7.10831 8.05822C7.19998 7.96655 7.31665 7.81655 7.41665 7.69989C7.51665 7.58322 7.55831 7.49155 7.62498 7.35822C7.69165 7.21655 7.65831 7.09989 7.60831 6.99989C7.55831 6.89989 7.14165 5.88322 6.97498 5.46655C6.80831 5.06655 6.63331 5.11655 6.50831 5.10822H6.10831C5.96665 5.10822 5.74998 5.15822 5.55831 5.36655C5.37498 5.57489 4.84165 6.07489 4.84165 7.09155C4.84165 8.10822 5.58331 9.09155 5.68331 9.22489C5.78331 9.36655 7.14165 11.4499 9.20831 12.3416C9.69998 12.5582 10.0833 12.6832 10.3833 12.7749C10.875 12.9332 11.325 12.9082 11.6833 12.8582C12.0833 12.7999 12.9083 12.3582 13.075 11.8749C13.25 11.3916 13.25 10.9832 13.1916 10.8916C13.1333 10.7999 13.0083 10.7582 12.8 10.6582Z"
+                                                        fill="#F9F9F9" />
+                                                </svg>
+                                                <abbr class="ml-2">
+                                                    contact_us@gmail.com
+                                                </abbr>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M15.6667 0.333252H2.33335C1.41669 0.333252 0.67502 1.08325 0.67502 1.99992L0.666687 11.9999C0.666687 12.9166 1.41669 13.6666 2.33335 13.6666H15.6667C16.5834 13.6666 17.3334 12.9166 17.3334 11.9999V1.99992C17.3334 1.08325 16.5834 0.333252 15.6667 0.333252ZM15.6667 3.66659L9.00002 7.83325L2.33335 3.66659V1.99992L9.00002 6.16658L15.6667 1.99992V3.66659Z"
+                                                        fill="#F9F9F9" />
+                                                </svg>
+                                                <abbr class="ml-2">
+                                                    (+62) 875-6353-6500
+                                                </abbr>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="widget clearfix">
+                                        <b class="m-0 text-capitalize">useful pages</b>
+                                        <div>
+                                            <a href="">Home</a>
+                                        </div>
+                                        <div>
+                                            <a href="">Katalog Produk</a>
+                                        </div>
+                                        <div>
+                                            <a href="">Blog</a>
+                                        </div>
+                                        <div>
+                                            <a href="">About</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="widget clearfix">
+                                        <b class="m-0 text-capitalize">useful links</b>
+                                        <div>
+                                            <a href="">Privacy Policy</a>
+                                        </div>
+                                        <div>
+                                            <a href="">Contact Us</a>
+                                        </div>
+                                        <div>
+                                            <a href="">FAQ's</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <b class="m-0 text-capitalize">follow us</b>
+                                    <div class="clearfix">
+                                        <a href="">
+                                            <img src="{{asset('images/sosmed/Instagram.png')}}" alt="">
+                                        </a>
+                                        <a href="">
+                                            <img src="{{asset('images/sosmed/Twitter.png')}}" alt="">
+                                        </a>
+                                        <a href="">
+                                            <img src="{{asset('images/sosmed/Send.png')}}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
-                        <div class="col-lg-4">
-                            <h4>FOLLOW US</h4>
-                            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                    viewBox="0 0 24 24" style="fill: rgb(255, 0, 0);transform: ;msFilter:;">
-                                    <path
-                                        d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z">
-                                    </path>
-                                </svg></a>
-                            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="46" height="46"
-                                    viewBox="0 0 24 24" style="fill: rgb(183, 0, 255);transform: ;msFilter:;">
-                                    <path
-                                        d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z">
-                                    </path>
-                                    <circle cx="11.994" cy="11.979" r="3.003"></circle>
-                                </svg></a>
-                            <a href="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                                    style="fill: rgb(0, 255, 13);transform: ;msFilter:;">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M18.403 5.633A8.919 8.919 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a8.981 8.981 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.926 8.926 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.446 7.446 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.448 7.448 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.413 7.413 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a9.65 9.65 0 0 0-.429-.008.826.826 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321c.112.15 1.582 2.415 3.832 3.387.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066.187-.524.187-.973.131-1.067-.056-.094-.207-.151-.43-.263">
-                                    </path>
-                                </svg>
-                            </a>
-                        </div>
                     </div>
 
                 </div><!-- .footer-widgets-wrap end -->
-
+            </div>
+            <div class="text-center p-2" style="background-color: white; color: black">
+                Copyright @ 2024 snapguide. All right reserved
             </div>
 
             <!-- Copyrights

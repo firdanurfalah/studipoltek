@@ -3,63 +3,35 @@
 @section('content')
 
 <!--  BEGIN CONTENT AREA  -->
-<div id="content" class="main-content">
-    <div class="layout-px-spacing">
+<div class="card">
+    <div class="card-header">
+        <a href="/categori/create" class="btn btn-primary btn-sm">Tambah</a>
+    </div>
 
-        <div class="page-header">
-            <div class="page-title">
-
-                <a href="/categori/create" class="btn btn-primary btn-sm">Tambah</a>
-
-            </div>
-        </div>
-
-
-        <!-- CONTENT AREA -->
+    <!-- CONTENT AREA -->
+    <div class="card-body">
         <div class="row">
-
             <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
                 <div class="widget widget-content-area br-4">
                     <div class="widget-one">
-                        <table id="zero-config" class="table dt-table-hover" style="width:100%">
+                        <table id="table" class="table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
-
-                                    <th>nama</th>
-                                    <th>gambar</th>
-                                    <th>harga</th>
-                                    <th>deskripsi</th>
-
-
-
-                                    <th class="no-content text-center">Aksi</th>
+                                    <th class="text-capitalize" width="10%">no</th>
+                                    <th class="text-capitalize">nama</th>
+                                    <th class="text-capitalize">deskripsi</th>
+                                    <th class="no-content text-center text-capitalize" width="20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($categori as $key => $value)
                                 <tr>
-
+                                    <td>{{$key+1}}</td>
                                     <td>{{$value->nama}}</td>
-                                    <td> <img width="120px" src="/gambar?rf={{$value->gambar}}"
-                                            onclick="showImage('{{$value->gambar}}')"> </td>
-
-                                    <td>{{$value->harga}}</td>
                                     <td>{{$value->deskripsi}}</td>
-
-
-
-
-
                                     <td>
-                                        <a href="/categori/{{$value->id}}"
-                                            class="btn btn-primary btn-sm d-block d-none">Edit</a>
-                                        <br>
-                                        <form action="{{ route('categori.destroy', $value->id) }}" method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                            <a type="submit"
-                                                class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                        </form>
+                                        <a href="/categori/{{$value->id}}" class="btn btn-primary btn-sm">Edit</a>
+                                        <span class="btn btn-danger btn-sm" onclick="hapus({{$value->id}})">Hapus</span>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -70,33 +42,48 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Image</h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img src="" alt="" id="imagecategori" width="100%">
-                    </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Image</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="" id="imagecategori" width="100%">
                 </div>
             </div>
         </div>
-
-
-
-        <!-- CONTENT AREA -->
-
     </div>
+    <div class="modal fade" id="modalhapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Hapus Data?</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <form action="" method="post" id="form-delete">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm show_confirm">Ya</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CONTENT AREA -->
 </div>
 <!--  END CONTENT AREA  -->
 <script>
-    function showImage(foto) {
-        $('#imagecategori').attr('src','/gambar?rf=/'+foto);
-        $('#exampleModal').modal('show');
+    function hapus(id) {
+        $('#modalhapus').modal('show');
+        $('#form-delete').attr('action','/categori/'+id);
     }
+    // function showImage(foto) {
+    //     $('#imagecategori').attr('src','/gambar?rf=/'+foto);
+    //     $('#exampleModal').modal('show');
+    // }
 </script>
 @endsection

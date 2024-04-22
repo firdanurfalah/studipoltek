@@ -2,103 +2,37 @@
 
 @section('content')
 
+<h5 class="font-weight-bold " style="color: blue;">Categori </h5>
 <!--  BEGIN CONTENT AREA  -->
-<div id="content" class="main-content">
-    <div class="layout-px-spacing">
-        <form action="/categori" method="POST" enctype="multipart/form-data" style="width: 1340px; height: 2000px;">
-
-            @csrf
-            <div class="page-header">
-                <div class="page-title">
-                    <a href="{{route('categori.index')}}" class="btn btn-primary btn-sm">Kembali</a>
-                    <button class="btn btn-success btn-sm" type="submit">Simpan</button>
-                </div>
+<div class="card">
+    <form action="/categori" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="card-header">
+            <div class="page-title">
+                <a href="{{route('categori.index')}}" class="btn btn-primary btn-sm">Kembali</a>
+                <button class="btn btn-success btn-sm" type="submit">Simpan</button>
             </div>
-           
+        </div>
+        <div class="card-body">
             <div class="row">
-               
-                <div class="col-xl-12 col-lg-12 col-md-12 col-12 ">
-                    <h5 class= "font-weight-bold " style="color: blue;" >Categori </h5>
-                    <div class="widget widget-content-area br-1"  style="height: 100%;">
-                        
-                        <div class="widget-two">
-                            
-                          
-                            <div class="row m-2">
-                                   
-                                <div class="col-lg-6">
-                                    <label for="form-control" style="color: black;">Nama</label>
-                                    <input type="hidden" name="idcategori" value="">
-                                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="" value="{{old('nama')}}">
-                                    @error('nama')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="gambar" style="color: black;">Upload Foto</label>
-                                    <input type="file" name="gambar" id="gambar" class="form-control @error('gambar') is-invalid @enderror" style="width: 50%; height: 50px;">
-                                    @error('gambar')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>  
-                                    @enderror
-                                  
-                                </div>
-                            </div>
-                            
-                            <div class="row m-2">
-                                   
-                                <div class="col-lg-6">
-                                    <label for="form-control" style="color: black;">Harga</label>
-                                    <input type="hidden" name="idcategori" value="">
-                                    <input type="text" name="harga" class="form-control @error('harga') is-invalid @enderror" placeholder="" value="{{old('harga')}}">
-                                    @error('harga')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <label for="form-control" style="color: black;"> Deskripsi</label>
-                                    <input type="hidden" name="idcategori" value="">
-                                    <textarea cols="30" rows="5" class="form-control  @error('deskripsi') is-invalid @enderror" name="deskripsi">{{old('deskripsi')}}</textarea>
-                                    @error('deskripsi')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                             
-                         
-                            </div>
-
-                         
-
-                        </div>
-                        
-                        
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="nama" class="text-capitalize">nama</label>
+                        <input type="text" name="nama" id="nama"
+                            class="form-control @error('nama') is-invalid @enderror" placeholder="nama">
                     </div>
-                    
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="deskripsi" class="text-capitalize">deskripsi</label>
+                        <textarea type="text" name="deskripsi" id="deskripsi"
+                            class="form-control @error('deskripsi') is-invalid @enderror" placeholder="deskripsi"
+                            rows="1"></textarea>
+                    </div>
                 </div>
             </div>
-        </form>
-
-
-
-
-        <!-- CONTENT AREA -->
-
-    </div>
+        </div>
+    </form>
 </div>
 <!--  END CONTENT AREA  -->
 @endsection
-
-
-
-
-
-
-
