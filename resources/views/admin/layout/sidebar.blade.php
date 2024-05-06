@@ -64,6 +64,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin-promo" class="nav-link {{Request::is('admin-promo') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Promo
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/booking" class="nav-link {{Request::is('booking') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>

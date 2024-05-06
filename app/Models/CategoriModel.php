@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CategoriModel extends Model
 {
@@ -15,6 +16,9 @@ class CategoriModel extends Model
         'gambar',
         'harga',
         'deskripsi',
-      
     ];
+    public function product(): HasMany
+    {
+        return $this->hasMany(ProductModel::class, 'kategori_id', 'id');
+    }
 }

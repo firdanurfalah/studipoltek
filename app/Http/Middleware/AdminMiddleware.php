@@ -16,6 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // cek level user bila sesuai maka dapat akses bila tidak akan dikembalikan ke halaman sebelumnya
         if (auth()->user()->level == 'admin' || auth()->user()->level == 'owner') {
             return $next($request);
         }

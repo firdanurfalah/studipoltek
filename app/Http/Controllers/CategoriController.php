@@ -11,16 +11,20 @@ class CategoriController extends Controller
 {
     public function index()
     {
+        // ambil data di table kategori
         $data['categori'] = CategoriModel::get();
+        // respon data
         return view('admin.pages.categori.index', $data);
     }
     public function create()
     {
+        // menampilan view tambah
         return view('admin.pages.categori.tambah');
     }
 
     public function store(Request $request)
     {
+        // validasi data inputan
         $validator = Validator::make($request->all(), [
             'nama'  => 'required',
             // 'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -28,11 +32,12 @@ class CategoriController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        // response error validation
+        // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
         }
 
+        // tambah atau update data
         $c = CategoriModel::updateOrCreate([
             'id' => $request->id
         ], [
@@ -44,15 +49,20 @@ class CategoriController extends Controller
         // if ($request->hasFile('gambar')) { 
         //     $file = $request->file('gambar')->store('categori/' . time());
         // }
+
         if ($c) {
+            // respon data
             return redirect('/categori')->with('info', 'Berhasil ');
         }
+        // respon data
         return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
     }
 
     public function show(string $id)
     {
+        // ambil data di table kategori berdasarkan id
         $data['x'] = CategoriModel::where('id', $id)->first();
+        // respon data
         return view('admin.pages.categori.edit', $data);
     }
 
@@ -92,7 +102,9 @@ class CategoriController extends Controller
     }
     public function destroy(string $id)
     {
+        // hapus data di table kategori berdasarkan id
         CategoriModel::where('id', $id)->delete();
+        // respon data
         return redirect('/categori')->with('info', 'Berhasil hapus data');
     }
 }

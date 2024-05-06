@@ -62,15 +62,9 @@ Route::post('/approve-booking/{id}', [App\Http\Controllers\Front\HomeController:
 // Route::get('/', function () {
 //     return view('front.beranda');
 // });
-Route::get('/about', function () {
-    return view('front.pages.about');
-});
-Route::get('/kategori', function () {
-    return view('front.pages.categories');
-});
-Route::get('/promo', function () {
-    return view('front.pages.promo');
-});
+Route::get('/katalog-studio', [App\Http\Controllers\Front\HomeController::class, 'katalogstudio']);
+Route::get('/referensi', [App\Http\Controllers\Front\HomeController::class, 'referensi']);
+Route::get('/promo', [App\Http\Controllers\Front\HomeController::class, 'promo']);
 Route::get('/kontak', function () {
     return view('front.pages.contacs');
 });

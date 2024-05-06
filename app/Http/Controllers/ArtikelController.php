@@ -11,101 +11,94 @@ class ArtikelController extends Controller
 {
     public function index()
     {
-        $data['artikel']= ArtikelModel::get();
-
+        // ambil data di table artikel
+        $data['artikel'] = ArtikelModel::get();
+        // menampilkan view index
         return view('admin.pages.artikel.index', $data);
     }
     public function create()
     {
+        // menampilkan view tambah
         return view('admin.pages.artikel.tambah');
     }
 
     public function store(Request $request)
     {
+        // validasi data inputan
         $validator = Validator::make($request->all(), [
-
-          
-            'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'judul'  => 'required',
             'deskripsi'  => 'required',
-          
-           
-       
-       
-      
         ]);
 
-        // response error validation
+        // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        // jika terdapat inputan gambar
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar')->store('artikel/' . time());
 
-        ArtikelModel::create([
-            'id' => $request->idartikel,
-            'gambar' => $file,
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            
-
-        
-      
-
-    
-         
-        ]);
+            // simpan data
+            ArtikelModel::create([
+                'id' => $request->idartikel,
+                'gambar' => $file,
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+            ]);
+            // respon data
             return redirect('/artikel')->with('ss', 'Berhasil tambah ');
         }
     }
 
-        public function show(string $id)
-        {
-            // $data['edit'] = AdminModel::where('id', $id)->first();
-            // return view('admin.pages.admin.edit');
-        }
+    public function show(string $id)
+    {
+        // $data['edit'] = AdminModel::where('id', $id)->first();
+        // return view('admin.pages.admin.edit');
+    }
 
-        public function edit(string $id)
-        {
-            //
-        }
+    public function edit(string $id)
+    {
+        //
+    }
 
-        public function update(Request $request, string $id)
-        {
-            if ($request->hasFile('gambar')) {
-                $file = $request->file('gambar')->store('artikel/' . time());
+    public function update(Request $request, string $id)
+    {
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar')->store('artikel/' . time());
             $validator = Validator::make($request->all(), [
-             
-                'gambar'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
-                'judul'=> 'required',
-                'deskripsi'=> 'required',
-              
-              
-         
-               
+
+                'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'judul' => 'required',
+                'deskripsi' => 'required',
+
+
+
+
             ]);
-    
+
             // response error validation
             if ($validator->fails()) {
                 return Redirect::back()->withErrors($validator)->withInput();
             }
             ArtikelModel::where('id', $id)->update([
                 'id' => $request->idartikel,
-           
+
                 'gambar' => $file,
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
-              
-       
+
+
             ]);
             return redirect('/artikel')->with('success', 'Berhasil edit ');
         }
-        }
+    }
 
-        public function destroy(string $id)
-        {
-            ArtikelModel::where('id', $id)->delete();
-            return redirect('/artikel')->with('success', 'Berhasil hapus data');
-        }
+    public function destroy(string $id)
+    {
+        // hapus data di table artikel berdasarkan id
+        ArtikelModel::where('id', $id)->delete();
+        return redirect('/artikel')->with('success', 'Berhasil hapus data');
+    }
 }

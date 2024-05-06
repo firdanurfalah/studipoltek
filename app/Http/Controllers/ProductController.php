@@ -15,10 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // ambil data di table product
         $data['data'] = ProductModel::select(
             'product_models.*',
             'categori.nama as categori_nama'
         )
+            // join table kategori dan produk
             ->join('categori', 'categori.id', 'product_models.kategori_id')
             ->get();
         return view('admin.pages.product.index', $data);
@@ -29,7 +31,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        // ambil data di table kategori
         $data['kategori'] = CategoriModel::get();
+        // menampilkan view tambah
         return view('admin.pages.product.tambah', $data);
     }
 
@@ -38,6 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // validasi data inputan
         $validator = Validator::make($request->all(), [
             'nama'  => 'required',
             'harga' => 'required',
@@ -47,11 +52,12 @@ class ProductController extends Controller
             'rekomendasi' => 'required',
         ]);
 
-        // response error validation
+        // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
         }
 
+        // buat variable inputan
         $insert = [
             'nama' => $request->nama,
             'harga' => $request->harga,
@@ -59,16 +65,20 @@ class ProductController extends Controller
             'is_recommend' => $request->rekomendasi,
             'kategori_id' => $request->kategori,
         ];
+        // jika terdapat inputan gambar
         if ($request->hasFile('gambar')) {
             $insert['gambar'] = $request->file('gambar')->store('product/' . time());
         }
 
+        // tambah atau update data
         $u = ProductModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
         if ($u) {
+            // return data
             return redirect('/product')->with('info', 'Berhasil ');
         }
+        // return data
         return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
     }
 
@@ -77,8 +87,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        // ambil data produk dan kategori
         $data['x'] = ProductModel::where('id', $id)->first();
         $data['kategori'] = CategoriModel::get();
+        // menampilkan view edit
         return view('admin.pages.product.edit', $data);
     }
 
@@ -103,7 +115,9 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        // hapus data di table produk berdasarkan id
         ProductModel::where('id', $id)->delete();
+        // respon data
         return redirect('/product')->with('info', 'Berhasil hapus data');
     }
 }
