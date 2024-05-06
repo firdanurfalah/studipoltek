@@ -5,7 +5,7 @@
 <section id="content">
     <div class="content-wrap">
         <div class="heading-block center">
-            <h2>About</h2>
+            <h2>Kata</h2>
         </div>
     </div>
 </section>

@@ -5,7 +5,7 @@
 <section id="content">
     <div class="content-wrap">
         <div class="heading-block center">
-            <h2>KATEGORI</h2>
+            <h2>Referens</h2>
         </div>
         <div class="row col-mb-50">
             <div class="col-sm-6 col-lg-3">
