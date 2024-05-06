@@ -1,42 +1,44 @@
 @extends('front.template.themes')
 @section('content')
-<section class="slider">
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="#">
-                    <img src="{{asset('images/test1.png')}}" alt="">
-                </a>
+<section class="content">
+    <div class="content-wrap">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="{{asset('images/test1.png')}}" alt="">
+                    </a>
+                </div>
             </div>
         </div>
 </section>
