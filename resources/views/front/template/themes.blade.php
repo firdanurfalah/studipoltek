@@ -31,6 +31,7 @@
             border-radius: 20px;
         }
     </style>
+    @yield('css')
 </head>
 
 <body class="stretched">
@@ -139,12 +140,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="about">
+                                    <a class="menu-link" href="katalog-studio">
                                         <div>Katalog Studio</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="kategori">
+                                    <a class="menu-link" href="referensi">
                                         <div>Referensi</div>
                                     </a>
                                 </li>
