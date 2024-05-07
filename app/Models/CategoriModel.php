@@ -21,4 +21,8 @@ class CategoriModel extends Model
     {
         return $this->hasMany(ProductModel::class, 'kategori_id', 'id');
     }
+    public function referensi(): HasMany
+    {
+        return $this->hasMany(ReferensiModel::class, 'kategori_id', 'id');
+    }
 }

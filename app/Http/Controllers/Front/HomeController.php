@@ -44,7 +44,7 @@ class HomeController extends Controller
     {
         $data = [];
         // ambil data ketegori dengan produk
-        $data['kategori'] = CategoriModel::select()->with('product')->get();
+        $data['kategori'] = CategoriModel::select()->with('referensi')->get();
         // return $data;
         // set view
         return view('front.pages.categories', $data);

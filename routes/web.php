@@ -11,6 +11,7 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\ReferensiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,6 +25,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('booking', BookingController::class);
     Route::resource('product', ProductController::class);
     Route::resource('admin-promo', PromoController::class);
+    Route::resource('admin-referensi', ReferensiController::class);
 });
 
 /*

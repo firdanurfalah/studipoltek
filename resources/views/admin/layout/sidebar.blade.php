@@ -72,6 +72,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin-referensi" class="nav-link {{Request::is('admin-referensi') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Referensi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/booking" class="nav-link {{Request::is('booking') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
