@@ -172,7 +172,14 @@
             </div>
             <div class="header-wrap-clone"></div>
         </header><!-- #header end -->
-
+        @if(Session::has('info'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Info!</strong> {{Session::get('info')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         @yield('content')
 
         <!-- Footer

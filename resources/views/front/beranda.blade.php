@@ -133,7 +133,8 @@
                                     {{number_format($v->harga)}}</b></div>
                             <div class="total-booking text-secondary">98 Booking</div>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <a class="button button-small button-dark button-circle pt-2 pb-2 text-center" href="#">
+                                <a class="button button-small button-dark button-circle pt-2 pb-2 text-center"
+                                    href="/produk/{{$v->id}}">
                                     Booking
                                 </a>
                                 <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
@@ -161,7 +162,7 @@
                 <h2 class="">Ramadhan Sale</h2>
                 <span class="text-capitalize">Dapatkan promo spesial bulan ramadhan</span>
             </div>
-            <!-- Portfolio Items
+            <!-- Promo
                 ============================================= -->
             <div class="container">
                 <div class="row">
@@ -340,7 +341,8 @@
                                     {{number_format($v->harga)}}</b></div>
                             <div class="total-booking text-secondary">98 Booking</div>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <a class="button button-small button-dark button-circle pt-2 pb-2 text-center" href="#">
+                                <a class="button button-small button-dark button-circle pt-2 pb-2 text-center"
+                                    href="/produk/{{$v->id}}">
                                     Booking
                                 </a>
                                 <svg width="19" height="17" viewBox="0 0 19 17" fill="none"

@@ -56,8 +56,12 @@
                                 </div>
                             </div>
                         </div>
+
                         {{-- <div class="sale-flash badge badge-danger p-2">Sale!</div> --}}
                     </div><!-- Product Single - Gallery End -->
+                    <span><i class="icon-exclamation-sign mt-4 mr-2"></i>Datang
+                        15 menit sebelum sesi foto
+                        dimulai</span>
                 </div>
                 <div class="col-md-4 product-desc">
                     <div class="d-flex align-items-center justify-content-between">

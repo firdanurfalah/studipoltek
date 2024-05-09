@@ -9,6 +9,7 @@ use App\Models\CategoriModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,6 +61,17 @@ class HomeController extends Controller
         return view('front.pages.promo', $data);
     }
 
+    public function produkdetail($id)
+    {
+        $x = [];
+        // ambil data produk selain id yg sama
+        $x['all'] = ProductModel::whereNot('id', $id)->get();
+        // ambil data produk berdasarkan id
+        $x['data'] = ProductModel::where('id', $id)->first();
+        // menampilkan data
+        return view('front.detail', $x);
+    }
+
     public function categoridetail($id)
     {
         $data = [];
@@ -72,8 +84,8 @@ class HomeController extends Controller
 
     public function formbooking(Request $request)
     {
-        // ambil kategori berdasarkarn id
-        $data['data'] = CategoriModel::where('id', $request->id)->first();
+        // ambil produk berdasarkarn id
+        $data['data'] = ProductModel::where('id', $request->id)->first();
         // bila kosong ke halaman sebelumnya
         if (!$data['data']) {
             return Redirect::back()->with('info', 'Product Not Found');
@@ -85,13 +97,17 @@ class HomeController extends Controller
     public function prosesbooking(Request $request)
     {
         // return $request->all();
+        $a = Auth::user();
+        if (!$a) {
+            return Redirect::back()->with('info', 'Silahkan login terlebih dahulu');
+        }
         // validasi data inputan
         $valid = Validator::make($request->all(), [
-            // 'email' => 'required',
             'nama' => 'required',
             'no_hp' => 'required',
             'tanggal' => 'required',
-            // 'gambar' => 'required',
+            'jam' => 'required',
+            'jumlah_orang' => 'required',
         ]);
 
         // bila gagal kembali ke halaman sebelumnya
@@ -103,12 +119,16 @@ class HomeController extends Controller
         // proses simpan
         $i = BookingModel::create([
             'nama' => $request->nama,
-            'email' => 'email',
+            'email' => Auth::user()->email,
             'nohp' => $request->no_hp,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'upload' => 'kosong',
             'status' => 0,
+            'jumlah_orang' => $request->jumlah_orang,
+            'product_id' => $request->product_id,
+            'user_id' => Auth::user()->id,
+            'promo_id' => 0,
         ]);
 
         // bila gagal
@@ -119,11 +139,11 @@ class HomeController extends Controller
         return view('front.orderselesai');
     }
 
-    public function approvebooking($id)
+    public function approvebooking($id, Request $request)
     {
         // ubah status booking
         $i = BookingModel::where('id', $id)->update([
-            'status' => $id == 1 ? 0 : 1,
+            'status' => $request->status,
         ]);
 
         // bila berhasil
