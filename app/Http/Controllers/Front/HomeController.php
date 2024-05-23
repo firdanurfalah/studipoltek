@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
+use App\Models\ReferensiModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -17,14 +19,43 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // get data rekomendasi
+        $rekom = GlobalHelper::getrecommend();
         $data = [];
+        $data['product'] = [];
+        // kondisi bila data rekomendasi lebih dari 0
+        if (count($rekom) > 0) {
+            foreach ($rekom as $key => $value) {
+                if ($key <= 2) {
+                    // get data product berdasrakan rekomendasi
+                    $product = ProductModel::select()
+                        ->where('kategori_id', $value->id_kategori)
+                        ->limit($value->limit)
+                        ->get();
+                    foreach ($product as $key => $v) {
+                        // tambah ke variavel data product
+                        array_push($data['product'], $v);
+                    }
+                }
+            }
+        } else {
+            // ambil data produk dengan limit 3 kondisi random
+            $data['product'] = ProductModel::select()
+                ->limit(3)
+                ->inRandomOrder()
+                ->get();
+        }
         // ambil data kategori
         $data['category'] = CategoriModel::get();
         // ambil data artikel
         $data['article'] = ArtikelModel::get();
         // ambil data produk dengan limit 3
-        $data['product'] = ProductModel::limit(3)->get();
-        $data['arrival'] = ProductModel::limit(3)->get();
+        // $data['product'] = ProductModel::select()
+        //     ->limit(3)
+        //     ->get();
+        $data['arrival'] = ProductModel::orderBy('created_at', 'DESC')
+            ->limit(3)
+            ->get();
         // ambil data promo dengan limit 3
         $data['promo'] = PromoModel::limit(3)->get();
         // return $data;
@@ -34,9 +65,32 @@ class HomeController extends Controller
     public function katalogstudio(Request $request)
     {
         $data = [];
+        $data['harga'] = '';
+        $data['jumlah_orang'] = '';
+        $data['kategori_id'] = '';
+        // ambil data kategori
+        $data['kategori'] = CategoriModel::get();
+
+        if ($request) {
+            $data['harga'] = $request->harga;
+            $data['jumlah_orang'] = $request->jumlah_orang;
+            $data['kategori_id'] = $request->kategori;
+            GlobalHelper::logkegiatan(null, $request->kategori);
+        }
         // ambil data produk
-        $data['product'] = ProductModel::paginate(6);
-        // return $data;
+        $data['product'] = ProductModel::where(function ($q) use ($request) {
+            // filter harga bila ada
+            if ($request->harga) {
+                $e = explode('-', $request->harga);
+                $q->where('harga', '<', $e[1]);
+                $q->where('harga', '>', $e[0]);
+            }
+            // filter kategori bila ada
+            if ($request->kategori) {
+                $q->where('kategori_id', $request->kategori);
+            }
+        })
+            ->paginate(6);
         // set view
         return view('front.pages.about', $data);
     }
@@ -50,6 +104,17 @@ class HomeController extends Controller
         // set view
         return view('front.pages.categories', $data);
     }
+    public function referensidetail($id)
+    {
+        $data = [];
+        // ambil data ketegori dengan produk
+        $data['kategori'] = ReferensiModel::where('id', $id)->first();
+        // return $data;
+        // catat log kegiatan
+        GlobalHelper::logkegiatan(null, $data['kategori']->kategori_id);
+        // set view
+        return view('front.pages.categorie_detail', $data);
+    }
 
     public function promo()
     {
@@ -61,6 +126,11 @@ class HomeController extends Controller
         return view('front.pages.promo', $data);
     }
 
+    function cariproduk(Request $r)
+    {
+        return $r->all();
+    }
+
     public function produkdetail($id)
     {
         $x = [];
@@ -68,6 +138,8 @@ class HomeController extends Controller
         $x['all'] = ProductModel::whereNot('id', $id)->get();
         // ambil data produk berdasarkan id
         $x['data'] = ProductModel::where('id', $id)->first();
+        // catat log kegiatan
+        GlobalHelper::logkegiatan($x['data']->id, $x['data']->kategori_id);
         // menampilkan data
         return view('front.detail', $x);
     }

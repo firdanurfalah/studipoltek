@@ -77,14 +77,16 @@
                     <div class="row">
                         @foreach($v->referensi as $key => $va)
                         <div class="col-lg-3">
-                            <div class="card" style="border: 0px">
-                                <div class="card-body">
-                                    <img src="/gambar?rf={{$va->gambar}}" alt="">
-                                    <div class="mt-2">
-                                        {{$va->nama}}
+                            <a href="/referensi-detail/{{$va->id}}">
+                                <div class="card" style="border: 0px">
+                                    <div class="card-body">
+                                        <img src="/gambar?rf={{$va->gambar}}" alt="">
+                                        <div class="mt-2">
+                                            {{$va->nama}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @endforeach
                     </div>

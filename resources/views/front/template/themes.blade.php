@@ -140,29 +140,29 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="katalog-studio">
+                                    <a class="menu-link" href="/katalog-studio">
                                         <div>Katalog Studio</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="referensi">
+                                    <a class="menu-link" href="/referensi">
                                         <div>Referensi</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="promo">
+                                    <a class="menu-link" href="/promo">
                                         <div>Promo</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="menu-link" href="kontak">
+                                    <a class="menu-link" href="/kontak">
                                         <div>Pengambilan Foto</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
                                     <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
                                         href="/login">
-                                        Login
+                                        {{Auth::check() ? 'Dashboard' : 'Login'}}
                                     </a>
                                 </li>
                             </ul>

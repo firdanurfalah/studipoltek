@@ -69,8 +69,10 @@ Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class
 // Route::get('/', function () {
 //     return view('front.beranda');
 // });
+Route::get('/cari-produk', [App\Http\Controllers\Front\HomeController::class, 'cariproduk']);
 Route::get('/katalog-studio', [App\Http\Controllers\Front\HomeController::class, 'katalogstudio']);
 Route::get('/referensi', [App\Http\Controllers\Front\HomeController::class, 'referensi']);
+Route::get('/referensi-detail/{id}', [App\Http\Controllers\Front\HomeController::class, 'referensidetail']);
 Route::get('/promo', [App\Http\Controllers\Front\HomeController::class, 'promo']);
 Route::get('/kontak', function () {
     return view('front.pages.contacs');
