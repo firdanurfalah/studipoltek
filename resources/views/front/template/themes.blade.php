@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{asset('front/css/custom.css')}}" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
     <!-- Document Title
 	============================================= -->
     <title>Home - Corporate Layout 2 | Canvas</title>
@@ -160,10 +163,17 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
+                                    @if(Auth::check())
+                                    <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
+                                        href="/home">
+                                        Dashboard
+                                    </a>
+                                    @else
                                     <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
                                         href="/login">
-                                        {{Auth::check() ? 'Dashboard' : 'Login'}}
+                                        Login
                                     </a>
+                                    @endif
                                 </li>
                             </ul>
                         </nav><!-- #primary-menu end -->

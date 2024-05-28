@@ -50,6 +50,8 @@ class ProductController extends Controller
             'gambar' => 'required_if:id,null|image|mimes:jpeg,png,jpg',
             'kategori' => 'required',
             'rekomendasi' => 'required',
+            'min_orang' => 'required',
+            'max_orang' => 'required',
         ]);
 
         // response error validasi
@@ -64,6 +66,8 @@ class ProductController extends Controller
             'harga_diskon' => $request->harga_diskon,
             'is_recommend' => $request->rekomendasi,
             'kategori_id' => $request->kategori,
+            'min_orang' => $request->min_orang,
+            'max_orang' => $request->max_orang,
         ];
         // jika terdapat inputan gambar
         if ($request->hasFile('gambar')) {

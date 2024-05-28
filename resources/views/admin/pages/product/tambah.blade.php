@@ -39,6 +39,20 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label for="min_orang" class="text-capitalize">min orang</label>
+                        <input type="number" name="min_orang" id="min_orang"
+                            class="form-control @error('min_orang') is-invalid @enderror" placeholder="min_orang">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="max_orang" class="text-capitalize">max orang</label>
+                        <input type="number" name="max_orang" id="max_orang"
+                            class="form-control @error('max_orang') is-invalid @enderror" placeholder="max_orang">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label for="kategori" class="text-capitalize">kategori</label>
                         <select name="kategori" id="kategori"
                             class="form-control @error('kategori') is-invalid @enderror">
