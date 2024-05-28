@@ -33,7 +33,9 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <!-- Product Single - Price
 										============================================= -->
-                                <div class="product-price"><del>RP. {{number_format($data->harga+150000)}}</del>
+                                <div class="product-price">@if($data->harga_diskon > 0)
+                                    <del>Rp. {{number_format($data->harga_diskon)}}</del>
+                                    @endif
                                     <ins>RP. {{number_format($data->harga)}}</ins>
                                 </div>
                                 <!-- Product Single - Price End -->

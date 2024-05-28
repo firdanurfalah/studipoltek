@@ -9,8 +9,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\ReferensiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,6 +26,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('booking', BookingController::class);
     Route::resource('product', ProductController::class);
     Route::resource('admin-promo', PromoController::class);
+    Route::resource('admin-referensi', ReferensiController::class);
+    Route::post('/approve-booking/{id}', [App\Http\Controllers\Front\HomeController::class, 'approvebooking']);
 });
 
 /*
@@ -52,18 +56,23 @@ Route::get('/dashboard', function () {
 // Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'create'])->name('artikel');
 // Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
 
+Route::get('/register-user', [App\Http\Controllers\HomeController::class, 'register']);
+Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
+Route::resource('profile', UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
 Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
+Route::get('/produk/{id}', [App\Http\Controllers\Front\HomeController::class, 'produkdetail']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
-Route::post('/approve-booking/{id}', [App\Http\Controllers\Front\HomeController::class, 'approvebooking']);
 // Route::get('/', function () {
 //     return view('front.beranda');
 // });
+Route::get('/cari-produk', [App\Http\Controllers\Front\HomeController::class, 'cariproduk']);
 Route::get('/katalog-studio', [App\Http\Controllers\Front\HomeController::class, 'katalogstudio']);
 Route::get('/referensi', [App\Http\Controllers\Front\HomeController::class, 'referensi']);
+Route::get('/referensi-detail/{id}', [App\Http\Controllers\Front\HomeController::class, 'referensidetail']);
 Route::get('/promo', [App\Http\Controllers\Front\HomeController::class, 'promo']);
 Route::get('/kontak', function () {
     return view('front.pages.contacs');

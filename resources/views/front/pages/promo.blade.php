@@ -7,7 +7,7 @@
         transform: rotate(-25deg);
         font-size: 30px;
         background-color: #F7B600;
-        z-index: 999;
+        z-index: 9;
     }
 
     @media (min-width:769px) {

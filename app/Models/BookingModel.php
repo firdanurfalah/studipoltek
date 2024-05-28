@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class BookingModel extends Model
 {
@@ -19,5 +20,17 @@ class BookingModel extends Model
         'upload',
         'status',
         'jumlah_orang',
+        'product_id',
+        'user_id',
+        'promo_id',
     ];
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'product_id');
+    }
+    public function promo(): HasOne
+    {
+        return $this->hasOne(PromoModel::class, 'id', 'promo_id');
+    }
 }

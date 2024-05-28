@@ -75,16 +75,18 @@
                 <div class="tab-content clearfix ui-tabs-panel ui-corner-bottom ui-widget-content" id="tabs-{{$key}}"
                     aria-labelledby="ui-id-{{$key}}" role="tabpanel" aria-hidden="false">
                     <div class="row">
-                        @foreach($v->product as $key => $va)
+                        @foreach($v->referensi as $key => $va)
                         <div class="col-lg-3">
-                            <div class="card" style="border: 0px">
-                                <div class="card-body">
-                                    <img src="/gambar?rf={{$va->gambar}}" alt="">
-                                    <div class="mt-2">
-                                        {{$va->nama}}
+                            <a href="/referensi-detail/{{$va->id}}">
+                                <div class="card" style="border: 0px">
+                                    <div class="card-body">
+                                        <img src="/gambar?rf={{$va->gambar}}" alt="">
+                                        <div class="mt-2">
+                                            {{$va->nama}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @endforeach
                     </div>

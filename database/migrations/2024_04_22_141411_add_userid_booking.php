@@ -12,17 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('level', ['admin', 'user', 'owner']);
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->enum('level', ['admin', 'user', 'owner']);
+        // });
+        Schema::table('booking', function (Blueprint $table) {
+            $table->integer('user_id') ->nullable();
         });
         Schema::table('booking', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->integer('product_id')->nullable();
         });
         Schema::table('booking', function (Blueprint $table) {
-            $table->integer('product_id');
-        });
-        Schema::table('booking', function (Blueprint $table) {
-            $table->integer('promo_id');
+            $table->integer('promo_id')->nullable();
         });
     }
 

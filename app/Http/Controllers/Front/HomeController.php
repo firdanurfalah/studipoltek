@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
+use App\Models\ReferensiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,14 +19,43 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // get data rekomendasi
+        $rekom = GlobalHelper::getrecommend();
         $data = [];
+        $data['product'] = [];
+        // kondisi bila data rekomendasi lebih dari 0
+        if (count($rekom) > 0) {
+            foreach ($rekom as $key => $value) {
+                if ($key <= 2) {
+                    // get data product berdasrakan rekomendasi
+                    $product = ProductModel::select()
+                        ->where('kategori_id', $value->id_kategori)
+                        ->limit($value->limit)
+                        ->get();
+                    foreach ($product as $key => $v) {
+                        // tambah ke variavel data product
+                        array_push($data['product'], $v);
+                    }
+                }
+            }
+        } else {
+            // ambil data produk dengan limit 3 kondisi random
+            $data['product'] = ProductModel::select()
+                ->limit(3)
+                ->inRandomOrder()
+                ->get();
+        }
         // ambil data kategori
         $data['category'] = CategoriModel::get();
         // ambil data artikel
         $data['article'] = ArtikelModel::get();
         // ambil data produk dengan limit 3
-        $data['product'] = ProductModel::limit(3)->get();
-        $data['arrival'] = ProductModel::limit(3)->get();
+        // $data['product'] = ProductModel::select()
+        //     ->limit(3)
+        //     ->get();
+        $data['arrival'] = ProductModel::orderBy('created_at', 'DESC')
+            ->limit(3)
+            ->get();
         // ambil data promo dengan limit 3
         $data['promo'] = PromoModel::limit(3)->get();
         // return $data;
@@ -33,9 +65,32 @@ class HomeController extends Controller
     public function katalogstudio(Request $request)
     {
         $data = [];
+        $data['harga'] = '';
+        $data['jumlah_orang'] = '';
+        $data['kategori_id'] = '';
+        // ambil data kategori
+        $data['kategori'] = CategoriModel::get();
+
+        if ($request) {
+            $data['harga'] = $request->harga;
+            $data['jumlah_orang'] = $request->jumlah_orang;
+            $data['kategori_id'] = $request->kategori;
+            GlobalHelper::logkegiatan(null, $request->kategori);
+        }
         // ambil data produk
-        $data['product'] = ProductModel::paginate(6);
-        // return $data;
+        $data['product'] = ProductModel::where(function ($q) use ($request) {
+            // filter harga bila ada
+            if ($request->harga) {
+                $e = explode('-', $request->harga);
+                $q->where('harga', '<', $e[1]);
+                $q->where('harga', '>', $e[0]);
+            }
+            // filter kategori bila ada
+            if ($request->kategori) {
+                $q->where('kategori_id', $request->kategori);
+            }
+        })
+            ->paginate(6);
         // set view
         return view('front.pages.about', $data);
     }
@@ -44,10 +99,21 @@ class HomeController extends Controller
     {
         $data = [];
         // ambil data ketegori dengan produk
-        $data['kategori'] = CategoriModel::select()->with('product')->get();
+        $data['kategori'] = CategoriModel::select()->with('referensi')->get();
         // return $data;
         // set view
         return view('front.pages.categories', $data);
+    }
+    public function referensidetail($id)
+    {
+        $data = [];
+        // ambil data ketegori dengan produk
+        $data['kategori'] = ReferensiModel::where('id', $id)->first();
+        // return $data;
+        // catat log kegiatan
+        GlobalHelper::logkegiatan(null, $data['kategori']->kategori_id);
+        // set view
+        return view('front.pages.categorie_detail', $data);
     }
 
     public function promo()
@@ -58,6 +124,24 @@ class HomeController extends Controller
         // return $data;
         // set view
         return view('front.pages.promo', $data);
+    }
+
+    function cariproduk(Request $r)
+    {
+        return $r->all();
+    }
+
+    public function produkdetail($id)
+    {
+        $x = [];
+        // ambil data produk selain id yg sama
+        $x['all'] = ProductModel::whereNot('id', $id)->get();
+        // ambil data produk berdasarkan id
+        $x['data'] = ProductModel::where('id', $id)->first();
+        // catat log kegiatan
+        GlobalHelper::logkegiatan($x['data']->id, $x['data']->kategori_id);
+        // menampilkan data
+        return view('front.detail', $x);
     }
 
     public function categoridetail($id)
@@ -72,8 +156,8 @@ class HomeController extends Controller
 
     public function formbooking(Request $request)
     {
-        // ambil kategori berdasarkarn id
-        $data['data'] = CategoriModel::where('id', $request->id)->first();
+        // ambil produk berdasarkarn id
+        $data['data'] = ProductModel::where('id', $request->id)->first();
         // bila kosong ke halaman sebelumnya
         if (!$data['data']) {
             return Redirect::back()->with('info', 'Product Not Found');
@@ -85,13 +169,17 @@ class HomeController extends Controller
     public function prosesbooking(Request $request)
     {
         // return $request->all();
+        $a = Auth::user();
+        if (!$a) {
+            return Redirect::back()->with('info', 'Silahkan login terlebih dahulu');
+        }
         // validasi data inputan
         $valid = Validator::make($request->all(), [
-            // 'email' => 'required',
             'nama' => 'required',
             'no_hp' => 'required',
             'tanggal' => 'required',
-            // 'gambar' => 'required',
+            'jam' => 'required',
+            'jumlah_orang' => 'required',
         ]);
 
         // bila gagal kembali ke halaman sebelumnya
@@ -103,12 +191,16 @@ class HomeController extends Controller
         // proses simpan
         $i = BookingModel::create([
             'nama' => $request->nama,
-            'email' => 'email',
+            'email' => Auth::user()->email,
             'nohp' => $request->no_hp,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'upload' => 'kosong',
             'status' => 0,
+            'jumlah_orang' => $request->jumlah_orang,
+            'product_id' => $request->product_id,
+            'user_id' => Auth::user()->id,
+            'promo_id' => 0,
         ]);
 
         // bila gagal
@@ -119,11 +211,11 @@ class HomeController extends Controller
         return view('front.orderselesai');
     }
 
-    public function approvebooking($id)
+    public function approvebooking($id, Request $request)
     {
         // ubah status booking
         $i = BookingModel::where('id', $id)->update([
-            'status' => $id == 1 ? 0 : 1,
+            'status' => $request->status,
         ]);
 
         // bila berhasil
