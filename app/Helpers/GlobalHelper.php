@@ -64,7 +64,7 @@ class GlobalHelper
                 ->join('categori', 'categori.id', 'log_kegiatan_models.id_kategori')
                 ->where('id_user', Auth::user()->id)
                 ->orderBy('jmlkat', 'DESC')
-                ->groupBy('id_kategori')
+                ->groupBy('id_kategori','categori.nama')
                 ->get();
             foreach ($lkm as $key => $v) {
                 // set limit
