@@ -11,6 +11,11 @@
         display: none;
     }
 
+    .radiox[disabled]+span {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
     label span {
         border: 1px solid #ccc;
         width: 56px;
@@ -69,8 +74,17 @@
                             <ins>RP. {{number_format($data->harga)}}</ins>
                         </div>
                     </div>
+                    <div class="text-secondary">
+                        @if($data->min_orang == $data->max_orang)
+                        {{$data->min_orang}} Orang
+                        @else
+                        {{$data->min_orang . ' - ' . $data->max_orang}} Orang
+                        @endif
+                    </div>
                     <p>{{$data->deskripsi}}</p>
                 </div>
+                <input type="text" name="max_orang" id="max_orang" value="{{$data->max_orang}}" hidden>
+                <input type="text" name="harga" id="harga" value="{{$data->harga}}" hidden>
                 <div class="col-md-5">
                     <h4>Isi Fomulir :</h4>
                     <form action="/proses-booking" method="POST" class="col-md-10 mt-4" enctype="multipart/form-data">
@@ -93,9 +107,11 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">jumlah orang</label>
                             <select name="jumlah_orang" id="jumlah_orang" class="form-control">
-                                @for($i = 1; $i <= 10; $i++) <option value="{{$i}}">{{$i}}</option>
+                                @for($i = $data->min_orang; $i <= 10; $i++) <option value="{{$i}}">{{$i}}
+                                    </option>
                                     @endfor
                             </select>
+                            <small class="text-warning" id="tambahharga"></small>
                             @error('jumlah_orang')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
@@ -118,18 +134,18 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">jam</label>
                             <div class="d-flex">
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="18.00" /><span>18.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="19.00" /><span>19.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="20.00" /><span>20.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="21.00" /><span>21.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="22.00" /><span>22.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam"
-                                        value="23.00" /><span>23.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="18"
+                                        class="radiox" style="border: 0" value="18.00" /><span>18.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="19"
+                                        class="radiox" style="border: 0" value="19.00" /><span>19.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="20"
+                                        class="radiox" style="border: 0" value="20.00" /><span>20.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="21"
+                                        class="radiox" style="border: 0" value="21.00" /><span>21.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="22"
+                                        class="radiox" style="border: 0" value="22.00" /><span>22.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="23"
+                                        class="radiox" style="border: 0" value="23.00" /><span>23.00</span></label>
                             </div>
                             @error('jam')
                             <small class="text-danger">Harus di isi</small>
@@ -156,6 +172,33 @@
 @endsection
 @section('js')
 <script>
+    $(document).ready(function () {
+        let jams = ['22'];
+        $('#tanggal').attr('min', dayjs().format('YYYY-MM-DD'));
+        let j = dayjs().hour() - 2;
+        var checkboxes = document.querySelectorAll("input[name=jam]");
+        checkboxes.forEach(e => {
+            $('#'+e.id).removeAttr('disabled');
+            if (e.id < j) {
+                $('#'+e.id).attr('disabled',true);
+            }
+            if (!jams.indexOf(e.id)) {
+                $('#'+e.id).attr('disabled',true);
+            }
+            console.log(e.id);
+        });
+        console.log(jams);
+    })
+    $('#jumlah_orang').on('change', function () {
+        let v = $(this).val();
+        let x = $('#max_orang').val();
+        let h = $('#harga').val();
+        $('#tambahharga').html('');
+        let harga = h/x;
+        if (v > x) {
+            $('#tambahharga').html('Maksimal ' + x + ' orang bila lebih maka terdapat tambahan biaya, sebesar Rp.'+harga.toFixed()+' per orang');
+        }
+    })
     $('#gambar').on('change',function (e) {
         console.log(e);
         let src = URL.createObjectURL(e.target.files[0]);

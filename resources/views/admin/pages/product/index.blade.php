@@ -21,6 +21,7 @@
                                     <th class="text-capitalize">nama</th>
                                     <th class="text-capitalize">harga</th>
                                     <th class="text-capitalize">harga diskon</th>
+                                    <th class="text-capitalize">orang</th>
                                     <th class="text-capitalize">kategori</th>
                                     <th class="text-capitalize">rekomendasi</th>
                                     <th class="text-capitalize">gambar</th>
@@ -34,6 +35,7 @@
                                     <td>{{$value->nama}}</td>
                                     <td>{{$value->harga}}</td>
                                     <td>{{$value->harga_diskon}}</td>
+                                    <td>{{$value->min_orang}} - {{$value->max_orang}} Orang</td>
                                     <td>{{$value->categori_nama}}</td>
                                     <td>{{$value->is_recommend == 1 ? 'Ya' : 'Tidak'}}</td>
                                     <td><img src="/gambar?rf={{$value->gambar}}" alt="" width="100px"></td>

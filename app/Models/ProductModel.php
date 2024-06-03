@@ -16,5 +16,7 @@ class ProductModel extends Model
         'is_recommend',
         'kategori_id',
         'gambar',
+        'min_orang',
+        'max_orang',
     ];
 }

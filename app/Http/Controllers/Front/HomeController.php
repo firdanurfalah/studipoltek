@@ -10,6 +10,7 @@ use App\Models\CategoriModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
 use App\Models\ReferensiModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -161,6 +162,15 @@ class HomeController extends Controller
         // bila kosong ke halaman sebelumnya
         if (!$data['data']) {
             return Redirect::back()->with('info', 'Product Not Found');
+        }
+        $b = BookingModel::select('jam')
+            ->where('product_id', $request->id)
+            ->whereDate('tanggal', '>=', Carbon::now())
+            ->get();
+        $data['jamterpakai'] = [];
+        foreach ($b as $key => $v) {
+            $e = explode('.', $v->jam);
+            array_push($data['jamterpakai'], $e[0]);
         }
         // set view
         return view('front.booking', $data);
