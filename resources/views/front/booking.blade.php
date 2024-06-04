@@ -69,18 +69,33 @@
                         dimulai</span>
                 </div>
                 <div class="col-md-4 product-desc">
+                    <h2 class="text-capitalize">{{$data->nama}}</h2>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="product-price"><del>RP. {{number_format($data->harga+150000)}}</del>
                             <ins>RP. {{number_format($data->harga)}}</ins>
                         </div>
                     </div>
-                    <div class="text-secondary">
-                        @if($data->min_orang == $data->max_orang)
-                        {{$data->min_orang}} Orang
-                        @else
-                        {{$data->min_orang . ' - ' . $data->max_orang}} Orang
-                        @endif
-                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Background</td>
+                                <td>: {{$data->background}}</td>
+                            </tr>
+                            <tr>
+                                <td>Waktu</td>
+                                <td>: {{$data->waktu}}</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Orang</td>
+                                <td>: @if($data->min_orang == $data->max_orang)
+                                    {{$data->min_orang}} Orang
+                                    @else
+                                    {{$data->min_orang . ' - ' . $data->max_orang}} Orang
+                                    @endif
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <p>{{$data->deskripsi}}</p>
                 </div>
                 <input type="text" name="max_orang" id="max_orang" value="{{$data->max_orang}}" hidden>
@@ -105,6 +120,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <input type="text" name="" id="harga_per_orang" value="{{$data->harga_per_orang}}" hidden>
                             <label for="" class="text-capitalize">jumlah orang</label>
                             <select name="jumlah_orang" id="jumlah_orang" class="form-control">
                                 @for($i = $data->min_orang; $i <= 10; $i++) <option value="{{$i}}">{{$i}}
@@ -162,6 +178,14 @@
                             <small class="text-danger">Harus di isi</small>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="" class="text-capitalize">Price Total</label>
+                            <input type="text" name="price_total" id="price_total" class="form-control"
+                                value="{{$data->harga}}" readonly>
+                            @error('price_total')
+                            <small class="text-danger">Harus di isi</small>
+                            @enderror
+                        </div>
                         <button class="btn btn-primary">Booking</button>
                     </form>
                 </div>
@@ -172,10 +196,12 @@
 @endsection
 @section('js')
 <script>
+    let hargaawal = $('#price_total').val();
+    let jamsekarang = dayjs().hour();
     $(document).ready(function () {
-        let jams = ['22'];
+        let jams = [];
         $('#tanggal').attr('min', dayjs().format('YYYY-MM-DD'));
-        let j = dayjs().hour() - 2;
+        let j = dayjs().hour() + 2;
         var checkboxes = document.querySelectorAll("input[name=jam]");
         checkboxes.forEach(e => {
             $('#'+e.id).removeAttr('disabled');
@@ -185,18 +211,74 @@
             if (!jams.indexOf(e.id)) {
                 $('#'+e.id).attr('disabled',true);
             }
-            console.log(e.id);
+            console.log(e.id, j);
         });
         console.log(jams);
     })
+    $('#tanggal').on('change', function () {
+        let jams = [];
+        let j = dayjs($(this).val()).format('DDMMYYYY');
+        let now = dayjs().format('DDMMYYYY');
+
+        // buat semua checkbox enabled
+        var checkboxes = document.querySelectorAll("input[name=jam]");
+        if (j == now) {
+            checkboxes.forEach(e => {
+                $('#'+e.id).removeAttr('disabled');
+                if (e.id < (jamsekarang + 2)) {
+                    $('#'+e.id).attr('disabled',true);
+                }
+                if (!jams.indexOf(e.id)) {
+                    $('#'+e.id).attr('disabled',true);
+                }
+            });
+        }else{
+            checkboxes.forEach(e => {
+                $('#'+e.id).removeAttr('disabled');
+            });
+        }
+        // buat semua checkbox enabled
+
+        // ajax untuk check ketersediaan tanggal
+        $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : "/checktanggal?tanggal="+$(this).val(),
+        // data : {'token' : token},
+        type : 'GET',
+        dataType : 'json',
+        success : function(result){
+            // disabled jam booking sesuai database
+            result.forEach(element => {
+                let el = element.split('.');
+                checkboxes.forEach(e => {
+                    $('#'+e.id).removeAttr('disabled');
+                    if (e.id == el[0]) {
+                        $('#'+e.id).attr('disabled',true);
+                    }
+                    // if (!jams.indexOf(e.id)) {
+                    //     $('#'+e.id).attr('disabled',true);
+                    // }
+                });
+            });
+        }
+        });
+        
+    });
     $('#jumlah_orang').on('change', function () {
         let v = $(this).val();
         let x = $('#max_orang').val();
         let h = $('#harga').val();
+        console.log('x',v,x,h);
         $('#tambahharga').html('');
-        let harga = h/x;
+        let harga = $('#harga_per_orang').val();
+        $('#price_total').val(hargaawal);
         if (v > x) {
-            $('#tambahharga').html('Maksimal ' + x + ' orang bila lebih maka terdapat tambahan biaya, sebesar Rp.'+harga.toFixed()+' per orang');
+            let pt = Number(h) + Number((v - x) * harga);
+            $('#price_total').val(pt);
+
+            $('#tambahharga').html('Maksimal ' + x + ' orang bila lebih maka terdapat tambahan biaya, sebesar Rp.'+harga+' per orang');
         }
     })
     $('#gambar').on('change',function (e) {

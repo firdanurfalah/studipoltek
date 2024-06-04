@@ -18,5 +18,9 @@ class ProductModel extends Model
         'gambar',
         'min_orang',
         'max_orang',
+        'background',
+        'waktu',
+        'deskripsi',
+        'harga_per_orang',
     ];
 }

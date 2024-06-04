@@ -21,13 +21,10 @@
                                             <th class="text-uppercase">nohp</th>
                                             <th class="text-uppercase">tanggal</th>
                                             <th class="text-uppercase">jam</th>
+                                            <th class="text-uppercase">total harga</th>
                                             {{-- <th>upload</th> --}}
                                             <th class="text-uppercase">status</th>
-
-
-
-
-                                            <th class="no-content text-center">Aksi</th>
+                                            {{-- <th class="no-content text-center">Aksi</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,6 +36,7 @@
                                             <td>{{$value->nohp}}</td>
                                             <td>{{$value->tanggal}}</td>
                                             <td>{{$value->jam}}</td>
+                                            <td>{{$value->price_total}}</td>
                                             {{-- <td><a href="/gambar?rf={{$value->upload}}"
                                                     style="cursor: pointer"><img src="/gambar?rf={{$value->upload}}"
                                                         width="100px" height="40px"></a>
@@ -57,17 +55,14 @@
                                             </td>
 
 
-                                            <td>
-                                                {{-- <a href="/booking/{{ $value->id }}"
-                                                    class="btn btn-primary btn-sm d-block d-none">Edit</a>
-                                                <br> --}}
+                                            {{-- <td>
                                                 <form action="{{ route('booking.destroy', $value->id) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <a type="submit"
                                                         class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>

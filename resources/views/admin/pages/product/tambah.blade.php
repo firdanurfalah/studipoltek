@@ -75,6 +75,42 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label for="background" class="text-capitalize">background</label>
+                        <select name="background" id="background"
+                            class="form-control @error('background') is-invalid @enderror">
+                            <option value="Tanpa Background">Tanpa Background</option>
+                            <option value="1 Background/Tempat">1 Background/Tempat</option>
+                            <option value="1 Background">1 Background</option>
+                            <option value="2 Background">2 Background</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="waktu" class="text-capitalize">waktu</label>
+                        <select name="waktu" id="waktu" class="form-control @error('waktu') is-invalid @enderror">
+                            <option value="25 Shoot">25 Shoot</option>
+                            <option value="70 Shoot">70 Shoot</option>
+                            <option value="35 Shoot dan 50 File Edit">35 Shoot dan 50 File Edit</option>
+                            <option value="10 Menit">10 Menit</option>
+                            <option value="60 Menit">60 Menit</option>
+                            <option value="90 Menit">90 Menit</option>
+                            <option value="Unlimited">Unlimited</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="harga_per_orang" class="text-capitalize">harga per orang</label>
+                        <select name="harga_per_orang" id="harga_per_orang"
+                            class="form-control @error('harga_per_orang') is-invalid @enderror">
+                            <option value="20000">20k</option>
+                            <option value="50000">50k</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label for="gambar" class="text-capitalize">gambar</label>
                         <input type="file" name="gambar" id="gambar" accept="image/png, image/jpeg"
                             class="form-control @error('image') is-invalid @enderror"

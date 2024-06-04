@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
+use App\Models\FavoritModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
 use App\Models\ReferensiModel;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,8 @@ class HomeController extends Controller
         $rekom = GlobalHelper::getrecommend();
         $data = [];
         $data['product'] = [];
+        // get data favorit
+        $data['favorit'] = FavoritModel::pluck('product_id')->toArray();
         // kondisi bila data rekomendasi lebih dari 0
         if (count($rekom) > 0) {
             foreach ($rekom as $key => $value) {
@@ -71,6 +75,8 @@ class HomeController extends Controller
         $data['kategori_id'] = '';
         // ambil data kategori
         $data['kategori'] = CategoriModel::get();
+        // get data favorit
+        $data['favorit'] = FavoritModel::pluck('product_id')->toArray();
 
         if ($request) {
             $data['harga'] = $request->harga;
@@ -176,6 +182,13 @@ class HomeController extends Controller
         return view('front.booking', $data);
     }
 
+    public function checktanggal(Request $request)
+    {
+        if ($request->tanggal) {
+            return BookingModel::whereDate('tanggal', $request->tanggal)->pluck('jam')->toArray();
+        }
+    }
+
     public function prosesbooking(Request $request)
     {
         // return $request->all();
@@ -209,6 +222,7 @@ class HomeController extends Controller
             'status' => 0,
             'jumlah_orang' => $request->jumlah_orang,
             'product_id' => $request->product_id,
+            'price_total' => $request->price_total,
             'user_id' => Auth::user()->id,
             'promo_id' => 0,
         ]);
@@ -234,5 +248,36 @@ class HomeController extends Controller
         }
         // bila gagal
         return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+    }
+
+    public function setfavorit($product_id)
+    {
+        // ambil data login
+        $auth = Auth::user();
+        // cek data login
+        if (!$auth) {
+            return Redirect::to('login');
+        }
+
+        // cek ketersediaan favorit
+        $f = FavoritModel::where('user_id', $auth->id)
+            ->where('product_id', $product_id)
+            ->get();
+        if (count($f) > 0) {
+            $f = FavoritModel::where('user_id', $auth->id)
+                ->where('product_id', $product_id)
+                ->delete();
+            return Redirect::back()->with('info', 'Data Favorit Sudah Terhapus');
+        }
+
+        // tambah data favorit berdasarkan user
+        $fm = FavoritModel::create([
+            'user_id' => $auth->id,
+            'product_id' => $product_id,
+        ]);
+        if ($fm) {
+            return Redirect::back()->with('info', 'Data Favorit Tersimpan');;
+        }
+        return Redirect::back()->with('info', 'Data Favorit Gagal Tersimpan');
     }
 }

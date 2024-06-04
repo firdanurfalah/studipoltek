@@ -23,6 +23,7 @@ class BookingModel extends Model
         'product_id',
         'user_id',
         'promo_id',
+        'price_total',
     ];
 
     public function product(): HasOne
