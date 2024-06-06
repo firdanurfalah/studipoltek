@@ -30,6 +30,7 @@
                             </div><!-- Product Single - Gallery End -->
                         </div>
                         <div class="col-md-5 product-desc">
+                            <h2 class="text-capitalize">{{$data->nama}}</h2>
                             <div class="d-flex align-items-center justify-content-between">
                                 <!-- Product Single - Price
 										============================================= -->
@@ -39,22 +40,43 @@
                                     <ins>RP. {{number_format($data->harga)}}</ins>
                                 </div>
                                 <!-- Product Single - Price End -->
+                                <!-- Product Single - Quantity & Cart Button
+                                        ============================================= -->
+                                <form action="/form-booking"
+                                    class="cart mb-0 d-flex justify-content-between align-items-center" method="get"
+                                    enctype='multipart/form-data'>
+                                    <input type="text" name="id" id="id" value="{{$data->id}}" hidden>
+                                    <div class="quantity clearfix">
+                                        {{-- <input type="button" value="-" class="minus">
+                                        <input type="number" step="1" min="1" name="quantity" value="1" title="Qty"
+                                            class="qty" />
+                                        <input type="button" value="+" class="plus"> --}}
+                                    </div>
+                                    <button type="submit" class="add-to-cart button m-0">Booking Now</button>
+                                </form><!-- Product Single - Quantity & Cart Button End -->
                             </div>
                             <div class="line"></div>
-                            <!-- Product Single - Quantity & Cart Button
-									============================================= -->
-                            <form action="/form-booking"
-                                class="cart mb-0 d-flex justify-content-between align-items-center" method="get"
-                                enctype='multipart/form-data'>
-                                <input type="text" name="id" id="id" value="{{$data->id}}" hidden>
-                                <div class="quantity clearfix">
-                                    {{-- <input type="button" value="-" class="minus">
-                                    <input type="number" step="1" min="1" name="quantity" value="1" title="Qty"
-                                        class="qty" />
-                                    <input type="button" value="+" class="plus"> --}}
-                                </div>
-                                <button type="submit" class="add-to-cart button m-0">Booking Now</button>
-                            </form><!-- Product Single - Quantity & Cart Button End -->
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Background</td>
+                                        <td>: {{$data->background}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Waktu</td>
+                                        <td>: {{$data->waktu}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Orang</td>
+                                        <td>: @if($data->min_orang == $data->max_orang)
+                                            {{$data->min_orang}} Orang
+                                            @else
+                                            {{$data->min_orang . ' - ' . $data->max_orang}} Orang
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <div class="line"></div>
                             <p>{{$data->deskripsi}}</p>
 

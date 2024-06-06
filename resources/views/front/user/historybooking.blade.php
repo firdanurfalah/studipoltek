@@ -85,7 +85,7 @@
         $('#imagedetail').attr('src','/gambar?rf='+data.product.gambar)
         $('#kiri').html(data.product.nama);
         let harga = new Intl.NumberFormat('id-Id', { style: 'currency', currency: 'IDR' }).format(
-            data.product.harga);
+            data.price_total);
         $('#kanan').html(harga);
         $('#modalhapus').modal('show');
     }

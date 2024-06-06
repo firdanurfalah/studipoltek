@@ -68,6 +68,9 @@ class ProductController extends Controller
             'kategori_id' => $request->kategori,
             'min_orang' => $request->min_orang,
             'max_orang' => $request->max_orang,
+            'background' => $request->background,
+            'waktu' => $request->waktu,
+            'harga_per_orang' => $request->harga_per_orang,
         ];
         // jika terdapat inputan gambar
         if ($request->hasFile('gambar')) {

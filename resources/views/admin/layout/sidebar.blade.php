@@ -14,7 +14,7 @@
                 <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                <a href="/home" class="d-block">{{Auth::user()->name}}</a>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/artikel" class="nav-link {{Request::is('artikel') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-columns"></i>
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                             Artikel
                         </p>
@@ -57,7 +57,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/product" class="nav-link {{Request::is('product') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-columns"></i>
+                        <i class="nav-icon fas fa-camera"></i>
                         <p>
                             Produk
                         </p>
@@ -65,7 +65,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/admin-promo" class="nav-link {{Request::is('admin-promo') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-columns"></i>
+                        <i class="nav-icon fas fa-percent"></i>
                         <p>
                             Promo
                         </p>
@@ -81,7 +81,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/booking" class="nav-link {{Request::is('booking') ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-columns"></i>
+                        <i class="nav-icon fas fa-plus"></i>
                         <p>
                             Booking
                         </p>
