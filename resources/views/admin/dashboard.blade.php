@@ -4,6 +4,7 @@
 
 <!--  BEGIN CONTENT AREA  -->
 <div id="content" class="main-content">
+
    <div class="layout-px-spacing">
       <div class="row">
          <div class="col-lg-12">
@@ -17,6 +18,8 @@
       </div>
    </div>
    <textarea name="" id="databar" cols="30" rows="10" hidden>{{json_encode($tahunan)}}</textarea>
+
+  
 </div>
 <script>
    // chart tahunan
