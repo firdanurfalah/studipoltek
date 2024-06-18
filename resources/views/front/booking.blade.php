@@ -114,7 +114,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control">
+                            <input type="text" name="nama" id="nama" class="form-control" required>
                             @error('nama')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <input type="text" name="" id="harga_per_orang" value="{{$data->harga_per_orang}}" hidden>
                             <label for="" class="text-capitalize">jumlah orang</label>
-                            <select name="jumlah_orang" id="jumlah_orang" class="form-control">
+                            <select name="jumlah_orang" id="jumlah_orang" class="form-control" required>
                                 @for($i = $data->min_orang; $i <= 10; $i++) <option value="{{$i}}">{{$i}}
                                     </option>
                                     @endfor
@@ -134,7 +134,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">no hp</label>
-                            <input type="text" name="no_hp" id="no_hp" class="form-control">
+                            <input type="text" name="no_hp" id="no_hp" class="form-control" required>
                             @error('no_hp')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">tanggal</label>
                             {{-- <input type="datetime-local" name="tanggal" id="tanggal" class="form-control"> --}}
-                            <input type="date" name="tanggal" id="tanggal" class="form-control">
+                            <input type="date" name="tanggal" id="tanggal" class="form-control" required>
                             @error('tanggal')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
@@ -150,18 +150,24 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">jam</label>
                             <div class="d-flex">
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="18"
-                                        class="radiox" style="border: 0" value="18.00" /><span>18.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="19"
-                                        class="radiox" style="border: 0" value="19.00" /><span>19.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="20"
-                                        class="radiox" style="border: 0" value="20.00" /><span>20.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="21"
-                                        class="radiox" style="border: 0" value="21.00" /><span>21.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="22"
-                                        class="radiox" style="border: 0" value="22.00" /><span>22.00</span></label>
-                                <label class="" style="margin-right: 52px;"><input type="radio" name="jam" id="23"
-                                        class="radiox" style="border: 0" value="23.00" /><span>23.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="18" class="radiox" style="border: 0"
+                                        value="18.00" /><span>18.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="19" class="radiox" style="border: 0"
+                                        value="19.00" /><span>19.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="20" class="radiox" style="border: 0"
+                                        value="20.00" /><span>20.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="21" class="radiox" style="border: 0"
+                                        value="21.00" /><span>21.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="22" class="radiox" style="border: 0"
+                                        value="22.00" /><span>22.00</span></label>
+                                <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
+                                        id="23" class="radiox" style="border: 0"
+                                        value="23.00" /><span>23.00</span></label>
                             </div>
                             @error('jam')
                             <small class="text-danger">Harus di isi</small>
