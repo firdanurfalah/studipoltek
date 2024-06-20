@@ -219,7 +219,7 @@ class HomeController extends Controller
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'upload' => 'kosong',
-            'status' => 0,
+            'status' => 1,
             'jumlah_orang' => $request->jumlah_orang,
             'product_id' => $request->product_id,
             'price_total' => $request->price_total,
