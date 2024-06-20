@@ -12,7 +12,12 @@
     }
 
     .radiox[disabled]+span {
-        background-color: #000000;
+        background-color: #ff0000;
+        color: #ffffff;
+    }
+
+    input:checked+span {
+        background-color: #0026ff !important;
         color: #ffffff;
     }
 
