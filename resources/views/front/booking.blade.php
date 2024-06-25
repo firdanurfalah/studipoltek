@@ -203,6 +203,8 @@
             </div>
         </div>
     </div>
+    <button id="pay-button" class="btn btn-primary">Pay!</button>
+    
 </section>
 @endsection
 @section('js')
@@ -297,5 +299,56 @@
         let src = URL.createObjectURL(e.target.files[0]);
         $('.imagepreview').attr('src',src);
     })
+</script>
+
+{{-- disini semua tentang midtrans --}}
+{{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Uf-KAvUs6SgE1DRi"></script>
+<script type="text/javascript">
+    document.getElementById('pay-button').onclick = function(){
+        console.log('2 clicked');
+        snap.pay('{{ $snap_token }}', {
+                        onSuccess: function(result){console.log(result);},
+                        onPending: function(result){console.log(result);},
+                        onError: function(result){console.log(result);}
+                    });
+};
+</script> --}}
+
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+<script type="text/javascript">
+    $('#pay-button').click(function (event) {
+    event.preventDefault();
+    
+    $.post("coba/pay", {
+        _method: 'POST',
+        _token: '{{ csrf_token() }}',
+        // name: $('#name').val(),
+        // email: $('#email').val(),
+        // amount: $('#amount').val(),
+        // note: $('#note').val()
+    },
+    function (data, status) {
+        
+        console.log(data);
+        snap.pay(data.snap_token.snap_token, {
+            onSuccess: function (result) {
+                location.reload();
+                console.log(result);
+            },
+    
+            onPending: function (result) {
+                location.reload();
+                console.log(result);
+            },
+    
+            onError: function (result) {
+                location.reload();
+                console.log(result);
+            }
+            
+        });
+        return false;
+    });
+    });
 </script>
 @endsection

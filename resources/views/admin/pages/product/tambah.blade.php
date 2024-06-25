@@ -91,6 +91,7 @@
                         <select name="waktu" id="waktu" class="form-control @error('waktu') is-invalid @enderror">
                             <option value="25 Shoot">25 Shoot</option>
                             <option value="70 Shoot">70 Shoot</option>
+                            <option value="75 Shoot">75 Shoot</option>
                             <option value="35 Shoot dan 50 File Edit">35 Shoot dan 50 File Edit</option>
                             <option value="10 Menit">10 Menit</option>
                             <option value="60 Menit">60 Menit</option>
@@ -104,6 +105,7 @@
                         <label for="harga_per_orang" class="text-capitalize">harga per orang</label>
                         <select name="harga_per_orang" id="harga_per_orang"
                             class="form-control @error('harga_per_orang') is-invalid @enderror">
+                            <option value="Tidak ada Tambahan">Tidak ada tambahan</option>
                             <option value="20000">20k</option>
                             <option value="50000">50k</option>
                         </select>
