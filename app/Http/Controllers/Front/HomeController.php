@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentController;
 use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
@@ -132,6 +133,11 @@ class HomeController extends Controller
         // set view
         return view('front.pages.promo', $data);
     }
+
+    // public function payment()
+    // {
+    //     return PaymentController::
+    // }
 
     function cariproduk(Request $r)
     {

@@ -1,7 +1,6 @@
 <?php
-
-
-
+use App\Http\Controllers\cobaController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 Auth::routes();
-
+Route::post('coba/pay', [cobaController::class, 'pay'])->name('coba.pay');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('adminxxx', AdminController::class);
@@ -68,6 +67,8 @@ Route::get('/produk/{id}', [App\Http\Controllers\Front\HomeController::class, 'p
 Route::get('/checktanggal', [App\Http\Controllers\Front\HomeController::class, 'checktanggal']);
 Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
+
+Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 
 Route::get('/cari-produk', [App\Http\Controllers\Front\HomeController::class, 'cariproduk']);
 Route::get('/katalog-studio', [App\Http\Controllers\Front\HomeController::class, 'katalogstudio']);
