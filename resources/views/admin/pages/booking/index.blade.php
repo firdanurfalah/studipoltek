@@ -161,6 +161,8 @@
         $('#id_booking').val(data.id);
         if (data.jam != 'kosong') {
             $('#tanggaljam').val(data.tanggal+'T'+data.jam.replace('.',':'));
+        }else{
+            $('#tanggaljam').val(data.tanggal+'T00:00');
         }
         console.log(data);
         
