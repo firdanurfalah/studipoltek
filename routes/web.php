@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\cobaController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,7 @@ Route::get('/produk/{id}', [App\Http\Controllers\Front\HomeController::class, 'p
 Route::get('/checktanggal', [App\Http\Controllers\Front\HomeController::class, 'checktanggal']);
 Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
+Route::post('/edit-jam', [App\Http\Controllers\Front\HomeController::class, 'editjam']);
 
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 

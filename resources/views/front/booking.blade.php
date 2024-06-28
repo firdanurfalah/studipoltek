@@ -12,7 +12,12 @@
     }
 
     .radiox[disabled]+span {
-        background-color: #000000;
+        background-color: #ff0000;
+        color: #ffffff;
+    }
+
+    input:checked+span {
+        background-color: #0026ff !important;
         color: #ffffff;
     }
 
@@ -123,7 +128,7 @@
                             <input type="text" name="" id="harga_per_orang" value="{{$data->harga_per_orang}}" hidden>
                             <label for="" class="text-capitalize">jumlah orang</label>
                             <select name="jumlah_orang" id="jumlah_orang" class="form-control" required>
-                                @for($i = $data->min_orang; $i <= 10; $i++) <option value="{{$i}}">{{$i}}
+                                @for($i = $data->min_orang; $i <= $data->max_orang; $i++) <option value="{{$i}}">{{$i}}
                                     </option>
                                     @endfor
                             </select>
@@ -147,7 +152,7 @@
                             <small class="text-danger">Harus di isi</small>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="" class="text-capitalize">jam</label>
                             <div class="d-flex">
                                 <label class="" style="margin-right: 52px;"><input required type="radio" name="jam"
@@ -172,7 +177,7 @@
                             @error('jam')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="form-group mt-2" hidden>
                             <label for="" class="text-capitalize">Bukti DP</label>
                             <input type="file" name="gambar" id="gambar" class="form-control"
@@ -199,7 +204,7 @@
         </div>
     </div>
     <button id="pay-button" class="btn btn-primary">Pay!</button>
-    
+
 </section>
 @endsection
 @section('js')
@@ -210,20 +215,21 @@
         let jams = [];
         $('#tanggal').attr('min', dayjs().format('YYYY-MM-DD'));
         let j = dayjs().hour() + 2;
-        var checkboxes = document.querySelectorAll("input[name=jam]");
-        checkboxes.forEach(e => {
-            $('#'+e.id).removeAttr('disabled');
-            if (e.id < j) {
-                $('#'+e.id).attr('disabled',true);
-            }
-            if (!jams.indexOf(e.id)) {
-                $('#'+e.id).attr('disabled',true);
-            }
-            console.log(e.id, j);
-        });
-        console.log(jams);
+        // var checkboxes = document.querySelectorAll("input[name=jam]");
+        // checkboxes.forEach(e => {
+        //     $('#'+e.id).removeAttr('disabled');
+        //     if (e.id < j) {
+        //         $('#'+e.id).attr('disabled',true);
+        //     }
+        //     if (!jams.indexOf(e.id)) {
+        //         $('#'+e.id).attr('disabled',true);
+        //     }
+        //     console.log(e.id, j);
+        // });
+        // console.log(jams);
     })
     $('#tanggal').on('change', function () {
+        return true;
         let jams = [];
         let j = dayjs($(this).val()).format('DDMMYYYY');
         let now = dayjs().format('DDMMYYYY');
@@ -297,7 +303,8 @@
 </script>
 
 {{-- disini semua tentang midtrans --}}
-{{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Uf-KAvUs6SgE1DRi"></script>
+{{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Uf-KAvUs6SgE1DRi">
+</script>
 <script type="text/javascript">
     document.getElementById('pay-button').onclick = function(){
         console.log('2 clicked');
@@ -309,7 +316,8 @@
 };
 </script> --}}
 
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
 <script type="text/javascript">
     $('#pay-button').click(function (event) {
     event.preventDefault();

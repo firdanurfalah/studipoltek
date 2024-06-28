@@ -207,7 +207,7 @@ class HomeController extends Controller
             'nama' => 'required',
             'no_hp' => 'required',
             'tanggal' => 'required',
-            'jam' => 'required',
+            // 'jam' => 'required',
             'jumlah_orang' => 'required',
         ]);
 
@@ -223,7 +223,7 @@ class HomeController extends Controller
             'email' => Auth::user()->email,
             'nohp' => $request->no_hp,
             'tanggal' => $request->tanggal,
-            'jam' => $request->jam,
+            'jam' => 'kosong',
             'upload' => 'kosong',
             'status' => 1,
             'jumlah_orang' => $request->jumlah_orang,
@@ -246,6 +246,32 @@ class HomeController extends Controller
         // ubah status booking
         $i = BookingModel::where('id', $id)->update([
             'status' => $request->status,
+        ]);
+
+        // bila berhasil
+        if ($i) {
+            return Redirect::back()->with('info', 'Data Tersimpan');
+        }
+        // bila gagal
+        return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+    }
+
+    public function editjam(Request $r)
+    {
+        // return $r->all();
+        // set variable null
+        $tgl = null;
+        $jam = null;
+        // cek data input
+        if ($r->tanggaljam) {
+            $e = explode('T', $r->tanggaljam);
+            $tgl = $e[0];
+            $jam = $e[1];
+        }
+        // ubah status booking
+        $i = BookingModel::where('id', $r->id_booking)->update([
+            'tanggal' => $tgl,
+            'jam' => $jam,
         ]);
 
         // bila berhasil

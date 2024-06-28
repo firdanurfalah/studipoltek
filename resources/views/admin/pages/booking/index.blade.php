@@ -24,7 +24,7 @@
                                             <th class="text-uppercase">total harga</th>
                                             {{-- <th>upload</th> --}}
                                             <th class="text-uppercase">status</th>
-                                            {{-- <th class="no-content text-center">Aksi</th> --}}
+                                            <th class="no-content text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,14 +55,18 @@
                                             </td>
 
 
-                                            {{-- <td>
-                                                <form action="{{ route('booking.destroy', $value->id) }}" method="post">
+                                            <td>
+                                                {{-- <form action="{{ route('booking.destroy', $value->id) }}"
+                                                    method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <a type="submit"
                                                         class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                                </form>
-                                            </td> --}}
+                                                </form> --}}
+                                                <button class="btn btn-info btn-sm d-block d-none"
+                                                    onclick="jamedit({{$value}})">Edit Jam</button>
+
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -100,6 +104,28 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="jamModal" tabindex="-1" aria-labelledby="jamModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="jamModalLabel">Jam</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/edit-jam" method="POST">
+                                    @csrf
+                                    <input type="text" name="id_booking" id="id_booking" hidden>
+                                    <div class="form-group">
+                                        <label for="">Jam</label>
+                                        <input type="datetime-local" name="tanggaljam" id="tanggaljam"
+                                            class="form-control" required>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -126,6 +152,20 @@
     }
     function approveclose() {
         $('#exampleModal').modal('hide');
+    }
+    
+    function jamedit(data) {
+        $('#tanggaljam').val(null);
+        $('#id_booking').val(null);
+        $('#jamModal').modal('show');
+        $('#id_booking').val(data.id);
+        if (data.jam != 'kosong') {
+            $('#tanggaljam').val(data.tanggal+'T'+data.jam.replace('.',':'));
+        }else{
+            $('#tanggaljam').val(data.tanggal+'T00:00');
+        }
+        console.log(data);
+        
     }
 </script>
 @endsection

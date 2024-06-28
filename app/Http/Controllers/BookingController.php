@@ -13,7 +13,9 @@ class BookingController extends Controller
     public function index()
     {
         // ambil data di table booking
-        $data['booking'] = BookingModel::get();
+        $data['booking'] = BookingModel::select()
+            ->orderBy('created_at', 'DESC')
+            ->get();
         // menampilkan view index
         return view('admin.pages.booking.index', $data);
     }
