@@ -18,32 +18,43 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // return GlobalHelper::getsastrawi();
         // get data rekomendasi
-        $rekom = GlobalHelper::getrecommend();
+        $rekom = GlobalHelper::getsastrawi();
         $data = [];
         $data['product'] = [];
         // get data favorit
         $data['favorit'] = FavoritModel::pluck('product_id')->toArray();
         // kondisi bila data rekomendasi lebih dari 0
         if (count($rekom) > 0) {
-            foreach ($rekom as $key => $value) {
-                if ($key <= 2) {
-                    // get data product berdasrakan rekomendasi
-                    $product = ProductModel::select()
-                        ->where('kategori_id', $value->id_kategori)
-                        ->limit($value->limit)
-                        ->get();
-                    foreach ($product as $key => $v) {
-                        // tambah ke variavel data product
-                        array_push($data['product'], $v);
-                    }
-                }
+            // get data product berdasrakan rekomendasi
+            $product = ProductModel::select()
+                ->whereIn('kategori_id', $rekom)
+                ->get();
+            foreach ($product as $key => $v) {
+                // tambah ke variavel data product
+                array_push($data['product'], $v);
             }
+            // foreach ($rekom as $key => $value) {
+            //     if ($key <= 2) {
+            //         // get data product berdasrakan rekomendasi
+            //         $product = ProductModel::select()
+            //             ->where('kategori_id', $value->id_kategori)
+            //             ->limit($value->limit)
+            //             ->get();
+            //         foreach ($product as $key => $v) {
+            //             // tambah ke variavel data product
+            //             array_push($data['product'], $v);
+            //         }
+            //     }
+            // }
         } else {
             // ambil data produk dengan limit 3 kondisi random
             $data['product'] = ProductModel::select()

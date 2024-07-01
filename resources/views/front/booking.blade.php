@@ -322,7 +322,7 @@
     $('#pay-button').click(function (event) {
     event.preventDefault();
     
-    $.post("coba/pay", {
+    $.post("payment", {
         _method: 'POST',
         _token: '{{ csrf_token() }}',
         // name: $('#name').val(),
