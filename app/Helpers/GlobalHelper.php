@@ -17,6 +17,8 @@ class GlobalHelper
         if (!Auth::check()) {
             return [];
         }
+
+        // ambil data log kegiatan
         $lkm = LogKegiatanModel::selectRaw(
             'count(id_kategori) as jmlkat, id_kategori, categori.nama'
         )
@@ -26,6 +28,7 @@ class GlobalHelper
             ->groupBy('id_kategori', 'categori.nama')
             ->get();
 
+        // ambil data kategori
         $kategori = CategoriModel::select('id')->pluck('id')->toArray();
         // return $kategori;
         $pp = new GlobalHelper;
@@ -42,6 +45,7 @@ class GlobalHelper
         foreach ($lkm as $itemId => $vector) {
             // if ($itemId != $targetItemId) {
             // }
+            // hitung kesamaan data dengan metode cosinesimilarity
             $csm = $pp::cosineSimilarity($kategori, [$vector->id_kategori]);
             if ($csm != 0) {
                 $similarities[] = $vector->id_kategori;
