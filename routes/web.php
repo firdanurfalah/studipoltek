@@ -70,7 +70,7 @@ Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
 Route::post('/edit-jam', [App\Http\Controllers\Front\HomeController::class, 'editjam']);
 
-Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+Route::post('/payment', [PaymentController::class, 'payment'])->name('payment');
 
 Route::get('/cari-produk', [App\Http\Controllers\Front\HomeController::class, 'cariproduk']);
 Route::get('/katalog-studio', [App\Http\Controllers\Front\HomeController::class, 'katalogstudio']);

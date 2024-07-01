@@ -2,13 +2,94 @@
 
 namespace App\Helpers;
 
+use App\Models\CategoriModel;
 use App\Models\LogKegiatanModel;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
 class GlobalHelper
 {
+    public static function getsastrawi()
+    {
+        if (!Auth::check()) {
+            return [];
+        }
+        $lkm = LogKegiatanModel::selectRaw(
+            'count(id_kategori) as jmlkat, id_kategori, categori.nama'
+        )
+            ->join('categori', 'categori.id', 'log_kegiatan_models.id_kategori')
+            ->where('id_user', Auth::user()->id)
+            ->orderBy('jmlkat', 'DESC')
+            ->groupBy('id_kategori', 'categori.nama')
+            ->get();
+
+        $kategori = CategoriModel::select('id')->pluck('id')->toArray();
+        // return $kategori;
+        $pp = new GlobalHelper;
+        $txt = [];
+        foreach ($lkm as $key => $v) {
+            $txt[] = $pp::preprocess($v->id_kategori);
+        }
+        // return $txt;
+        // $targetItemId = count($txt) - 1;
+        // $itemVectors = $txt; // Vektor yang dihasilkan dari TF-IDF atau metode lainnya
+        // $targetItemVector = $itemVectors[$targetItemId];
+        $similarities = [];
+
+        foreach ($lkm as $itemId => $vector) {
+            // if ($itemId != $targetItemId) {
+            // }
+            $csm = $pp::cosineSimilarity($kategori, [$vector->id_kategori]);
+            if ($csm != 0) {
+                $similarities[] = $vector->id_kategori;
+            }
+        }
+
+        // return nilai kesamaan berdasarkan algoritma cosineSimilarity
+        // return $similarities;
+
+        arsort($similarities); // Urutkan berdasarkan kesamaan tertinggi
+        $recommendedItems = array_slice($similarities, 0, 3); // Ambil 3 rekomendasi
+        return $recommendedItems;
+    }
+
+    public static function preprocess($text)
+    {
+        $stemmerFactory = new StemmerFactory();
+        $stemmer = $stemmerFactory->createStemmer();
+
+        $stopWordRemoverFactory = new StopWordRemoverFactory();
+        $stopWordRemover = $stopWordRemoverFactory->createStopWordRemover();
+
+        $text = strtolower($text);
+        $text = $stopWordRemover->remove($text);
+        $text = $stemmer->stem($text);
+
+        return $text;
+    }
+
+    public static function cosineSimilarity($vec1, $vec2)
+    {
+        $dotProduct = array_sum(array_map(function ($a, $b) {
+            return $a * $b;
+        }, $vec1, $vec2));
+        $magnitude1 = sqrt(array_sum(array_map(function ($x) {
+            return pow($x, 2);
+        }, $vec1)));
+        $magnitude2 = sqrt(array_sum(array_map(function ($x) {
+            return pow($x, 2);
+        }, $vec2)));
+
+        if ($magnitude1 * $magnitude2 == 0) {
+            return 0;
+        } else {
+            return $dotProduct / ($magnitude1 * $magnitude2);
+        }
+    }
+
     public static function logkegiatan($produk, $kategori)
     {
         // cek ketersediaan data
@@ -64,7 +145,7 @@ class GlobalHelper
                 ->join('categori', 'categori.id', 'log_kegiatan_models.id_kategori')
                 ->where('id_user', Auth::user()->id)
                 ->orderBy('jmlkat', 'DESC')
-                ->groupBy('id_kategori','categori.nama')
+                ->groupBy('id_kategori', 'categori.nama')
                 ->get();
             foreach ($lkm as $key => $v) {
                 // set limit
