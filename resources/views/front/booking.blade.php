@@ -128,7 +128,7 @@
                             <input type="text" name="" id="harga_per_orang" value="{{$data->harga_per_orang}}" hidden>
                             <label for="" class="text-capitalize">jumlah orang</label>
                             <select name="jumlah_orang" id="jumlah_orang" class="form-control" required>
-                                @for($i = $data->min_orang; $i <= $data->max_orang; $i++) <option value="{{$i}}">{{$i}}
+                                @for($i = $data->min_orang; $i <= 10; $i++) <option value="{{$i}}">{{$i}}
                                     </option>
                                     @endfor
                             </select>
@@ -203,7 +203,7 @@
             </div>
         </div>
     </div>
-    <button id="pay-button" class="btn btn-primary">Pay!</button>
+    {{-- <button id="pay-button" class="btn btn-primary">Pay!</button> --}}
 
 </section>
 @endsection
