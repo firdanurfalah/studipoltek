@@ -58,6 +58,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/register-user', [App\Http\Controllers\HomeController::class, 'register']);
 Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
+Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
 Route::resource('profile', UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -268,6 +268,19 @@ class HomeController extends Controller
             }
             // bila gagal
             return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+        } else {
+            $i = BookingModel::where('id', $r->idbooking)->update([
+                'upload' => 'kosong',
+                'type' => $r->type,
+                'status' => 2,
+            ]);
+
+            // bila berhasil
+            if ($i) {
+                return Redirect::back()->with('info', 'Data Tersimpan');
+            }
+            // bila gagal
+            return Redirect::back()->with('info', 'Data Tidak Tersimpan');
         }
         return Redirect::back()->with('info', 'Pastikan upload bukti !');
     }

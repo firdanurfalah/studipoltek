@@ -157,7 +157,7 @@
                                         <div>Promo</div>
                                     </a>
                                 </li>
-                                <li class="menu-item">
+                                <li class="menu-item" hidden>
                                     <a class="menu-link" href="/kontak">
                                         <div>Pengambilan Foto</div>
                                     </a>

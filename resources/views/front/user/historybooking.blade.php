@@ -59,8 +59,17 @@
                                         {{-- <a href="/admin-referensi/{{$value->id}}/edit"
                                             class="btn btn-primary btn-sm">Edit</a> --}}
                                         <span class="btn btn-info btn-sm" onclick="detail({{$value}})">Detail</span>
+                                        @if($value->jam != 'kosong' && $value->status == 0) <span
+                                            class="btn btn-warning btn-sm" onclick="konfirmasi({{$value}})">Konfirmasi
+                                            Jam</span>
+                                        @elseif($value->jam != 'kosong' && $value->status == 3)
                                         <span class="btn btn-warning btn-sm" onclick="bukti({{$value}})">Bukti
                                             Pembayaran</span>
+                                        @elseif($value->jam == 'kosong' && $value->status == 0)
+                                        @else
+                                        <span class="btn btn-warning btn-sm" onclick="bukti({{$value}})">Bukti
+                                            Pembayaran</span>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -73,6 +82,36 @@
             </div>
         </div>
     </div>
+    <!-- Modal Konfirmasi Jam-->
+    <div class="modal fade" id="modalkonfirmasijam" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Konfirmasi Jam</h5>
+                    <span class="" data-dismiss="modal" aria-label="Close" style="cursor: pointer">x</span>
+                </div>
+                <div class="modal-body">
+                    <h3 id="totalharga"></h3>
+                    <form action="/konfirmasijam" method="GET" id="formkonfirmasijam">
+                        @csrf
+                        <input type="text" name="idbookingjam" id="idbookingjam" hidden>
+                        <div class="form-group">
+                            <label for="">Konfirmasi Jam</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="3">Lanjut</option>
+                                <option value="99">Cancel</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <span class="btn btn-secondary btn-sm" data-dismiss="modal" aria-label="Close"
+                            style="cursor: pointer">Tutup</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Bukti Pembayaran-->
     <div class="modal fade" id="modalbukti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -82,13 +121,20 @@
                     <span class="" data-dismiss="modal" aria-label="Close" style="cursor: pointer">x</span>
                 </div>
                 <div class="modal-body">
-                    <h2>No. Rekening : 0000000</h2>
-                    <h2>Atas Nama : 0000000</h2>
                     <h3 id="totalharga"></h3>
                     <form action="" method="POST" id="formbukti" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="idbooking" id="idbooking" hidden>
                         <div class="form-group">
+                            <label for="">Tipe Pembayaran</label>
+                            <select name="type" id="type" class="form-control">
+                                <option value="2">Bayar Langsung</option>
+                                <option value="1">Transfer</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="koltransfer" hidden>
+                            <h2>No. Rekening : BRI 584501029474534</h2>
+                            <h2>Atas Nama : M. Sufi Ali</h2>
                             <label for="">Bukti Pembayaran</label>
                             <input type="file" name="gambar" id="gambar" accept="image/png, image/jpeg"
                                 class="form-control @error('image') is-invalid @enderror"
@@ -96,6 +142,8 @@
                             <img id="blah" alt="gambar" width="100" height="100" class="mt-2" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <span class="btn btn-secondary btn-sm" data-dismiss="modal" aria-label="Close"
+                            style="cursor: pointer">Tutup</span>
                     </form>
                 </div>
             </div>
@@ -124,6 +172,17 @@
 </div>
 <!--  END CONTENT AREA  -->
 <script>
+    $('#type').on('change', function () {
+        let v = $(this).val();
+        $('#koltransfer').attr('hidden',true);
+        if (v == 1) {
+            $('#koltransfer').removeAttr('hidden');
+        }
+    })
+    function konfirmasi(data) {
+        $('#modalkonfirmasijam').modal('show');
+        $('#idbookingjam').val(data.id);
+    }
     function detail(data) {
         $('#imagedetail').attr('src','/gambar?rf='+data.product.gambar)
         $('#kiri').html(data.product.nama);
@@ -135,6 +194,9 @@
     function bukti(data) {
         if (data.upload != 'kosong') {
             $('#blah').attr('src','/gambar?rf='+data.upload)
+            // $('#koltransfer').removeAttr('hidden');
+            $('#type').val(1);
+            $('#type').change();
         }
         $('#idbooking').val(data.id);
         $('#formbukti').attr('action','/upload-bukti');
