@@ -31,7 +31,7 @@ class HomeController extends Controller
         $data = [];
         $data['product'] = [];
         // get data favorit
-        $data['favorit'] = FavoritModel::pluck('product_id')->toArray();
+        $data['favorit'] = FavoritModel::where('user_id', Auth::id())->pluck('product_id')->toArray();
         // kondisi bila data rekomendasi lebih dari 0
         if (count($rekom) > 0) {
             // get data product berdasrakan rekomendasi
@@ -211,7 +211,7 @@ class HomeController extends Controller
         // return $request->all();
         $a = Auth::user();
         if (!$a) {
-            return Redirect::back()->with('info', 'Silahkan login terlebih dahulu');
+            return Redirect::to('/login')->with('info', 'Silahkan login terlebih dahulu');
         }
         // validasi data inputan
         $valid = Validator::make($request->all(), [
@@ -252,11 +252,32 @@ class HomeController extends Controller
         return view('front.orderselesai');
     }
 
+    public function uploadbukti(Request $r)
+    {
+        if ($r->hasFile('gambar')) {
+            $gambar = $r->file('gambar')->store('bukti/' . time());
+            // upload bukti booking
+            $i = BookingModel::where('id', $r->idbooking)->update([
+                'upload' => $gambar,
+                'status' => 2,
+            ]);
+
+            // bila berhasil
+            if ($i) {
+                return Redirect::back()->with('info', 'Data Tersimpan');
+            }
+            // bila gagal
+            return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+        }
+        return Redirect::back()->with('info', 'Pastikan upload bukti !');
+    }
+
     public function approvebooking($id, Request $request)
     {
         // ubah status booking
         $i = BookingModel::where('id', $id)->update([
             'status' => $request->status,
+            'link' => $request->link ? $request->link : '',
         ]);
 
         // bila berhasil

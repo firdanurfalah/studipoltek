@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
 
 
     <!-- jQuery -->
@@ -77,6 +78,7 @@
     <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('dist/js/tableToExcel.js')}}"></script>
 
     <style>
         /* Custom Style */

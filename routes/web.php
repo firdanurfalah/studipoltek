@@ -69,6 +69,7 @@ Route::get('/checktanggal', [App\Http\Controllers\Front\HomeController::class, '
 Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
 Route::post('/edit-jam', [App\Http\Controllers\Front\HomeController::class, 'editjam']);
+Route::post('/upload-bukti', [App\Http\Controllers\Front\HomeController::class, 'uploadbukti']);
 
 Route::post('/payment', [PaymentController::class, 'payment'])->name('payment');
 
