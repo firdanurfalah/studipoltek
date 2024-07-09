@@ -357,4 +357,8 @@ class HomeController extends Controller
         }
         return Redirect::back()->with('info', 'Data Favorit Gagal Tersimpan');
     }
+    public function register()
+    {
+        return view('auth.register');
+    }
 }
