@@ -4,101 +4,85 @@
 
 <!--  BEGIN CONTENT AREA  -->
 <div id="content" class="main-content">
-    <div class="layout-px-spacing">
+    <div class="">
         <div class="card">
             <div class="card-body">
                 <!-- CONTENT AREA -->
-                <div class="row">
+                <div class="table-responsive">
+                    <table id="table" class="table dt-table-hover" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase">tanggal pesan</th>
+                                <th class="text-uppercase">nama</th>
+                                <th class="text-uppercase">email</th>
+                                <th class="text-uppercase">nohp</th>
+                                <th class="text-uppercase">tanggal</th>
+                                <th class="text-uppercase">jam</th>
+                                <th class="text-uppercase">total harga</th>
+                                <th class="text-uppercase">status</th>
+                                <th class="text-uppercase">bukti Pembayaran</th>
+                                <th class="text-uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($booking as $key => $value)
+                            <tr>
+                                <td>{{$value->created_at->format('d-m-Y')}}</td>
+                                <td>{{$value->nama}}</td>
+                                <td>{{$value->email}}</td>
+                                <td>{{$value->nohp}}</td>
+                                <td>{{$value->tanggal}}</td>
+                                <td>{{$value->jam}}</td>
+                                <td>{{$value->price_total}}</td>
+                                {{-- <td><a href="/gambar?rf={{$value->upload}}" style="cursor: pointer"><img
+                                            src="/gambar?rf={{$value->upload}}" width="100px" height="40px"></a>
+                                </td> --}}
+                                <td>
+                                    @if($value->status == 0)
+                                    <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                        class="badge badge-info" style="cursor: pointer">Proses</span>
+                                    @elseif($value->status == 3)
+                                    <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                        class="badge badge-primary" style="cursor: pointer">Diterima</span>
+                                    @elseif($value->status == 2)
+                                    <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                        class="badge badge-info-emphasis" style="cursor: pointer">Selesai
+                                        Pembayaran</span>
+                                    @elseif($value->status == 1)
+                                    <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                        class="badge badge-success" style="cursor: pointer">Selesai
+                                        Pemotretan</span>
+                                    @else
+                                    <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                        class="badge badge-danger" style="cursor: pointer">Ditolak</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($value->upload != 'kosong')
+                                    <a href="/gambar?rf={{$value->upload}}">
+                                        <img src="/gambar?rf={{$value->upload}}" alt="" width="50px">
+                                    </a>
+                                    @elseif($value->type==2)
+                                    Bayar Langsung
+                                    @else
+                                    @endif
+                                </td>
+                                <td>
+                                    {{-- <form action="{{ route('booking.destroy', $value->id) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <a type="submit"
+                                            class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
+                                    </form> --}}
+                                    <button class="btn btn-info btn-sm d-block d-none" onclick="jamedit({{$value}})"
+                                        title="Edit jam">Edit Jam</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
 
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
-                        <div class="widget widget-content-area br-4">
-                            <div class="widget-one">
-                                <table id="table" class="table dt-table-hover" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase">tanggal pesan</th>
-                                            <th class="text-uppercase">nama</th>
-                                            <th class="text-uppercase">email</th>
-                                            <th class="text-uppercase">nohp</th>
-                                            <th class="text-uppercase">tanggal</th>
-                                            <th class="text-uppercase">jam</th>
-                                            <th class="text-uppercase">total harga</th>
-                                            {{-- <th>upload</th> --}}
-                                            <th class="text-uppercase">status</th>
-                                            <th class="text-uppercase">bukti Pembayaran</th>
-                                            <th class="no-content text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($booking as $key => $value)
-                                        <tr>
-                                            <td>{{$value->created_at->format('d-m-Y')}}</td>
-                                            <td>{{$value->nama}}</td>
-                                            <td>{{$value->email}}</td>
-                                            <td>{{$value->nohp}}</td>
-                                            <td>{{$value->tanggal}}</td>
-                                            <td>{{$value->jam}}</td>
-                                            <td>{{$value->price_total}}</td>
-                                            {{-- <td><a href="/gambar?rf={{$value->upload}}"
-                                                    style="cursor: pointer"><img src="/gambar?rf={{$value->upload}}"
-                                                        width="100px" height="40px"></a>
-                                            </td> --}}
-                                            <td>
-                                                @if($value->status == 0)
-                                                <span
-                                                    onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                                    class="badge badge-info" style="cursor: pointer">Proses</span>
-                                                @elseif($value->status == 3)
-                                                <span
-                                                    onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                                    class="badge badge-primary" style="cursor: pointer">Diterima</span>
-                                                @elseif($value->status == 2)
-                                                <span
-                                                    onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                                    class="badge badge-info-emphasis" style="cursor: pointer">Selesai
-                                                    Pembayaran</span>
-                                                @elseif($value->status == 1)
-                                                <span
-                                                    onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                                    class="badge badge-success" style="cursor: pointer">Selesai
-                                                    Pemotretan</span>
-                                                @else
-                                                <span
-                                                    onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                                    class="badge badge-danger" style="cursor: pointer">Ditolak</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($value->upload != 'kosong')
-                                                <a href="/gambar?rf={{$value->upload}}">
-                                                    <img src="/gambar?rf={{$value->upload}}" alt="" width="50px">
-                                                </a>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                {{-- <form action="{{ route('booking.destroy', $value->id) }}"
-                                                    method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <a type="submit"
-                                                        class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                                </form> --}}
-                                                <button class="btn btn-info btn-sm d-block d-none"
-                                                    onclick="jamedit({{$value}})" title="Edit jam">Edit Jam</button>
-
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
+                    </table>
                 </div>
-
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -124,6 +108,8 @@
                                         <input type="text" name="link" id="link" class="form-control">
                                     </div>
                                     <button class="btn btn-primary">Simpan</button>
+                                    <span class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
+                                        style="cursor: pointer">Tutup</span>
                                     {{-- <div class="text-center">
                                         <span onclick="approvesend(3)"
                                             class="btn btn-primary btn-sm mr-2">Diterima</span>
@@ -158,6 +144,8 @@
                                             class="form-control" required>
                                     </div>
                                     <button class="btn btn-primary" type="submit">Simpan</button>
+                                    <span class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
+                                        style="cursor: pointer">Tutup</span>
                                 </form>
                             </div>
                         </div>
@@ -165,11 +153,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <!-- CONTENT AREA -->
-
     </div>
 </div>
 <!--  END CONTENT AREA  -->

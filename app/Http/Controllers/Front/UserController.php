@@ -98,8 +98,20 @@ class UserController extends Controller
                 'promo',
             )
             ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
             ->get();
         // return $x;
         return view('front.user.historybooking', $x);
+    }
+
+    public function konfirmasijam(Request $request)
+    {
+        $b = BookingModel::where('id', $request->idbookingjam)->update([
+            'status' => $request->status,
+        ]);
+        if ($b) {
+            return Redirect::back()->with('info', 'Data tersimpan');
+        }
+        return Redirect::back()->with('info', 'Data tidak tersimpan');
     }
 }

@@ -288,7 +288,7 @@
         $('#tambahharga').html('');
         let harga = $('#harga_per_orang').val();
         $('#price_total').val(hargaawal);
-        if (v > x) {
+        if (Number(v) > x) {
             let pt = Number(h) + Number((v - x) * harga);
             $('#price_total').val(pt);
 

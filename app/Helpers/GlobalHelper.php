@@ -121,7 +121,9 @@ class GlobalHelper
                 return true;
             }
         }
-
+        // else{
+        //     return true;
+        // }
 
         try {
             // mencatat kegiatan user
