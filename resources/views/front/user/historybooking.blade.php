@@ -34,7 +34,7 @@
                                     <td>{{$value->nohp}}</td>
                                     <td>{{$value->tanggal}} - {{$value->jam}}</td>
                                     <td>{{$value->nama}}</td>
-                                    <td>{{$value->product->nama}}</td>
+                                    <td>{{$value->product ? $value->product->nama : ''}}</td>
                                     <td>
                                         @if($value->status == 0)
                                         <span class="badge badge-info">Proses</span>
