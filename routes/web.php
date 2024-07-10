@@ -56,7 +56,7 @@ Route::get('/dashboard', function () {
 // Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'create'])->name('artikel');
 // Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
 
-Route::get('/register-user', [App\Http\Controllers\HomeController::class, 'register']);
+Route::get('/register-user', [App\Http\Controllers\Front\HomeController::class, 'register']);
 Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
 Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
 Route::resource('profile', UserController::class);
