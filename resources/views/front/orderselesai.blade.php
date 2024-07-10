@@ -6,8 +6,9 @@
             <div class="heading-block center">
                 <h1>TERIMA KASIH</h1>
                 <span>Pesanan Sedang Di Proses, Kami Segera Menghubungi Anda</span>
+                <h4>Jam booking menunggu konfirmasi admin</h4>
             </div>
-            <a href="/" class="btn btn-secondary topmargin-sm">⇐ Back to Home</a>
+            <a href="/home" class="btn btn-secondary topmargin-sm">⇐ lihat pesanan</a>
         </div>
     </div>
 </section>
