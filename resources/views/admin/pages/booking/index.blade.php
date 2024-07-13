@@ -44,7 +44,17 @@
                                 <td>{{$value->email}}</td>
                                 <td>{{$value->nohp}}</td>
                                 <td>{{$value->tanggal}}</td>
-                                <td>{{$value->jam}}</td>
+                                <td>
+                                    @if($value->last_edit_user != Auth::id())
+                                    <span class="badge badge-warning" title="user yg menentukan jam">
+                                        {{$value->jam}}
+                                    </span>
+                                    @else
+                                    <span class="badge badge-success" title="admin yg menentukan jam">
+                                        {{$value->jam}}
+                                    </span>
+                                    @endif
+                                </td>
                                 <td>{{$value->price_total}}</td>
                                 {{-- <td><a href="/gambar?rf={{$value->upload}}" style="cursor: pointer"><img
                                             src="/gambar?rf={{$value->upload}}" width="100px" height="40px"></a>
@@ -222,6 +232,9 @@
 </div>
 <!--  END CONTENT AREA  -->
 <script>
+    $(document).ready(function () {
+        addEventListener("resize", (event) => {});
+    })
     $('#tanggal').daterangepicker({
       locale: {
          format: 'DD/MM/YYYY'

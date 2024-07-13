@@ -242,6 +242,7 @@ class HomeController extends Controller
             'price_total' => $request->price_total,
             'user_id' => Auth::user()->id,
             'promo_id' => 0,
+            'last_edit_user' => Auth::id(),
         ]);
 
         // bila gagal
@@ -289,8 +290,10 @@ class HomeController extends Controller
     {
         // ubah status booking
         $i = BookingModel::where('id', $id)->update([
+            'last_edit_user' => Auth::id(),
             'status' => $request->status,
             'link' => $request->link ? $request->link : '',
+            'last_edit_user' => Auth::id(),
         ]);
 
         // bila berhasil
@@ -317,6 +320,7 @@ class HomeController extends Controller
         $i = BookingModel::where('id', $r->id_booking)->update([
             'tanggal' => $tgl,
             'jam' => $jam,
+            'last_edit_user' => Auth::id(),
         ]);
 
         // bila berhasil
