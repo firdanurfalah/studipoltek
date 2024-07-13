@@ -8,6 +8,18 @@
         <div class="card">
             <div class="card-body">
                 <!-- CONTENT AREA -->
+                <form action="/booking" method="GET">
+                    @csrf
+                    <div class="form-group">
+                        <label for="">Tanggal</label>
+                        <div class="row">
+                            <input type="text" name="tanggal" id="tanggal" class="form-control col-lg-4"
+                                value="{{$tanggal}}">
+                            <button class="btn btn-primary btn-sm ml-2" type="submit">Cari</button>
+                            <span class="btn btn-success btn-sm ml-2" id="btnexport">Export</span>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table id="table" class="table dt-table-hover" style="width: 100%">
                         <thead>
@@ -151,12 +163,79 @@
                         </div>
                     </div>
                 </div>
+                <table id="tableKreditExport" hidden>
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase">tanggal pesan</th>
+                            <th class="text-uppercase">nama</th>
+                            <th class="text-uppercase">email</th>
+                            <th class="text-uppercase">nohp</th>
+                            <th class="text-uppercase">tanggal</th>
+                            <th class="text-uppercase">jam</th>
+                            <th class="text-uppercase">total harga</th>
+                            <th class="text-uppercase">status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($booking as $key => $value)
+                        <tr>
+                            <td>{{$value->created_at->format('d-m-Y')}}</td>
+                            <td>{{$value->nama}}</td>
+                            <td>{{$value->email}}</td>
+                            <td>{{$value->nohp}}</td>
+                            <td>{{$value->tanggal}}</td>
+                            <td>{{$value->jam}}</td>
+                            <td>{{$value->price_total}}</td>
+                            <td>
+                                @if($value->status == 0)
+                                <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                    class="badge badge-info" style="cursor: pointer">Proses</span>
+                                @elseif($value->status == 3)
+                                <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                    class="badge badge-primary" style="cursor: pointer">Diterima</span>
+                                @elseif($value->status == 2)
+                                <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                    class="badge badge-info-emphasis" style="cursor: pointer">Selesai
+                                    Pembayaran</span>
+                                @elseif($value->status == 1)
+                                <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                    class="badge badge-success" style="cursor: pointer">Selesai
+                                    Pemotretan</span>
+                                @else
+                                <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                                    class="badge badge-danger" style="cursor: pointer">Ditolak</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="6">Total</th>
+                            <th>{{$total}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
 </div>
 <!--  END CONTENT AREA  -->
 <script>
+    $('#tanggal').daterangepicker({
+      locale: {
+         format: 'DD/MM/YYYY'
+      },
+   });
+    // export excel
+   $('#btnexport').on('click',function () {
+      TableToExcel.convert(document.getElementById("tableKreditExport"),{
+         name: "Laporan.xlsx",
+         sheet: {
+            name: "Laporan"
+         }
+      });
+   })
     $('#status').on('change',function () {
         let v = $(this).val();
         $('#linkinput').attr('hidden',true);

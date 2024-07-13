@@ -16,7 +16,7 @@
             </div>
          </div>
          <div class="col-lg-12 mt-2">
-            <form action="/home" method="GET">
+            <form action="/home" method="GET" hidden>
                @csrf
                <div class="form-group">
                   <label for="">Tanggal</label>
@@ -65,10 +65,10 @@
 </div>
 <script>
    $('#tanggal').daterangepicker({
-    locale: {
-      format: 'DD/MM/YYYY'
-    },
-});
+      locale: {
+         format: 'DD/MM/YYYY'
+      },
+   });
    // export excel
    $('#btnexport').on('click',function () {
       TableToExcel.convert(document.getElementById("tableKreditExport"),{
