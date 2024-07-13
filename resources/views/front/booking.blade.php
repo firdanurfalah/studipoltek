@@ -152,6 +152,13 @@
                             <small class="text-danger">Harus di isi</small>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="" class="text-capitalize">keterangan <small>(optional)</small></label>
+                            <textarea name="keterangan_user" id="keterangan_user" class="form-control"></textarea>
+                            {{-- @error('keterangan')
+                            <small class="text-danger">Harus di isi</small>
+                            @enderror --}}
+                        </div>
                         {{-- <div class="form-group">
                             <label for="" class="text-capitalize">jam</label>
                             <div class="d-flex">

@@ -27,6 +27,7 @@ class BookingModel extends Model
         'link',
         'type',
         'last_edit_user',
+        'keterangan_user',
     ];
 
     public function product(): HasOne

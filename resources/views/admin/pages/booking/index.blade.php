@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <!-- CONTENT AREA -->
-                <form action="/booking" method="GET">
+                <form action="/booking" method="GET" {{Auth::user()->level == 'admin' ? '' : 'hidden'}}>
                     @csrf
                     <div class="form-group">
                         <label for="">Tanggal</label>
@@ -56,9 +56,6 @@
                                     @endif
                                 </td>
                                 <td>{{$value->price_total}}</td>
-                                {{-- <td><a href="/gambar?rf={{$value->upload}}" style="cursor: pointer"><img
-                                            src="/gambar?rf={{$value->upload}}" width="100px" height="40px"></a>
-                                </td> --}}
                                 <td>
                                     @if($value->status == 0)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
@@ -81,9 +78,7 @@
                                 </td>
                                 <td>
                                     @if($value->upload != 'kosong')
-                                    <a href="/gambar?rf={{$value->upload}}">
-                                        <img src="/gambar?rf={{$value->upload}}" alt="" width="50px">
-                                    </a>
+                                    <img src="/gambar?rf={{$value->upload}}" alt="" width="50px">
                                     @elseif($value->type==2)
                                     Bayar Langsung
                                     @else
@@ -160,6 +155,11 @@
                                 <form action="/edit-jam" method="POST">
                                     @csrf
                                     <input type="text" name="id_booking" id="id_booking" hidden>
+                                    <div class="form-group">
+                                        <label for="">Keterangan</label>
+                                        <textarea name="keterangan_user" id="keterangan_user" class="form-control"
+                                            readonly></textarea>
+                                    </div>
                                     <div class="form-group">
                                         <label for="">Jam</label>
                                         <input type="datetime-local" name="tanggaljam" id="tanggaljam"
@@ -281,6 +281,7 @@
         $('#id_booking').val(null);
         $('#jamModal').modal('show');
         $('#id_booking').val(data.id);
+        $('#keterangan_user').val(data.keterangan_user);
         if (data.jam != 'kosong') {
             $('#tanggaljam').val(data.tanggal+'T'+data.jam.replace('.',':'));
         }else{

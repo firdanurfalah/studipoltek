@@ -208,7 +208,6 @@ class HomeController extends Controller
 
     public function prosesbooking(Request $request)
     {
-        // return $request->all();
         $a = Auth::user();
         if (!$a) {
             return Redirect::to('/login')->with('info', 'Silahkan login terlebih dahulu');
@@ -240,6 +239,7 @@ class HomeController extends Controller
             'jumlah_orang' => $request->jumlah_orang,
             'product_id' => $request->product_id,
             'price_total' => $request->price_total,
+            'keterangan_user' => $request->keterangan,
             'user_id' => Auth::user()->id,
             'promo_id' => 0,
             'last_edit_user' => Auth::id(),
