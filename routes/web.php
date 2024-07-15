@@ -87,8 +87,3 @@ route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
 
-Route::get('/linkdrive', function () {
-    return view('admin.pages.linkcontoh');
-});
-
-// Route::get('/linkdrive', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
