@@ -26,6 +26,8 @@ class BookingModel extends Model
         'price_total',
         'link',
         'type',
+        'last_edit_user',
+        'keterangan_user',
     ];
 
     public function product(): HasOne

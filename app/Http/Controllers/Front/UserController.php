@@ -106,9 +106,14 @@ class UserController extends Controller
 
     public function konfirmasijam(Request $request)
     {
-        $b = BookingModel::where('id', $request->idbookingjam)->update([
+        $i = [
             'status' => $request->status,
-        ]);
+            'last_edit_user' => Auth::id(),
+        ];
+        if ($request->jam) {
+            $i['jam'] = $request->jam;
+        }
+        $b = BookingModel::where('id', $request->idbookingjam)->update($i);
         if ($b) {
             return Redirect::back()->with('info', 'Data tersimpan');
         }

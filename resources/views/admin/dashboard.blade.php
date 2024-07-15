@@ -16,7 +16,7 @@
             </div>
          </div>
          <div class="col-lg-12 mt-2">
-            <form action="/home" method="GET">
+            <form action="/home" method="GET" {{Auth::user()->level == 'owner' ? '' : 'hidden'}}>
                @csrf
                <div class="form-group">
                   <label for="">Tanggal</label>
@@ -28,31 +28,58 @@
                </div>
             </form>
             <div class="table-responsive">
-               <table class="table table-bordered" id="tableKreditExport">
+               <table id="tableKreditExport" class="table table-bordered">
                   <thead>
                      <tr>
-                        <td class="text-uppercase">No</td>
-                        <td class="text-uppercase">Tanggal</td>
-                        <td class="text-uppercase">Jam</td>
-                        <td class="text-uppercase">Nama Produk</td>
-                        <td class="text-uppercase">Harga Total</td>
-                        <td class="text-uppercase">Customer</td>
-                        <td class="text-uppercase">No HP</td>
+                        <th class="text-uppercase">tanggal pesan</th>
+                        <th class="text-uppercase">nama</th>
+                        <th class="text-uppercase">email</th>
+                        <th class="text-uppercase">nohp</th>
+                        <th class="text-uppercase">tanggal</th>
+                        <th class="text-uppercase">jam</th>
+                        <th class="text-uppercase">total harga</th>
+                        <th class="text-uppercase">status</th>
                      </tr>
                   </thead>
                   <tbody>
-                     @foreach($bulanan as $key => $v)
+                     @foreach($bulanan as $key => $value)
                      <tr>
-                        <td>{{$key+1}}</td>
-                        <td>{{$v->tanggal}}</td>
-                        <td>{{$v->jam}}</td>
-                        <td>{{$v->nama_product}}</td>
-                        <td>{{$v->price_total}}</td>
-                        <td>{{$v->nama}}</td>
-                        <td>{{$v->nohp}}</td>
+                        <td>{{$value->created_at->format('d-m-Y')}}</td>
+                        <td>{{$value->nama}}</td>
+                        <td>{{$value->email}}</td>
+                        <td>{{$value->nohp}}</td>
+                        <td>{{$value->tanggal}}</td>
+                        <td>{{$value->jam}}</td>
+                        <td>{{$value->price_total}}</td>
+                        <td>
+                           @if($value->status == 0)
+                           <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                              class="badge badge-info" style="cursor: pointer">Proses</span>
+                           @elseif($value->status == 3)
+                           <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                              class="badge badge-primary" style="cursor: pointer">Diterima</span>
+                           @elseif($value->status == 2)
+                           <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                              class="badge badge-info-emphasis" style="cursor: pointer">Selesai
+                              Pembayaran</span>
+                           @elseif($value->status == 1)
+                           <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                              class="badge badge-success" style="cursor: pointer">Selesai
+                              Pemotretan</span>
+                           @else
+                           <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
+                              class="badge badge-danger" style="cursor: pointer">Ditolak</span>
+                           @endif
+                        </td>
                      </tr>
                      @endforeach
                   </tbody>
+                  <tfoot>
+                     <tr>
+                        <th colspan="6">Total</th>
+                        <th>{{$total}}</th>
+                     </tr>
+                  </tfoot>
                </table>
             </div>
          </div>
@@ -65,10 +92,10 @@
 </div>
 <script>
    $('#tanggal').daterangepicker({
-    locale: {
-      format: 'DD/MM/YYYY'
-    },
-});
+      locale: {
+         format: 'DD/MM/YYYY'
+      },
+   });
    // export excel
    $('#btnexport').on('click',function () {
       TableToExcel.convert(document.getElementById("tableKreditExport"),{

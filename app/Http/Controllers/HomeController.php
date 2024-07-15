@@ -56,6 +56,12 @@ class HomeController extends Controller
             })
             ->orderBy('booking.created_at', 'DESC')
             ->get();
+        $x['total'] = 0;
+        foreach ($x['bulanan'] as $key => $value) {
+            if ($value->status == 1) {
+                $x['total'] += $value->price_total;
+            }
+        }
         for ($i = 1; $i < 13; $i++) {
             $b1 = BookingModel::select(
                 'booking.*',
