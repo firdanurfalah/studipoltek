@@ -32,7 +32,16 @@
                                     <td>{{$key+1}}</td>
                                     {{-- <td><img src="/gambar?rf={{$value->gambar}}" alt="" width="100px"></td> --}}
                                     <td>{{$value->nohp}}</td>
-                                    <td>{{$value->tanggal}} - {{$value->jam}}</td>
+                                    <td>{{$value->tanggal}} - @if($value->last_edit_user != Auth::id())
+                                        <span class="badge badge-success" title="admin yg menentukan jam">
+                                            {{$value->jam}}
+                                        </span>
+                                        @else
+                                        <span class="badge badge-warning" title="anda yg menentukan jam">
+                                            {{$value->jam}}
+                                        </span>
+                                        @endif
+                                    </td>
                                     <td>{{$value->nama}}</td>
                                     <td>{{$value->product ? $value->product->nama : ''}}</td>
                                     <td>
@@ -100,8 +109,13 @@
                             <label for="">Konfirmasi Jam</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="3">Lanjut</option>
+                                <option value="0">Ganti</option>
                                 <option value="99">Cancel</option>
                             </select>
+                        </div>
+                        <div class="form-group" id="inputjam">
+                            <label for="">Jam</label>
+                            <input type="time" name="jam" id="jam" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                         <span class="btn btn-secondary btn-sm" data-dismiss="modal" aria-label="Close"
@@ -179,9 +193,21 @@
             $('#koltransfer').removeAttr('hidden');
         }
     })
+    $('#status').on('change', function () {
+        let v = $(this).val();
+        showjam(v);
+    })
+    function showjam(i) {
+        $('#inputjam').attr('hidden',true);
+        if (i == 0) {
+            $('#inputjam').removeAttr('hidden');
+        }
+    }
     function konfirmasi(data) {
         $('#modalkonfirmasijam').modal('show');
+        showjam(3);
         $('#idbookingjam').val(data.id);
+        $('#jam').val(data.jam);
     }
     function detail(data) {
         $('#imagedetail').attr('src','/gambar?rf='+data.product.gambar)

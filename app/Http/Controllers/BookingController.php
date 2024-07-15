@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -10,12 +11,30 @@ use Illuminate\Support\Facades\Redirect;
 class BookingController extends Controller
 {
 
-    public function index()
+    public function index(Request $r)
     {
+        $data['tanggal'] = now();
+        if ($r->tanggal) {
+            $data['tanggal'] = $r->tanggal;
+        }
         // ambil data di table booking
         $data['booking'] = BookingModel::select()
+            ->where(function ($q) use ($r) {
+                if ($r->tanggal) {
+                    $t = explode('-', $r->tanggal);
+                    $q->whereDate('booking.tanggal', '>=', Carbon::parse(trim(str_replace('/', '-', $t[0]), ' '))->format('Y-m-d'))
+                        ->whereDate('booking.tanggal', '<=', Carbon::parse(trim(str_replace('/', '-', $t[1]), ' '))->format('Y-m-d'));
+                }
+            })
             ->orderBy('created_at', 'DESC')
             ->get();
+        // hitung total
+        $data['total'] = 0;
+        foreach ($data['booking'] as $key => $value) {
+            if ($value->status == 1) {
+                $data['total'] += $value->price_total;
+            }
+        }
         // menampilkan view index
         return view('admin.pages.booking.index', $data);
     }
