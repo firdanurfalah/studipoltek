@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\CategoriModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -46,16 +47,11 @@ class CategoriController extends Controller
             'harga' => 'tidak digunakan',
             'deskripsi' => $request->deskripsi,
         ]);
-        // if ($request->hasFile('gambar')) { 
-        //     $file = $request->file('gambar')->store('categori/' . time());
-        // }
 
-        if ($c) {
-            // respon data
-            return redirect('/categori')->with('info', 'Berhasil ');
-        }
+        // show alert
+        GlobalHelper::messagereturn($c);
         // respon data
-        return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
+        return redirect('/categori');
     }
 
     public function show(string $id)
@@ -92,19 +88,17 @@ class CategoriController extends Controller
             'harga' => 'tidak digunakan',
             'deskripsi' => $request->deskripsi,
         ]);
-        // if ($request->hasFile('gambar')) {
-        //     $file = $request->file('gambar')->store('categori/' . time());
-        // }
-        if ($c) {
-            return redirect('/categori')->with('info', 'Berhasil edit ');
-        }
-        return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal edit ');
+        // show alert
+        GlobalHelper::messagereturn($c);
+        return redirect('/categori');
     }
     public function destroy(string $id)
     {
         // hapus data di table kategori berdasarkan id
-        CategoriModel::where('id', $id)->delete();
+        $x = CategoriModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
         // respon data
-        return redirect('/categori')->with('info', 'Berhasil hapus data');
+        return redirect('/categori');
     }
 }

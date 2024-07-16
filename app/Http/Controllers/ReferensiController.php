@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\CategoriModel;
 use App\Models\ReferensiModel;
 use Illuminate\Http\Request;
@@ -70,12 +71,10 @@ class ReferensiController extends Controller
         $u = ReferensiModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
-        if ($u) {
-            // respon data
-            return redirect('/admin-referensi')->with('info', 'Berhasil ');
-        }
+        // show alert
+        GlobalHelper::messagereturn($u);
         // respon data
-        return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
+        return redirect('/admin-referensi');
     }
 
     /**
@@ -112,8 +111,10 @@ class ReferensiController extends Controller
     public function destroy(string $id)
     {
         // hapus data di table referensi berdasarkan id
-        ReferensiModel::where('id', $id)->delete();
+        $x = ReferensiModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
         // return data
-        return redirect('/admin-referensi')->with('info', 'Berhasil hapus data');
+        return redirect('/admin-referensi');
     }
 }

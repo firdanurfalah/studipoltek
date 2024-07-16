@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\ArtikelModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -41,14 +42,17 @@ class ArtikelController extends Controller
             $file = $request->file('gambar')->store('artikel/' . time());
 
             // simpan data
-            ArtikelModel::create([
+            $x = ArtikelModel::create([
                 'id' => $request->idartikel,
                 'gambar' => $file,
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
             ]);
+
+            // show alert
+            GlobalHelper::messagereturn($x);
             // respon data
-            return redirect('/artikel')->with('ss', 'Berhasil tambah ');
+            return redirect('/artikel');
         }
     }
 
@@ -82,7 +86,7 @@ class ArtikelController extends Controller
             if ($validator->fails()) {
                 return Redirect::back()->withErrors($validator)->withInput();
             }
-            ArtikelModel::where('id', $id)->update([
+            $x = ArtikelModel::where('id', $id)->update([
                 'id' => $request->idartikel,
 
                 'gambar' => $file,
@@ -91,14 +95,18 @@ class ArtikelController extends Controller
 
 
             ]);
-            return redirect('/artikel')->with('success', 'Berhasil edit ');
+            // show alert
+            GlobalHelper::messagereturn($x);
+            return redirect('/artikel');
         }
     }
 
     public function destroy(string $id)
     {
         // hapus data di table artikel berdasarkan id
-        ArtikelModel::where('id', $id)->delete();
-        return redirect('/artikel')->with('success', 'Berhasil hapus data');
+        $x = ArtikelModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
+        return redirect('/artikel');
     }
 }

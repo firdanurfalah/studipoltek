@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\AdminModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,15 +57,17 @@ class AdminController extends Controller
         }
 
         // simpan atau update data
-        User::updateOrCreate(
+        $x = User::updateOrCreate(
             [
                 'id' => $request->id,
             ],
             $insert
         );
 
+        // show alert
+        GlobalHelper::messagereturn($x);
         // respon data
-        return redirect('/adminxxx')->with('ss', 'Berhasil');
+        return redirect('/adminxxx');
     }
 
     public function show(string $id)
@@ -89,7 +92,9 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         // hapus data di table user berdasarakan id
-        User::where('id', $id)->delete();
+        $x = User::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
         // return data
         return redirect('/admin')->with('success', 'Berhasil hapus data');
     }

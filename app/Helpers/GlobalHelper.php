@@ -7,6 +7,7 @@ use App\Models\LogKegiatanModel;
 use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 use Sastrawi\Stemmer\StemmerFactory;
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
@@ -167,5 +168,12 @@ class GlobalHelper
             }
         }
         return $lkm;
+    }
+    public static function messagereturn($bool)
+    {
+        if ($bool) {
+            return Alert::success('Success', 'Berhasil');
+        }
+        return Alert::info('Info', 'Tidak Berhasil');
     }
 }
