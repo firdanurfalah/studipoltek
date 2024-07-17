@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 {{-- Artikel --}}
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a href="/artikel" class="nav-link {{Request::is('artikel') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
@@ -118,7 +118,8 @@
                 </li>
                 {{-- FAQ --}}
                 <li class="nav-item">
-                    <a href="https://drive.google.com/file/d/1zLP5i7FcnWHX2n1xgYu7i1phRLCkE2vC/view?usp=drive_link" class="nav-link ">
+                    <a href="https://drive.google.com/file/d/1zLP5i7FcnWHX2n1xgYu7i1phRLCkE2vC/view?usp=drive_link"
+                        class="nav-link ">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Help
