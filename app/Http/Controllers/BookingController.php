@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\BookingModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class BookingController extends Controller
                 return Redirect::back()->withErrors($validator)->withInput();
             }
             // simpan data
-            BookingModel::create([
+            $x = BookingModel::create([
                 'id' => $request->idbooking,
                 'nama' => $request->nama,
                 'email' => $request->email,
@@ -76,8 +77,10 @@ class BookingController extends Controller
                 'upload' => $file,
                 'status' => $request->status,
             ]);
+            // show alert
+            GlobalHelper::messagereturn($x);
             // respon data
-            return redirect('/booking')->with('ss', 'Berhasil tambah ');
+            return redirect('/booking');
         }
     }
 
@@ -113,7 +116,7 @@ class BookingController extends Controller
         if ($request->hasFile('upload')) {
             $file = $request->file('upload')->store('booking/' . time());
             // update data
-            BookingModel::where('id', $id)->update([
+            $x = BookingModel::where('id', $id)->update([
                 'id' => $request->idbooking,
                 'nama' => $request->nama,
                 'email' => $request->email,
@@ -123,14 +126,18 @@ class BookingController extends Controller
                 'upload' => $file,
                 'status' => $request->status,
             ]);
+            // show alert
+            GlobalHelper::messagereturn($x);
             // respon data
-            return redirect('/booking')->with('success', 'Berhasil edit ');
+            return redirect('/booking');
         }
     }
     public function destroy(string $id)
     {
         // hapus data di table booking berdasarkan id
-        BookingModel::where('id', $id)->delete();
-        return redirect('/booking')->with('success', 'Berhasil hapus data');
+        $x = BookingModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
+        return redirect('/booking');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\PromoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -70,12 +71,10 @@ class PromoController extends Controller
         $u = PromoModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
-        if ($u) {
-            // respon data
-            return redirect('/admin-promo')->with('info', 'Berhasil ');
-        }
+        // show alert
+        GlobalHelper::messagereturn($u);
         // respon data
-        return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
+        return redirect('/admin-promo');
     }
 
     /**
@@ -111,8 +110,10 @@ class PromoController extends Controller
     public function destroy(string $id)
     {
         // hapus data di table promo berdasarkan id
-        PromoModel::where('id', $id)->delete();
+        $x = PromoModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
         // return data
-        return redirect('/admin-promo')->with('info', 'Berhasil hapus data');
+        return redirect('/admin-promo');
     }
 }
