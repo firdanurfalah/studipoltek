@@ -13,6 +13,7 @@
         "laravel/ui": "^4.2",
         "midtrans/midtrans-php": "^2.5",
         "php-ai/php-ml": "^0.10.0",
+        "realrashid/sweet-alert": "^7.2",
         "sastrawi/sastrawi": "1"
     },
     "require-dev": {

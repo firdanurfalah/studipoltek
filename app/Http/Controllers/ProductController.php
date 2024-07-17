@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelper;
 use App\Models\CategoriModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
@@ -81,12 +82,10 @@ class ProductController extends Controller
         $u = ProductModel::UpdateOrCreate([
             'id' => $request->id
         ], $insert);
-        if ($u) {
-            // return data
-            return redirect('/product')->with('info', 'Berhasil ');
-        }
+        // show alert
+        GlobalHelper::messagereturn($u);
         // return data
-        return Redirect::back()->withErrors($validator)->withInput($request->all())->with('info', 'Gagal ');
+        return redirect('/product');
     }
 
     /**
@@ -123,8 +122,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         // hapus data di table produk berdasarkan id
-        ProductModel::where('id', $id)->delete();
+        $x = ProductModel::where('id', $id)->delete();
+        // show alert
+        GlobalHelper::messagereturn($x);
         // respon data
-        return redirect('/product')->with('info', 'Berhasil hapus data');
+        return redirect('/product');
     }
 }
