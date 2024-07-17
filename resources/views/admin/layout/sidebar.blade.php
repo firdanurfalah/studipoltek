@@ -116,6 +116,15 @@
                         </p>
                     </a>
                 </li>
+                {{-- FAQ --}}
+                <li class="nav-item">
+                    <a href="https://drive.google.com/file/d/1zLP5i7FcnWHX2n1xgYu7i1phRLCkE2vC/view?usp=drive_link" class="nav-link ">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            Help
+                        </p>
+                    </a>
+                </li>
                 @endif
             </ul>
         </nav>

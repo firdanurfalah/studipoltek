@@ -166,7 +166,7 @@
                                     @if(Auth::check())
                                     <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"
                                         href="/home">
-                                        Dashboard
+                                        Profil
                                     </a>
                                     @else
                                     <a class="menu-link button button-small button-dark button-circle pt-2 pb-2"

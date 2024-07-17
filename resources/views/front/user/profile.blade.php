@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h5 class="font-weight-bold text-capitalize" style="color: blue;">referensi</h5>
+<h5 class="font-weight-bold text-capitalize" style="color: blue;">Profile</h5>
 <!--  BEGIN CONTENT AREA  -->
 <div class="card">
     <form action="/profile" method="POST" enctype="multipart/form-data">

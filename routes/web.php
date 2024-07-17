@@ -86,3 +86,4 @@ Route::get('/kontak', function () {
 route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
+
