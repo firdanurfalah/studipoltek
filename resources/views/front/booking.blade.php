@@ -119,7 +119,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" required>
+                            <input type="text" name="nama" id="nama" class="form-control" value="{{Auth::user()->name}}">
                             @error('nama')
                             <small class="text-danger">Harus di isi</small>
                             @enderror
