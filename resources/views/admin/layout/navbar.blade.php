@@ -137,15 +137,36 @@
                 <i class="fas fa-th-large"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                <span class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Logout</span>
             </div>
         </li>
     </ul>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi</h1>
+                {{-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> --}}
+            </div>
+            <div class="modal-body text-center">
+                <h3>Apakah anda yakin keluar?</h3>
+                <div class="align-item-center">
+                    <a class="btn btn-info" href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+                        Ya
+                    </a>
+                    <span class="btn btn-danger ml-2" data-dismiss="modal">Tidak</span>
+                </div>
+            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            <div class="modal-footer" hidden>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ use App\Models\FavoritModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
 use App\Models\ReferensiModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -364,5 +365,20 @@ class HomeController extends Controller
     public function register()
     {
         return view('auth.register');
+    }
+    public function custom_verify(Request $request)
+    {
+        if ($request->verify_id && $request->hash) {
+            $u = User::where('id', $request->verify_id)->first();
+            if (!$u) {
+                return 'Data tidak ditemukan';
+            }
+
+            User::where('id', $request->verify_id)->update([
+                'email_verified_at' => now()
+            ]);
+
+            return Redirect::to('/home');
+        }
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromoController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 Auth::routes(['verify' => true]);
+Route::get('/verified', [HomeController::class, 'custom_verify']);
 Route::get('/mail/send', function () {
     $data = [
         'subject' => 'Testing Kirim Email',
@@ -26,7 +28,7 @@ Route::get('/mail/send', function () {
         'body' => 'Ini adalah email uji coba dari Tutorial Laravel: Send Email Via SMTP GMAIL @ qadrLabs.com'
     ];
 
-    Mail::to('koeswoyo26@gmail.com')->send(new SendEmail($data));
+    Mail::to('iskandarrizqi13@gmail.com')->send(new SendEmail($data));
 });
 Route::post('coba/pay', [cobaController::class, 'pay'])->name('coba.pay');
 
