@@ -132,7 +132,6 @@
 					<div class="vertical-middle">
 						<div class="container py-5">
 
-
 							<div class="card mx-auto rounded-0 border-0" style="max-width: 400px;">
 								<div class="card-body" style="padding: 40px;">
 									<form id="login-form" name="login-form" class="mb-0" method="POST"
@@ -142,18 +141,22 @@
 
 										<div class="row">
 											<div class="col-12 form-group">
-												<label for="login-form-username">Name:</label>
+												<label for="login-form-username">Name: <small style="color: red">
+														{{$errors->first('name')}}</small></label>
 												<input type="text" id="login-form-username" name="name" value=""
 													class="form-control not-dark" />
 											</div>
 											<div class="col-12 form-group">
-												<label for="login-form-username">Email Address:</label>
+												<label for="login-form-username">Email Address: <small
+														style="color: red">
+														{{$errors->first('email')}}</small></label>
 												<input type="text" id="login-form-username" name="email" value=""
 													class="form-control not-dark" />
 											</div>
 
 											<div class="col-12 form-group">
-												<label for="login-form-password">Password:</label>
+												<label for="login-form-password">Password: <small style="color: red">
+														{{$errors->first('password')}}</small></label>
 												<input type="password" id="login-form-password" name="password" value=""
 													class="form-control not-dark" />
 											</div>

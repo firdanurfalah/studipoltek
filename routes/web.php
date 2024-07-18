@@ -13,10 +13,21 @@ use App\Http\Controllers\Front\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\ReferensiController;
+use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+Route::get('/mail/send', function () {
+    $data = [
+        'subject' => 'Testing Kirim Email',
+        'title' => 'Testing Kirim Email',
+        'body' => 'Ini adalah email uji coba dari Tutorial Laravel: Send Email Via SMTP GMAIL @ qadrLabs.com'
+    ];
+
+    Mail::to('koeswoyo26@gmail.com')->send(new SendEmail($data));
+});
 Route::post('coba/pay', [cobaController::class, 'pay'])->name('coba.pay');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -57,17 +68,20 @@ Route::get('/dashboard', function () {
 // Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking');
 
 Route::get('/register-user', [App\Http\Controllers\Front\HomeController::class, 'register']);
-Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
-Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
-Route::resource('profile', UserController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
+    Route::resource('profile', UserController::class);
+    Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
+});
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
 Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
 Route::get('/produk/{id}', [App\Http\Controllers\Front\HomeController::class, 'produkdetail']);
 Route::get('/checktanggal', [App\Http\Controllers\Front\HomeController::class, 'checktanggal']);
-Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);
 Route::post('/edit-jam', [App\Http\Controllers\Front\HomeController::class, 'editjam']);
 Route::post('/upload-bukti', [App\Http\Controllers\Front\HomeController::class, 'uploadbukti']);
@@ -86,4 +100,3 @@ Route::get('/kontak', function () {
 route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
-
