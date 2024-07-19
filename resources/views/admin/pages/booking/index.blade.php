@@ -60,12 +60,12 @@
                                     @if($value->status == 0)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
                                         class="badge badge-info" style="cursor: pointer">Proses</span>
-                                    @elseif($value->status == 3)
+                                    {{-- @elseif($value->status == 3)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                        class="badge badge-primary" style="cursor: pointer">Diterima</span>
-                                    @elseif($value->status == 2)
+                                        class="badge badge-primary" style="cursor: pointer">Diterima</span> --}}
+                                    @elseif($value->status == 2 || $value->status == 3)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                        class="badge badge-info-emphasis" style="cursor: pointer">Selesai
+                                        class="badge badge-dark" style="cursor: pointer">Selesai
                                         Pembayaran</span>
                                     @elseif($value->status == 1)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"

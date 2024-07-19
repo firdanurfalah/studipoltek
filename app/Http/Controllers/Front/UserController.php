@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -54,6 +55,11 @@ class UserController extends Controller
         $u = User::updateOrCreate([
             'id' => $request->id
         ], $i);
+        if ($u) {
+            Alert::info('Data Tersimpan');
+            return redirect('/profile')->with('ss', 'Berhasil update data');
+        }
+        Alert::info('Data Gagal Tersimpan');
         return redirect('/profile')->with('ss', 'Berhasil update data');
     }
 

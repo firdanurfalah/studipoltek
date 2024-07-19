@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 use Sastrawi\Stemmer\StemmerFactory;
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
@@ -240,12 +241,12 @@ class HomeController extends Controller
             'jumlah_orang' => $request->jumlah_orang,
             'product_id' => $request->product_id,
             'price_total' => $request->price_total,
-            'keterangan_user' => $request->keterangan,
+            'keterangan_user' => $request->keterangan_user,
             'user_id' => Auth::user()->id,
             'promo_id' => 0,
             'last_edit_user' => Auth::id(),
         ]);
-
+        return $request->all();
         // bila gagal
         if (!$i) {
             return Redirect::back()->withInput($request->all())->withErrors($valid)->with('info', 'Booking Tidak Tersimpan');
@@ -261,30 +262,38 @@ class HomeController extends Controller
             // upload bukti booking
             $i = BookingModel::where('id', $r->idbooking)->update([
                 'upload' => $gambar,
-                'status' => 2,
+                'status' => $r->status,
             ]);
 
             // bila berhasil
             if ($i) {
-                return Redirect::back()->with('info', 'Data Tersimpan');
+                $text = $r->status == 99 ? 'Cancel berhasil' : 'Pembayaran berhasil';
+                Alert::info($text);
+                return Redirect::back();
             }
             // bila gagal
-            return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+            $text = $r->status == 99 ? 'Cancel gagal' : 'Pembayaran gagal';
+            Alert::info($text);
+            return Redirect::back();
         } else {
             $i = BookingModel::where('id', $r->idbooking)->update([
                 'upload' => 'kosong',
                 'type' => $r->type,
-                'status' => 2,
+                'status' => $r->status,
             ]);
 
             // bila berhasil
             if ($i) {
-                return Redirect::back()->with('info', 'Data Tersimpan');
+                $text = $r->status == 99 ? 'Cancel berhasil' : 'Pembayaran berhasil';
+                Alert::info($text);
+                return Redirect::back();
             }
             // bila gagal
-            return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+            $text = $r->status == 99 ? 'Cancel gagal' : 'Pembayaran gagal';
+            Alert::info($text);
+            return Redirect::back();
         }
-        return Redirect::back()->with('info', 'Pastikan upload bukti !');
+        return Redirect::back();
     }
 
     public function approvebooking($id, Request $request)
@@ -299,10 +308,13 @@ class HomeController extends Controller
 
         // bila berhasil
         if ($i) {
-            return Redirect::back()->with('info', 'Data Tersimpan');
+            $text = $request->status == 1 ? 'Pemotretan telah selesai' : 'Data tersimpan';
+            Alert::info($text);
+            return Redirect::back();
         }
         // bila gagal
-        return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+        Alert::info('Data gagal tersimpan');
+        return Redirect::back();
     }
 
     public function editjam(Request $r)
@@ -326,10 +338,12 @@ class HomeController extends Controller
 
         // bila berhasil
         if ($i) {
-            return Redirect::back()->with('info', 'Data Tersimpan');
+            Alert::info('Jam telah diubah');
+            return Redirect::back();
         }
         // bila gagal
-        return Redirect::back()->with('info', 'Data Tidak Tersimpan');
+        Alert::info('Jam gagal diubah');
+        return Redirect::back();
     }
 
     public function setfavorit($product_id)
