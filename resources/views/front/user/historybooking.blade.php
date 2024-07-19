@@ -50,7 +50,7 @@
                                         @elseif($value->status == 3)
                                         <span class="badge badge-primary">Diterima</span>
                                         @elseif($value->status == 2)
-                                        <span class="badge badge-info-emphasis">Selesai
+                                        <span class="badge badge-dark">Selesai
                                             Pembayaran</span>
                                         @elseif($value->status == 1)
                                         <span class="badge badge-success">Selesai
@@ -68,17 +68,22 @@
                                         {{-- <a href="/admin-referensi/{{$value->id}}/edit"
                                             class="btn btn-primary btn-sm">Edit</a> --}}
                                         <span class="btn btn-info btn-sm" onclick="detail({{$value}})">Detail</span>
-                                        @if($value->jam != 'kosong' && $value->status == 0) <span
+                                        <span class="btn btn-warning btn-sm" onclick="bukti({{$value}})">Bukti
+                                            Pembayaran</span>
+                                        {{-- @if($value->jam != 'kosong' && $value->status == 0)
+                                        @else
+                                        @endif --}}
+                                        {{-- @if($value->jam != 'kosong' && $value->status == 0) <span
                                             class="btn btn-warning btn-sm" onclick="konfirmasi({{$value}})">Konfirmasi
                                             Jam</span>
-                                        @elseif($value->jam != 'kosong' && $value->status == 3)
+                                        @elseif($value->jam != 'kosong' && $value->status > 3)
                                         <span class="btn btn-warning btn-sm" onclick="bukti({{$value}})">Bukti
                                             Pembayaran</span>
                                         @elseif($value->jam == 'kosong' && $value->status == 0)
                                         @else
                                         <span class="btn btn-warning btn-sm" onclick="bukti({{$value}})">Bukti
                                             Pembayaran</span>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -107,11 +112,11 @@
                         <input type="text" name="idbookingjam" id="idbookingjam" hidden>
                         <div class="form-group">
                             <label for="">Konfirmasi Jam</label>
-                            <select name="status" id="status" class="form-control">
+                            {{-- <select name="status" id="status" class="form-control">
                                 <option value="3">Lanjut</option>
                                 <option value="0">Ganti</option>
                                 <option value="99">Cancel</option>
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="form-group" id="inputjam">
                             <label for="">Jam</label>
@@ -139,6 +144,13 @@
                     <form action="" method="POST" id="formbukti" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="idbooking" id="idbooking" hidden>
+                        <div class="form-group">
+                            <label for="">Konfirmasi Jam</label>
+                            <select name="status" id="status" class="form-control" required>
+                                <option value="3">Lanjut</option>
+                                <option value="99">Cancel</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="">Tipe Pembayaran</label>
                             <select name="type" id="type" class="form-control">
@@ -225,6 +237,7 @@
             $('#type').change();
         }
         $('#idbooking').val(data.id);
+        $('#status').val(data.status);
         $('#formbukti').attr('action','/upload-bukti');
         let harga = new Intl.NumberFormat('id-Id', { style: 'currency', currency: 'IDR' }).format(
             data.price_total);
