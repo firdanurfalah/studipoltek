@@ -246,7 +246,7 @@ class HomeController extends Controller
             'promo_id' => 0,
             'last_edit_user' => Auth::id(),
         ]);
-        return $request->all();
+        // return $request->all();
         // bila gagal
         if (!$i) {
             return Redirect::back()->withInput($request->all())->withErrors($valid)->with('info', 'Booking Tidak Tersimpan');
