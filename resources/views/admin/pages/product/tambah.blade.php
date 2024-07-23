@@ -63,12 +63,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" hidden>
                     <div class="form-group">
                         <label for="rekomendasi" class="text-capitalize">rekomendasi</label>
                         <select name="rekomendasi" id="rekomendasi"
                             class="form-control @error('rekomendasi') is-invalid @enderror">
-                            <option value="1">Ya</option>
+                            <option value="1" selected>Ya</option>
                             <option value="0">Tidak</option>
                         </select>
                     </div>
@@ -105,7 +105,7 @@
                         <label for="harga_per_orang" class="text-capitalize">harga per orang</label>
                         <select name="harga_per_orang" id="harga_per_orang"
                             class="form-control @error('harga_per_orang') is-invalid @enderror">
-                            <option value="Tidak ada Tambahan">Tidak ada tambahan</option>
+                            <option value="0">Tidak ada tambahan</option>
                             <option value="20000">20k</option>
                             <option value="50000">50k</option>
                         </select>
