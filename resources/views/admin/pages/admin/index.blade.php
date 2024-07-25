@@ -39,12 +39,8 @@
                                         <a href="/adminxxx/{{$value->id}}"
                                             class="btn btn-primary btn-sm d-block d-none">Edit</a>
                                         <br>
-                                        <form action="{{ route('adminxxx.destroy', $value->id) }}" method="post">
-                                            @method('DELETE')
-                                            @csrf
-                                            <a type="submit"
-                                                class="btn btn-danger btn-sm show_confirm d-block d-none">Hapus</a>
-                                        </form>
+                                        <span class="btn btn-danger btn-sm d-block d-none"
+                                            onclick="hapus({{$value->id}})">Hapus</span>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -57,7 +53,22 @@
             </div>
 
         </div>
-
+        <div class="modal fade" id="modalhapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">Hapus Data?</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <form action="" method="post" id="form-delete">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm show_confirm">Ya</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -75,6 +86,10 @@
       "autoWidth": false,
       "responsive": true,
     });
+    function hapus(id) {
+        $('#modalhapus').modal('show');
+        $('#form-delete').attr('action','/adminxxx/'+id);
+    }
 </script>
 <!--  END CONTENT AREA  -->
 @endsection

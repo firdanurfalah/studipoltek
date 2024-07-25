@@ -96,6 +96,6 @@ class AdminController extends Controller
         // show alert
         GlobalHelper::messagereturn($x);
         // return data
-        return redirect('/admin')->with('success', 'Berhasil hapus data');
+        return redirect('/adminxxx')->with('success', 'Berhasil hapus data');
     }
 }

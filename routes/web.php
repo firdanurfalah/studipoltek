@@ -78,10 +78,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/history-booking', [App\Http\Controllers\Front\UserController::class, 'historybooking']);
     Route::resource('profile', UserController::class);
     Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
+    Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
 });
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
-Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
 Route::get('/produk/{id}', [App\Http\Controllers\Front\HomeController::class, 'produkdetail']);
 Route::get('/checktanggal', [App\Http\Controllers\Front\HomeController::class, 'checktanggal']);
 Route::post('/proses-booking', [App\Http\Controllers\Front\HomeController::class, 'prosesbooking']);

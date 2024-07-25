@@ -19,11 +19,14 @@ class Authenticate
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->level == 'user') {
-            if (!auth()->user()->email_verified_at) {
-                return redirect()->to('/')->with('info', 'email belum di verifikasi');
+        if (auth()->check()) {
+            if (auth()->user()->level == 'user') {
+                if (!auth()->user()->email_verified_at) {
+                    return redirect()->to('/')->with('info', 'email belum di verifikasi');
+                }
             }
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->to('/')->with('info', 'silahkan login terlebih dahulu');
     }
 }

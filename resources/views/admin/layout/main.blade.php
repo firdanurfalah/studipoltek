@@ -684,6 +684,24 @@
     </div>
     <!-- ./wrapper -->
     @include('admin.layout.script')
+    <script>
+        $('#show_confirm').on('click',function () {
+            Swal.fire({
+                title: "Apakah anda yakin?",
+                // text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus sekarang!",
+                cancelButtonText:"Tidak"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formdelete').submit();
+                    }
+            });
+        })
+    </script>
 </body>
 
 </html>

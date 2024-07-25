@@ -130,11 +130,10 @@
                             <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="" width="100%">
                             <div class="title">{{$v->nama}}</div>
                             <div class="price">
+                                <b>Rp. {{number_format($v->harga)}}</b>
                                 @if($v->harga_diskon > 0)
                                 <del>Rp. {{number_format($v->harga_diskon)}}</del>
                                 @endif
-                                <b>Rp.
-                                    {{number_format($v->harga)}}</b>
                             </div>
                             {{-- <div class="total-booking text-secondary">98 Booking</div> --}}
                             <div class="d-flex align-items-center justify-content-center mt-2">
@@ -345,13 +344,14 @@
                             </span>
                             <img style="border-radius: 10px" src="/gambar?rf={{$v->gambar}}" alt="" width="100%">
                             <div class="title">{{$v->nama}}</div>
-                            <div class="price">@if($v->harga_diskon > 0)
-                                <del>Rp. {{number_format($v->harga_diskon)}}</del>
-                                @endif
+                            <div class="price">
                                 <b>Rp.
                                     {{number_format($v->harga)}}</b>
+                                @if($v->harga_diskon > 0)
+                                <del>Rp. {{number_format($v->harga_diskon)}}</del>
+                                @endif
                             </div>
-                            <div class="total-booking text-secondary">98 Booking</div>
+                            {{-- <div class="total-booking text-secondary">98 Booking</div> --}}
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <a class="button button-small button-dark button-circle pt-2 pb-2 text-center"
                                     href="/produk/{{$v->id}}">
