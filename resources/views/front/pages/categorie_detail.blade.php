@@ -11,11 +11,11 @@
                         <div class="col-md-5">
                             <!-- Product Single - Gallery
 									============================================= -->
-                            <div class="product-image">
+                            <div class="product-image" >
                                 <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                                     <div class="flexslider">
                                         <div class="slider-wrap" data-lightbox="gallery">
-                                            <div class="slide" data-thumb="/gambar?rf={{$kategori->gambar}}">
+                                            <div class="slide" data-thumb="/gambar?rf={{$kategori->gambar}}"  >
                                                 <a href="/gambar?rf={{$kategori->gambar}}"
                                                     title="Pink Printed Dress - Front View"
                                                     data-lightbox="gallery-item"><img

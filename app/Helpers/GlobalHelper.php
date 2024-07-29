@@ -145,11 +145,14 @@ class GlobalHelper
         // klik favorit
         $lkm = [];
         if (Auth::check()) {
+            // Menghitung jumlah total log kegiatan pengguna
             $c = LogKegiatanModel::where('id_user', Auth::user()->id)->count();
+            // Mengambil data log kegiatan berdasarkan kategori
             $lkm = LogKegiatanModel::selectRaw(
                 'count(id_kategori) as jmlkat, id_kategori, categori.nama'
             )
                 ->join('categori', 'categori.id', 'log_kegiatan_models.id_kategori')
+                // Filter berdasarkan ID pengguna yang terautentikasi
                 ->where('id_user', Auth::user()->id)
                 ->orderBy('jmlkat', 'DESC')
                 ->groupBy('id_kategori', 'categori.nama')
