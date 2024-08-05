@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AdminController extends Controller
 {
@@ -33,9 +34,18 @@ class AdminController extends Controller
     {
         // validasi inputan
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'email' => 'required',
-            'level' => 'required',
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
+            // 'password_confirmation' => 'required|same:password'
+        ], [
+            'email.unique' => 'Email sudah dipakai',
+            // 'password.confirmed' => 'Password tidak sama',
+            // 'password_confirmation.same' => 'Password tidak sama'
         ]);
 
         // response error validasi

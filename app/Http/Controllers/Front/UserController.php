@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -122,6 +123,39 @@ class UserController extends Controller
         $b = BookingModel::where('id', $request->idbookingjam)->update($i);
         if ($b) {
             return Redirect::back()->with('info', 'Data tersimpan');
+        }
+        return Redirect::back()->with('info', 'Data tidak tersimpan');
+    }
+
+    public function resetpassword(Request $r)
+    {
+        // validasi inputan
+        $valid = Validator::make($r->all(), [
+            'email' => 'required|exists:users,email',
+            'password' => ['required', 'string', 'confirmed', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
+            'password_confirmation' => 'required|same:password'
+        ], [
+            'email.exists' => 'Email tidak ditemukan',
+            'password.confirmed' => 'Password tidak sama',
+            'password_confirmation.same' => 'Password tidak sama'
+        ]);
+
+        // bila gagal kembali ke halaman sebelumnya
+        if ($valid->fails()) {
+            return Redirect::back()->withInput($r->all())->withErrors($valid)->with('info', 'Harap Cek Data Anda');
+        }
+        // return $r;
+
+        $u = User::where('email', $r->email)->update([
+            'password' => Hash::make($r->password)
+        ]);
+
+        if ($u) {
+            return Redirect::to('/login')->with('info', 'Reset password berhasil silahkan login kembali');
         }
         return Redirect::back()->with('info', 'Data tidak tersimpan');
     }

@@ -114,14 +114,15 @@
                             <label for="" class="text-capitalize">Email</label>
                             <input type="email" name="email" id="email" class="form-control">
                             @error('email')
-                            <small class="text-danger">Harus di isi</small>
+                            <small class="text-danger">Harus di isi </small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" value="{{Auth::user()->name}}">
+                            <input type="text" name="nama" id="nama" class="form-control"
+                                value="{{old('nama') ? old('nama') :Auth::user()->name}}">
                             @error('nama')
-                            <small class="text-danger">Harus di isi</small>
+                            <small class="text-danger">Harus di isi dan tanpa ada simbol dan tanpa ada angka</small>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -139,15 +140,17 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">no hp</label>
-                            <input type="text" name="no_hp" id="no_hp" class="form-control" required>
+                            <input type="text" name="no_hp" id="no_hp" class="form-control" min="10" maxlength="15"
+                                value="{{old('no_hp')}}" required>
                             @error('no_hp')
-                            <small class="text-danger">Harus di isi</small>
+                            <small class="text-danger">Harus di isi dan panjang karakter minimal 10 sampai 15</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">tanggal</label>
                             {{-- <input type="datetime-local" name="tanggal" id="tanggal" class="form-control"> --}}
-                            <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                value="{{old('tanggal')}}" required>
                             @error('tanggal')
                             <small class="text-danger">Harus di isi</small>
                             @enderror

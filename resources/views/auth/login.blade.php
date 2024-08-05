@@ -123,7 +123,14 @@
                 <div class="section bg-transparent min-vh-100 p-0 m-0 d-flex">
                     <div class="vertical-middle">
                         <div class="container py-5">
-
+                            @if(Session::has('info'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>Info!</strong> {{Session::get('info')}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
 
 
                             <div class="card mx-auto rounded-0 border-0" style="max-width: 400px;">

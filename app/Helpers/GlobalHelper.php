@@ -112,11 +112,12 @@ class GlobalHelper
 
         // check user login
         if (Auth::check()) {
+            $inp['id_user'] = Auth::user()->id;
             // bila hari ini ada data lebih dari 3 dengan param yg sama maka tidak disimpan
             $c = LogKegiatanModel::where('id_user', Auth::user()->id)
                 ->where('id_kategori', $kategori)
                 ->where('id_produk', $produk)
-                ->whereDate('created_at', now())
+                ->whereDate('created_at', now()->format('Y-m-d'))
                 ->count();
             if ($c > 4) {
                 return true;

@@ -60,13 +60,12 @@
                                     @if($value->status == 0)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
                                         class="badge badge-info" style="cursor: pointer">Proses</span>
-                                    {{-- @elseif($value->status == 3)
+                                    @elseif($value->status == 3)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                        class="badge badge-primary" style="cursor: pointer">Diterima</span> --}}
-                                    @elseif($value->status == 2 || $value->status == 3)
+                                        class="badge badge-primary" style="cursor: pointer">Diterima</span>
+                                    @elseif($value->status == 2)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
-                                        class="badge badge-dark" style="cursor: pointer">Selesai
-                                        Pembayaran</span>
+                                        class="badge badge-dark" style="cursor: pointer">Upload bukti</span>
                                     @elseif($value->status == 1)
                                     <span onclick="approve({{$value->id}},{{$value->status}},'{{$value->link}}')"
                                         class="badge badge-success" style="cursor: pointer">Selesai
@@ -116,7 +115,7 @@
                                         <label for="status">Status Booking</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="3">Diterima</option>
-                                            <option value="2">Selesai Pembayaran</option>
+                                            <option value="2">Upload Bukti</option>
                                             <option value="1">Selesai Pemotretan</option>
                                         </select>
                                     </div>
