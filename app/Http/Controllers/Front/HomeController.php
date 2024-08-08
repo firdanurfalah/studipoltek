@@ -70,7 +70,22 @@ class HomeController extends Controller
                 ->join('product_models', 'product_models.id', 'log_kegiatan_models.id_produk')
                 // ->limit(3)
                 // ->inRandomOrder()
-                ->groupBy('product_models.id', 'log_kegiatan_models.id_produk')
+                ->groupBy(
+                    'product_models.nama',
+                    'product_models.harga',
+                    'product_models.harga_diskon',
+                    'product_models.is_recommend',
+                    'product_models.kategori_id',
+                    'product_models.gambar',
+                    'product_models.min_orang',
+                    'product_models.max_orang',
+                    'product_models.background',
+                    'product_models.waktu',
+                    'product_models.deskripsi',
+                    'product_models.harga_per_orang',
+                    'product_models.id',
+                    'log_kegiatan_models.id_produk'
+                )
                 ->orderBy('jml', 'DESC')
                 ->limit(3)
                 ->get();
