@@ -9,6 +9,7 @@ use App\Models\ArtikelModel;
 use App\Models\BookingModel;
 use App\Models\CategoriModel;
 use App\Models\FavoritModel;
+use App\Models\LogKegiatanModel;
 use App\Models\ProductModel;
 use App\Models\PromoModel;
 use App\Models\ReferensiModel;
@@ -58,12 +59,23 @@ class HomeController extends Controller
             //     }
             // }
         } else {
-            // ambil data produk dengan limit 3 kondisi random
-            $data['product'] = ProductModel::select()
+            // ambil data produk dengan limit 3 kondisi yg paling sering dilihat
+            $data['product'] = LogKegiatanModel::selectRaw(
+                '
+                count(log_kegiatan_models.id_produk) as jml,
+                log_kegiatan_models.id_produk,
+                product_models.*
+                '
+            )
+                ->join('product_models', 'product_models.id', 'log_kegiatan_models.id_produk')
+                // ->limit(3)
+                // ->inRandomOrder()
+                ->groupBy('log_kegiatan_models.id_produk')
+                ->orderBy('jml', 'DESC')
                 ->limit(3)
-                ->inRandomOrder()
                 ->get();
         }
+        // return $data['product'];
         // ambil data kategori
         $data['category'] = CategoriModel::get();
         // ambil data artikel
@@ -216,17 +228,17 @@ class HomeController extends Controller
         }
         // validasi data inputan
         $valid = Validator::make($request->all(), [
-            'nama' => 'required',
-            'no_hp' => 'required',
+            'nama' => 'required|regex:/^[a-zA-Z ]*$/',
+            'no_hp' => 'required|min:10|max:15',
             'tanggal' => 'required',
             // 'jam' => 'required',
             'jumlah_orang' => 'required',
         ]);
-
         // bila gagal kembali ke halaman sebelumnya
         if ($valid->fails()) {
             return Redirect::back()->withInput($request->all())->withErrors($valid)->with('info', 'Harap Cek Data Anda');
         }
+        // return $request->all();
         // $file = $request->file('gambar')->store('booking/' . time());
         // $exp = explode('T', $request->tanggal);
         // proses simpan
@@ -262,7 +274,7 @@ class HomeController extends Controller
             // upload bukti booking
             $i = BookingModel::where('id', $r->idbooking)->update([
                 'upload' => $gambar,
-                'status' => $r->status,
+                'status' => 2,
             ]);
 
             // bila berhasil
@@ -328,6 +340,15 @@ class HomeController extends Controller
             $e = explode('T', $r->tanggaljam);
             $tgl = $e[0];
             $jam = $e[1];
+        }
+
+        $c = BookingModel::select()
+            ->where('tanggal', $tgl)
+            ->where('jam', $jam)
+            ->exists();
+        if ($c) {
+            Alert::info('Tanggal dan jam sudah terpakai');
+            return Redirect::back();
         }
         // ubah status booking
         $i = BookingModel::where('id', $r->id_booking)->update([

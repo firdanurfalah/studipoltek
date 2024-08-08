@@ -72,6 +72,7 @@ Route::get('/dashboard', function () {
 Route::get('/register-user', [App\Http\Controllers\Front\HomeController::class, 'register']);
 
 Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
+Route::get('/resetpassword', [App\Http\Controllers\Front\UserController::class, 'resetpassword']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
