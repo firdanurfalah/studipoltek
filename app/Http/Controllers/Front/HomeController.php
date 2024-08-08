@@ -84,6 +84,8 @@ class HomeController extends Controller
                     'product_models.deskripsi',
                     'product_models.harga_per_orang',
                     'product_models.deleted_at',
+                    'product_models.created_at',
+                    'product_models.updated_at',
                     'product_models.id',
                     'log_kegiatan_models.id_produk'
                 )
