@@ -153,6 +153,12 @@
 												<input type="text" id="login-form-username" name="email"
 													class="form-control not-dark" value="{{old('email')}}" />
 											</div>
+											<div class="col-12 form-group">
+												<label for="no_hp">Nomor HP: <small style="color: red">
+														{{$errors->first('no_hp')}}</small></label>
+												<input type="number" name="no_hp" id="no_hp" class="form-control"
+													min="10" maxlength="15" value="{{old('no_hp')}}" required>
+											</div>
 
 											<div class="col-12 form-group">
 												<label for="login-form-password">Password: <small style="color: red">

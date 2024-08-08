@@ -140,7 +140,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="text-capitalize">no hp</label>
-                            <input type="text" name="no_hp" id="no_hp" class="form-control" min="10" maxlength="15"
+                            <input type="number" name="no_hp" id="no_hp" class="form-control" min="10" maxlength="15"
                                 value="{{old('no_hp') ? old('no_hp') : Auth::user()->no_hp}}" required>
                             @error('no_hp')
                             <small class="text-danger">Harus di isi dan panjang karakter minimal 10 sampai 15</small>
