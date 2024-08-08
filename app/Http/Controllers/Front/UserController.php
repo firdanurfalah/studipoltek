@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $valid = Validator::make($request->all(), [
             'name' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|max:16',
         ]);
 
         // bila gagal kembali ke halaman sebelumnya
