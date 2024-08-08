@@ -40,6 +40,7 @@ class UserController extends Controller
     {
         $valid = Validator::make($request->all(), [
             'name' => 'required',
+            'no_hp' => 'required',
         ]);
 
         // bila gagal kembali ke halaman sebelumnya
@@ -48,7 +49,8 @@ class UserController extends Controller
         }
 
         $i = [
-            'name' => $request->name
+            'name' => $request->name,
+            'no_hp' => $request->no_hp
         ];
         if ($request->password) {
             $i['password'] = Hash::make($request->password);

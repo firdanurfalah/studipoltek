@@ -120,7 +120,7 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">nama</label>
                             <input type="text" name="nama" id="nama" class="form-control"
-                                value="{{old('nama') ? old('nama') :Auth::user()->name}}">
+                                value="{{old('nama') ? old('nama') : Auth::user()->name}}">
                             @error('nama')
                             <small class="text-danger">Harus di isi dan tanpa ada simbol dan tanpa ada angka</small>
                             @enderror
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <label for="" class="text-capitalize">no hp</label>
                             <input type="text" name="no_hp" id="no_hp" class="form-control" min="10" maxlength="15"
-                                value="{{old('no_hp')}}" required>
+                                value="{{old('no_hp') ? old('no_hp') : Auth::user()->no_hp}}" required>
                             @error('no_hp')
                             <small class="text-danger">Harus di isi dan panjang karakter minimal 10 sampai 15</small>
                             @enderror

@@ -70,7 +70,7 @@ class HomeController extends Controller
                 ->join('product_models', 'product_models.id', 'log_kegiatan_models.id_produk')
                 // ->limit(3)
                 // ->inRandomOrder()
-                ->groupBy('log_kegiatan_models.id_produk')
+                ->groupBy('product_models.id', 'log_kegiatan_models.id_produk')
                 ->orderBy('jml', 'DESC')
                 ->limit(3)
                 ->get();

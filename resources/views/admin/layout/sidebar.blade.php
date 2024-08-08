@@ -32,7 +32,6 @@
                         </p>
                     </a>
                 </li>
-                @if(Auth::user()->level == 'admin')
                 {{-- Admin --}}
                 <li class="nav-item">
                     <a href="/adminxxx" class="nav-link {{Request::is('adminxxx') ? 'active' : ''}}">
@@ -42,6 +41,7 @@
                         </p>
                     </a>
                 </li>
+                @if(Auth::user()->level == 'admin')
                 {{-- Kategori --}}
                 <li class="nav-item">
                     <a href="/categori" class="nav-link {{Request::is('categori') ? 'active' : ''}}">

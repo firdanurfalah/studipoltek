@@ -58,8 +58,11 @@
                     <div class="form-group">
                         <label for="level" class="text-capitalize">level</label>
                         <select name="level" id="level" class="form-control">
-                            <option value="0">Admin</option>
-                            <option value="1">User</option>
+                            @if(Auth::user()->level == 'owner')
+                            <option value="admin">Admin</option>
+                            <option value="owner">Owner</option>
+                            @endif
+                            <option value="user">User</option>
                         </select>
                         @error('level')
                         <span class="text-danger" role="alert">
