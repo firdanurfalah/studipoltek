@@ -46,9 +46,11 @@
                     <div class="form-group">
                         <label for="level" class="text-capitalize">level</label>
                         <select name="level" id="level" class="form-control">
+                            @if(Auth::user()->level == 'owner')
                             <option value="admin" {{$x->level == 'admin' ? 'selected':''}}>Admin</option>
-                            <option value="user" {{$x->level == 'user' ? 'selected':''}}>User</option>
                             <option value="owner" {{$x->level == 'owner' ? 'selected':''}}>Owner</option>
+                            @endif
+                            <option value="user" {{$x->level == 'user' ? 'selected':''}}>User</option>
                         </select>
                         @error('level')
                         <span class="invalid-feedback" role="alert">

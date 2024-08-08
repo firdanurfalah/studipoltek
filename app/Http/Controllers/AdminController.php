@@ -6,6 +6,7 @@ use App\Helpers\GlobalHelper;
 use App\Models\AdminModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -16,9 +17,16 @@ class AdminController extends Controller
 
     public function index()
     {
-
+        // set data login
+        $auth = Auth::user();
         // ambil data di table user
-        $data['admin'] = User::get();
+        $data['admin'] = User::where(function ($q) use ($auth) {
+            // jika level admin maka hanya level user yg diambil
+            if ($auth->level == 'admin') {
+                return $q->where('level', 'user');
+            }
+        })
+            ->get();
 
         // menampilkan view index
         return view('admin.pages.admin.index', $data);

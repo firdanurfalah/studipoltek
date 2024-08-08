@@ -25,6 +25,14 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label for="no_hp" class="text-capitalize">Nomor HP</label>
+                        <input type="text" name="no_hp" id="no_hp"
+                            class="form-control @error('no_hp') is-invalid @enderror" placeholder="no_hp"
+                            value="{{$x->no_hp}}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label for="password" class="text-capitalize">password (kosongkan bila tidak ingin
                             diganti)</label>
                         <input type="password" name="password" id="password"
