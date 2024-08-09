@@ -102,7 +102,7 @@
 
                                         <div class="row">
                                             <div class="col-12 form-group">
-                                                <label for="login-form-username">Email Address: <small
+                                                <label for="login-form-username">Email address: <small
                                                         style="color: red">
                                                         {{$errors->first('email')}}</small></label>
                                                 <input type="text" id="login-form-username" name="email"
@@ -110,7 +110,8 @@
                                             </div>
 
                                             <div class="col-12 form-group">
-                                                <label for="login-form-password">Password: <small style="color: red">
+                                                <label for="login-form-password">New password: <small
+                                                        style="color: red">
                                                         {{$errors->first('password')}}</small></label>
                                                 <input type="password" id="login-form-password" name="password" value=""
                                                     class="form-control not-dark" />
@@ -130,7 +131,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 form-group">
-                                                <label for="login-form-password">Confirm password:</label>
+                                                <label for="login-form-password">Confirm new password:</label>
                                                 <input type="password" id="login-form-password"
                                                     name="password_confirmation" value=""
                                                     class="form-control not-dark" />
