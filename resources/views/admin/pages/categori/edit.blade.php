@@ -24,7 +24,7 @@
                             value="{{$x->nama}}">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" hidden>
                     <div class="form-group">
                         <label for="deskripsi" class="text-capitalize">deskripsi</label>
                         <textarea type="text" name="deskripsi" id="deskripsi"

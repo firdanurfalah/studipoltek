@@ -292,7 +292,7 @@ class HomeController extends Controller
             // upload bukti booking
             $i = BookingModel::where('id', $r->idbooking)->update([
                 'upload' => $gambar,
-                'status' => 2,
+                // 'status' => 2,
             ]);
 
             // bila berhasil

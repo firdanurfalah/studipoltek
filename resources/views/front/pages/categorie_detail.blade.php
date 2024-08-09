@@ -27,7 +27,7 @@
                                 </div>
                             </div><!-- Product Single - Gallery End -->
                         </div>
-                        <div class="col-md-5 product-desc">
+                        <div class="col-md-5 product-desc" hidden>
                             <p>{{$kategori->deskripsi}}</p>
 
                         </div>

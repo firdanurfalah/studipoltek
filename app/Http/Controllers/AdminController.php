@@ -42,30 +42,29 @@ class AdminController extends Controller
     {
         // validasi inputan
         $validator = Validator::make($request->all(), [
-            'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', Password::min(8)
+            'nama' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]*$/'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['nullable', 'string', Password::min(8)
                 ->letters()
                 ->mixedCase()
                 ->numbers()
                 ->symbols()],
             // 'password_confirmation' => 'required|same:password'
         ], [
-            'email.unique' => 'Email sudah dipakai',
+            // 'email.unique' => 'Email sudah dipakai',
             // 'password.confirmed' => 'Password tidak sama',
             // 'password_confirmation.same' => 'Password tidak sama'
         ]);
-
         // response error validasi
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput($request->all());
         }
-
+        // return $request->all();
         // buat variable simpan
         $insert =
             [
                 'name' => $request->nama,
-                'email' => $request->email,
+                // 'email' => $request->email,
                 'level' => $request->level,
             ];
 

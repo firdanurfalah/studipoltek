@@ -19,7 +19,7 @@
                                 <tr>
                                     <th class="text-capitalize" width="10%">no</th>
                                     <th class="text-capitalize">nama</th>
-                                    <th class="text-capitalize">deskripsi</th>
+                                    {{-- <th class="text-capitalize">deskripsi</th> --}}
                                     <th class="no-content text-center text-capitalize" width="20%">Aksi</th>
                                 </tr>
                             </thead>
@@ -28,7 +28,7 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->nama}}</td>
-                                    <td>{{$value->deskripsi}}</td>
+                                    {{-- <td>{{$value->deskripsi}}</td> --}}
                                     <td>
                                         <a href="/categori/{{$value->id}}" class="btn btn-primary btn-sm">Edit</a>
                                         <span class="btn btn-danger btn-sm" onclick="hapus({{$value->id}})">Hapus</span>

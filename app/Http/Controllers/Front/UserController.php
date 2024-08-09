@@ -39,8 +39,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'name' => 'required',
-            'no_hp' => 'required|max:16',
+            'name' => 'required|regex:/^[a-zA-Z ]*$/',
+            'no_hp' => 'required|min:10|max:15',
+            'password' => ['nullable', 'string', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
         ]);
 
         // bila gagal kembali ke halaman sebelumnya

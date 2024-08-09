@@ -14,7 +14,7 @@
                         <label for="nama" class="text-capitalize">Nama</label>
                         <input type="text" name="nama" id="nama" value="{{$x->name}}" class="form-control">
                         @error('nama')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -25,7 +25,7 @@
                         <label for="email" class="text-capitalize">email</label>
                         <input type="email" name="email" id="email" value="{{$x->email}}" class="form-control">
                         @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -36,7 +36,7 @@
                         <label for="password" class="text-capitalize">password (kosongi bila tidak dirubah)</label>
                         <input type="password" name="password" id="password" class="form-control">
                         @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -53,7 +53,7 @@
                             <option value="user" {{$x->level == 'user' ? 'selected':''}}>User</option>
                         </select>
                         @error('level')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -64,7 +64,7 @@
                         <label for="nohp" class="text-capitalize">nohp</label>
                         <input type="text" name="nohp" id="nohp" value="{{$x->nohp}}" class="form-control">
                         @error('nohp')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror

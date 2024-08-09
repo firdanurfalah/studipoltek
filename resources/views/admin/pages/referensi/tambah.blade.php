@@ -35,7 +35,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" hidden>
                     <div class="form-group">
                         <label for="deskripsi" class="text-capitalize">deskripsi</label>
                         <textarea name="deskripsi" id="deskripsi"

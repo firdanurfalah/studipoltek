@@ -47,7 +47,7 @@ class ReferensiController extends Controller
         $validator = Validator::make($request->all(), [
             'nama'  => 'required',
             'kategori'  => 'required',
-            'deskripsi' => 'required',
+            // 'deskripsi' => 'required',
             'gambar' => 'required_if:id,null|image|mimes:jpeg,png,jpg',
         ]);
 
@@ -60,7 +60,6 @@ class ReferensiController extends Controller
         $insert = [
             'nama' => $request->nama,
             'kategori_id' => $request->kategori,
-            'deskripsi' => $request->deskripsi,
         ];
         // jika tedapat inputan gambar
         if ($request->hasFile('gambar')) {
