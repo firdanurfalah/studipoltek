@@ -77,7 +77,8 @@
                                 </td>
                                 <td>
                                     @if($value->upload != 'kosong')
-                                    <img src="/gambar?rf={{$value->upload}}" alt="" width="50px">
+                                    <img src="/gambar?rf={{$value->upload}}" alt="" width="50px"
+                                        onclick="opengambar('{{$value->upload}}')" style="cursor: pointer">
                                     @elseif($value->type==2)
                                     Bayar Langsung
                                     @else
@@ -168,6 +169,25 @@
                                     <span class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
                                         style="cursor: pointer">Tutup</span>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modalhapus" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="exampleModalLabel">Detail</h5>
+                                <span class="" data-dismiss="modal" aria-label="Close" style="cursor: pointer">x</span>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="" alt="" width="100%" id="imagedetail">
+                                {{-- <div class="d-flex">
+                                    <span id="kiri" class="">Kiri</span>
+                                    <span id="kanan" class="ml-auto">Kanan</span>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -288,6 +308,14 @@
         }
         console.log(data);
         
+    }
+    function opengambar(data) {
+        $('#imagedetail').attr('src','/gambar?rf='+data)
+        // $('#kiri').html(data.product.nama);
+        // let harga = new Intl.NumberFormat('id-Id', { style: 'currency', currency: 'IDR' }).format(
+        //     data.price_total);
+        // $('#kanan').html(harga);
+        $('#modalhapus').modal('show');
     }
 </script>
 @endsection
