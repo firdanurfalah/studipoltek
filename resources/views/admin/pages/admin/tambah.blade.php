@@ -71,7 +71,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-lg-6" hidden>
+                <div class="col-lg-6" >
                     <div class="form-group">
                         <label for="nohp" class="text-capitalize">nohp</label>
                         <input type="text" name="nohp" id="nohp" class="form-control">
