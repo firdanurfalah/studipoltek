@@ -6,6 +6,7 @@
 <div id="content" class="main-content">
 
    <div class="layout-px-spacing">
+      @if(Auth::user()->role_id == 'owner')
       <div class="row">
          <div class="col-lg-12">
             <div class="card">
@@ -84,6 +85,7 @@
             </div>
          </div>
       </div>
+      @endif
    </div>
 
    <textarea name="" id="databar" cols="30" rows="10" hidden>{{json_encode($tahunan)}}</textarea>

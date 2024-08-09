@@ -21,6 +21,11 @@
                         <input type="text" name="name" id="name"
                             class="form-control @error('name') is-invalid @enderror" placeholder="name"
                             value="{{$x->name}}">
+                        @error('name')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -29,6 +34,11 @@
                         <input type="text" name="no_hp" id="no_hp"
                             class="form-control @error('no_hp') is-invalid @enderror" placeholder="no_hp"
                             value="{{$x->no_hp}}">
+                        @error('no_hp')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -37,6 +47,11 @@
                             diganti)</label>
                         <input type="password" name="password" id="password"
                             class="form-control @error('password') is-invalid @enderror" placeholder="password">
+                        @error('password')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-4" hidden>
@@ -46,6 +61,11 @@
                             class="form-control @error('image') is-invalid @enderror"
                             onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                         <img id="blah" alt="gambar" width="100" height="100" />
+                        @error('gambar')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </div>

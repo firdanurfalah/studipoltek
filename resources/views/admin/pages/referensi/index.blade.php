@@ -19,7 +19,7 @@
                                 <tr>
                                     <th class="text-capitalize" width="10%">no</th>
                                     <th class="text-capitalize">gambar</th>
-                                    <th class="text-capitalize">deskripsi</th>
+                                    {{-- <th class="text-capitalize">deskripsi</th> --}}
                                     <th class="text-capitalize">nama</th>
                                     <th class="text-capitalize">kategori</th>
                                     <th class="no-content text-center text-capitalize" width="20%">Aksi</th>
@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td><img src="/gambar?rf={{$value->gambar}}" alt="" width="100px"></td>
-                                    <td>{{$value->deskripsi}}</td>
+                                    {{-- <td>{{$value->deskripsi}}</td> --}}
                                     <td>{{$value->nama}}</td>
                                     <td>{{$value->kategori}}</td>
                                     <td>

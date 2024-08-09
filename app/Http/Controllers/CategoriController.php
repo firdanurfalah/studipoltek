@@ -30,7 +30,7 @@ class CategoriController extends Controller
             'nama'  => 'required',
             // 'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             // 'harga' => 'required',
-            'deskripsi' => 'required',
+            // 'deskripsi' => 'required',
         ]);
 
         // response error validasi
@@ -45,7 +45,7 @@ class CategoriController extends Controller
             'nama' => $request->nama,
             'gambar' => 'tidak digunakan',
             'harga' => 'tidak digunakan',
-            'deskripsi' => $request->deskripsi,
+            'deskripsi' => '%20',
         ]);
 
         // show alert
@@ -74,7 +74,7 @@ class CategoriController extends Controller
             'nama'  => 'required',
             // 'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             // 'harga' => 'required',
-            'deskripsi' => 'required',
+            // 'deskripsi' => 'required',
         ]);
 
         // response error validation
