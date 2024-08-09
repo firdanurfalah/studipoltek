@@ -166,7 +166,9 @@
                                     <br>
 
 
-                                    <p>Lupa password? Hubungi admin di firda@email.email</p>
+                                    <a href="/reset-password">
+                                        <p>Lupa password?</p>
+                                    </a>
                                     <div class="accordion-header">
                                         <div class="accordion-icon">
                                             <i class="accordion-closed icon-user4"></i>

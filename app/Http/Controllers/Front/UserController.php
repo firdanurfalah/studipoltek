@@ -129,6 +129,11 @@ class UserController extends Controller
         return Redirect::back()->with('info', 'Data tidak tersimpan');
     }
 
+    public function showresetpassword()
+    {
+        return view('auth.passwords.email');
+    }
+
     public function resetpassword(Request $r)
     {
         // validasi inputan
