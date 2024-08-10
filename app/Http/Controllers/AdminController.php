@@ -43,7 +43,7 @@ class AdminController extends Controller
         // validasi inputan
         $validator = Validator::make($request->all(), [
             'nama' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]*$/'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['nullable', 'string', Password::min(8)
                 ->letters()
                 ->mixedCase()
@@ -51,7 +51,7 @@ class AdminController extends Controller
                 ->symbols()],
             // 'password_confirmation' => 'required|same:password'
         ], [
-            // 'email.unique' => 'Email sudah dipakai',
+            'email.unique' => 'Email sudah dipakai',
             // 'password.confirmed' => 'Password tidak sama',
             // 'password_confirmation.same' => 'Password tidak sama'
         ]);
