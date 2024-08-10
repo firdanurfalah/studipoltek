@@ -64,7 +64,7 @@ class AdminController extends Controller
         $insert =
             [
                 'name' => $request->nama,
-                // 'email' => $request->email,
+                'email' => $request->email,
                 'level' => $request->level,
             ];
 
