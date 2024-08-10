@@ -71,10 +71,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-lg-6" >
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nohp" class="text-capitalize">nohp</label>
-                        <input type="text" name="nohp" id="nohp" class="form-control">
+                        <input type="text" name="nohp" id="nohp" class="form-control" maxlength="13">
                         @error('nohp')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -82,6 +82,7 @@
                         @enderror
                     </div>
                 </div>
+                
             </div>
         </form>
     </div>
