@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <!-- CONTENT AREA -->
-                <form action="/booking" method="GET" {{Auth::user()->level == 'admin' ? '' : 'hidden'}}>
+                <form action="/booking" method="GET" {{Auth::user()->level == 'admin' ? '' : 'owner'}}>
                     @csrf
                     <div class="form-group">
                         <label for="">Tanggal</label>

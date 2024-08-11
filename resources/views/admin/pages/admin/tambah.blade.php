@@ -74,7 +74,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nohp" class="text-capitalize">nohp</label>
-                        <input type="tel" name="nohp" id="nohp" class="form-control" maxlength="13" pattern="\d*" title="Please enter only numbers">
+                        <input type="tel" name="nohp" id="nohp" class="form-control" pattern="\d{10,13}"  maxlength="13" pattern="\d*" title="Isi 10-13 digit berupa angka">
                         @error('nohp')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>

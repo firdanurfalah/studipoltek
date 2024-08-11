@@ -138,12 +138,28 @@
                             <small class="text-danger">Harus di isi</small>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="" class="text-capitalize">no hp</label>
-                            <input type="number" name="no_hp" id="no_hp" class="form-control" min="10" maxlength="15"
+                        {{-- <div class="form-group">
+                            <label for="no" class="text-capitalize">no hp</label>
+                            <input type="number" name="no_hp" id="no_hp" class="form-control" 
                                 value="{{old('no_hp') ? old('no_hp') : Auth::user()->no_hp}}" required>
                             @error('no_hp')
                             <small class="text-danger">Harus di isi dan panjang karakter minimal 10 sampai 15</small>
+                            @enderror
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="no_hp" class="text-capitalize">No HP</label>
+                            <input 
+                                type="text" 
+                                name="no_hp" 
+                                id="no_hp" 
+                                class="form-control" 
+                                value="{{ old('no_hp') ? old('no_hp') : Auth::user()->no_hp }}" 
+                                required 
+                                {{-- pattern="\d{10}"  --}}
+                                title="Harus berupa 10-13 digit angka"  maxlength="13"
+                            >
+                            @error('no_hp')
+                            <small class="text-danger">Harus diisi dan panjang karakter harus 13 digit angka.</small>
                             @enderror
                         </div>
                         <div class="form-group">

@@ -139,7 +139,7 @@
 
                                             <div class="col-12 form-group mb-0">
                                                 <button class="button button-3d button-black m-0" id="login-form-submit"
-                                                    name="login-form-submit" value="login">Register</button>
+                                                    name="login-form-submit" value="login">Reset</button>
 
                                             </div>
                                         </div>
