@@ -25,7 +25,7 @@ return new class extends Migration
     {
         if (Schema::hasColumn('users', 'no_hp')) {
             Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn('no_hp');
+                $table->dropColumn('no_hp')->nullable();
             });
         }
     }

@@ -24,7 +24,7 @@
                 {{-- Admin dan Owner --}}
                 @if(Auth::user()->level == 'admin' || Auth::user()->level == 'owner')
                 {{-- Dashboard --}}
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a href="/home" class="nav-link {{Request::is('home') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>

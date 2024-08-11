@@ -29,7 +29,7 @@
                             class="form-control @error('deskripsi') is-invalid @enderror" placeholder="deskripsi"
                             rows="1"></textarea>
                     </div>
-                </div>
+                </div>             
             </div>
         </div>
     </form>

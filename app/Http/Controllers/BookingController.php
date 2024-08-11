@@ -25,6 +25,7 @@ class BookingController extends Controller
                     $t = explode('-', $r->tanggal);
                     $q->whereDate('booking.tanggal', '>=', Carbon::parse(trim(str_replace('/', '-', $t[0]), ' '))->format('Y-m-d'))
                         ->whereDate('booking.tanggal', '<=', Carbon::parse(trim(str_replace('/', '-', $t[1]), ' '))->format('Y-m-d'));
+                        
                 }
             })
             ->orderBy('created_at', 'DESC')

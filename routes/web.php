@@ -32,7 +32,7 @@ Route::get('/mail/send', function () {
 });
 Route::post('coba/pay', [cobaController::class, 'pay'])->name('coba.pay');
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'admin', ]], function () {
     Route::resource('adminxxx', AdminController::class);
     Route::resource('categori', CategoriController::class);
     Route::resource('artikel', ArtikelController::class);
@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('admin-referensi', ReferensiController::class);
     Route::post('/approve-booking/{id}', [App\Http\Controllers\Front\HomeController::class, 'approvebooking']);
 });
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', UserController::class);
     Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
     Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
+    
 });
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
@@ -104,3 +107,4 @@ Route::get('/kontak', function () {
 route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
+

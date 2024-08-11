@@ -29,10 +29,12 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    
                     <div class="form-group">
                         <label for="no_hp" class="text-capitalize">Nomor HP</label>
-                        <input type="text" name="no_hp" id="no_hp"
-                            class="form-control @error('no_hp') is-invalid @enderror" placeholder="no_hp"
+                        <input type="text" name="no_hp" id="no_hp" inputmode="numeric" pattern="\d{10,13}"  maxlength="13"
+                            class="form-control @error('no_hp') is-invalid @enderror" placeholder="isi"
+                            title="harus menginputkan angka 10 - 13 digit"
                             value="{{$x->no_hp}}">
                         @error('no_hp')
                         <span class="text-danger" role="alert">

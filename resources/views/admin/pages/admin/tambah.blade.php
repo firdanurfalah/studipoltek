@@ -71,17 +71,19 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-lg-6" hidden>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nohp" class="text-capitalize">nohp</label>
-                        <input type="text" name="nohp" id="nohp" class="form-control">
+                        <input type="tel" name="nohp" id="nohp" class="form-control" pattern="\d{10,13}"  maxlength="13" pattern="\d*" title="Isi 10-13 digit berupa angka">
                         @error('nohp')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
+                    
                 </div>
+                
             </div>
         </form>
     </div>
