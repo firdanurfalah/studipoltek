@@ -28,11 +28,11 @@ Route::get('/mail/send', function () {
         'body' => 'Ini adalah email uji coba dari Tutorial Laravel: Send Email Via SMTP GMAIL @ qadrLabs.com'
     ];
 
-    Mail::to('iskandarrizqi13@gmail.com')->send(new SendEmail($data));
+    Mail::to('dannykoes44@gmail.com')->send(new SendEmail($data));
 });
 Route::post('coba/pay', [cobaController::class, 'pay'])->name('coba.pay');
 
-Route::group(['middleware' => ['auth', 'admin', ]], function () {
+Route::group(['middleware' => ['auth', 'admin',]], function () {
     Route::resource('adminxxx', AdminController::class);
     Route::resource('categori', CategoriController::class);
     Route::resource('artikel', ArtikelController::class);
@@ -74,6 +74,8 @@ Route::get('/dashboard', function () {
 Route::get('/register-user', [App\Http\Controllers\Front\HomeController::class, 'register']);
 
 Route::get('/konfirmasijam', [App\Http\Controllers\Front\UserController::class, 'konfirmasijam']);
+Route::get('/inputpassword/{p}/{e}', [App\Http\Controllers\Front\UserController::class, 'inputpassword']);
+Route::post('/savepassword', [App\Http\Controllers\Front\UserController::class, 'savepassword']);
 Route::get('/resetpassword', [App\Http\Controllers\Front\UserController::class, 'resetpassword']);
 Route::get('/reset-password', [App\Http\Controllers\Front\UserController::class, 'showresetpassword']);
 
@@ -83,7 +85,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', UserController::class);
     Route::get('/setfavorit/{productid}', [App\Http\Controllers\Front\HomeController::class, 'setfavorit']);
     Route::get('/form-booking', [App\Http\Controllers\Front\HomeController::class, 'formbooking']);
-    
 });
 Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index']);
 Route::get('/categori/{id}/detail', [App\Http\Controllers\Front\HomeController::class, 'categoridetail']);
@@ -107,4 +108,3 @@ Route::get('/kontak', function () {
 route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
-

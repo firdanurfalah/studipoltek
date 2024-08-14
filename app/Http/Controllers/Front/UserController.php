@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
 use App\Models\BookingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -141,6 +143,25 @@ class UserController extends Controller
 
     public function resetpassword(Request $r)
     {
+        // Reset Password V2
+        // Cek ketersediaan user
+        $u = User::where('email', $r->email)->first();
+        if (!$u) {
+            return Redirect::back()->with('info', 'Email tidak ditemukan');
+        }
+
+        $p = preg_replace("/[^A-Z]+/", "", $u->password);
+        $e = $u->email;
+        // send email
+        $reset = [
+            'subject' => 'Reset Password',
+            'title' => 'Reset Password',
+            'body' => 'Silahkan kunjungi link yang tertera ' . env('APP_URL') . 'inputpassword/' . $p . '/' . $e . ' untuk reset password',
+        ];
+        Mail::to($r->email)->send(new SendEmail($reset));
+        return Redirect::back()->with('info', 'Email terkirim, silahkan cek inbox anda');
+        // return $r->all();
+        // Reset Password V1
         // validasi inputan
         $valid = Validator::make($r->all(), [
             'email' => 'required|exists:users,email',
@@ -162,6 +183,34 @@ class UserController extends Controller
         }
         // return $r;
 
+        $u = User::where('email', $r->email)->update([
+            'password' => Hash::make($r->password)
+        ]);
+
+        if ($u) {
+            return Redirect::to('/login')->with('info', 'Reset password berhasil silahkan login kembali');
+        }
+        return Redirect::back()->with('info', 'Data tidak tersimpan');
+    }
+
+    public function inputpassword($p, $e)
+    {
+        $x['e'] = User::where('email', $e)
+            // ->where('password', $p)
+            ->first();
+        $pk = preg_replace("/[^A-Z]+/", "", $x['e']->password);
+        if (!$x['e']) {
+            Alert::info('Email tidak ditemukan');
+            return Redirect::back();
+        }
+        if ($pk == $p) {
+            return view('auth.passwords.newpassword', $x);
+        }
+        Alert::info('Kunci tidak ditemukan');
+        return Redirect::back();
+    }
+    public function savepassword(Request $r)
+    {
         $u = User::where('email', $r->email)->update([
             'password' => Hash::make($r->password)
         ]);
