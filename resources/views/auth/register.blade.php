@@ -178,12 +178,12 @@
 													<ul class="checklist">
 														<li class="list-item-0 text-danger">Panjang password minimal 8
 														</li>
-														<li class="list-item-1 text-danger">Terdapat 1 angka</li>
-														<li class="list-item-2 text-danger">Terdapat 1 huruf kecil
+														<li class="list-item-1 text-danger"> harus terdapat angka</li>
+														<li class="list-item-2 text-danger">harus Terdapat huruf kecil
 														</li>
-														<li class="list-item-3 text-danger">Terdapat 1 huruf besar
+														<li class="list-item-3 text-danger">harus Terdapat huruf besar
 														</li>
-														<li class="list-item-4 text-danger">Terdapat 1 simbol
+														<li class="list-item-4 text-danger">harus Terdapat simbol
 														</li>
 													</ul>
 												</div>

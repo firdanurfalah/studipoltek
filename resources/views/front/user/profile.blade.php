@@ -19,11 +19,11 @@
                     <div class="form-group">
                         <label for="name" class="text-capitalize">name</label>
                         <input type="text" name="name" id="name"
-                            class="form-control @error('name') is-invalid @enderror" placeholder="name"
+                            class="form-control @error('name') is-invalid @enderror" placeholder="name" 
                             value="{{$x->name}}">
                         @error('name')
                         <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>{{'Harus menggunakan huruf tanpa angka!'}}</strong>
                         </span>
                         @enderror
                     </div>
