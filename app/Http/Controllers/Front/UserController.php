@@ -150,6 +150,9 @@ class UserController extends Controller
             return Redirect::back()->with('info', 'Email tidak ditemukan');
         }
 
+        User::where('email', $r->email)->update([
+            'link_active' => 1
+        ]);
         $p = preg_replace("/[^A-Z]+/", "", $u->password);
         $e = $u->email;
         // send email
@@ -199,12 +202,20 @@ class UserController extends Controller
             // ->where('password', $p)
             ->first();
         $pk = preg_replace("/[^A-Z]+/", "", $x['e']->password);
+        $active = $x['e']->link_active;
         if (!$x['e']) {
             Alert::info('Email tidak ditemukan');
             return Redirect::back();
         }
         if ($pk == $p) {
-            return view('auth.passwords.newpassword', $x);
+            if ($active == 1) {
+                User::where('email', $e)->update([
+                    'link_active' => 0
+                ]);
+                return view('auth.passwords.newpassword', $x);
+            }
+            Alert::info('Link kadaluarsa harap reset password ulang');
+            return Redirect::to('/')->with('info', 'Link kadaluarsa harap reset password ulang');
         }
         Alert::info('Kunci tidak ditemukan');
         return Redirect::back();
