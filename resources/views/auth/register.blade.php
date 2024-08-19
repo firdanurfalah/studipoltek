@@ -142,9 +142,15 @@
 										<div class="row">
 											<div class="col-12 form-group">
 												<label for="login-form-username">Name: <small style="color: red">
-														{{$errors->first('name')}}</small></label>
+														{{''}}</small></label>
 												<input type="text" id="login-form-username" name="name"
-													class="form-control not-dark" value="{{old('name')}}" required />
+													class="form-control not-dark" value="{{old('name')}}" 
+													
+													required />
+													@error('name')
+													<span class="text-danger" role="alert">
+														<strong>{{ 'harus menggunakan huruf tanpa angka/karakter khusus!' }}</strong> </span>
+													@enderror
 											</div>
 											<div class="col-12 form-group">
 												<label for="login-form-username">Email Address: <small
@@ -253,6 +259,21 @@
 			});
 		});
 	</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputField = document.getElementById('login-form-username');
+        
+        inputField.addEventListener('input', function() {
+            this.value = this.value.replace(/^\s+/, '');
+        });
+        
+        // Optional: If you want to remove spaces on form submit
+        document.querySelector('form').addEventListener('submit', function() {
+            inputField.value = inputField.value.replace(/^\s+/, '');
+        });
+    });
+</script>
 
 </body>
 

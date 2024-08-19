@@ -217,7 +217,7 @@ class UserController extends Controller
             Alert::info('Link kadaluarsa harap reset password ulang');
             return Redirect::to('/')->with('info', 'Link kadaluarsa harap reset password ulang');
         }
-        return Redirect::to('/')->with('info', 'Kunci tidak ditemukan, silahkan reset password kembali');
+        return Redirect::to('/login')->with('info', 'Token tidak ditemukan');
     }
     public function savepassword(Request $r)
     {

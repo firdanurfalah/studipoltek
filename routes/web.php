@@ -108,3 +108,9 @@ Route::get('/kontak', function () {
 route::get('gambar', function (Request $r) {
     return Storage::download($r->rf);
 });
+
+Route::get('/blank', function () {
+    return view('admin.pages.blank');
+});
+
+
